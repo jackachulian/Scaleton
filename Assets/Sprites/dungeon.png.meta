@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dungeon_3
+      name: stairs_left
       rect:
         serializedVersion: 2
         x: 80
@@ -120,8 +120,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 0, y: 8}
+        - {x: -8, y: 0}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: de7ae088490fba740afe187af5fc31fe
@@ -131,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_4
+      name: stairs_right
       rect:
         serializedVersion: 2
         x: 96
@@ -141,8 +149,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 0, y: 8}
+        - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 0}
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 27aa0bf8fe0db254d9bf8340442081b1
@@ -194,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_7
+      name: hole0
       rect:
         serializedVersion: 2
         x: 160
@@ -215,7 +231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_8
+      name: hole1
       rect:
         serializedVersion: 2
         x: 176
@@ -278,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_14
+      name: corner_left
       rect:
         serializedVersion: 2
         x: 80
@@ -299,7 +315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_15
+      name: corner_right
       rect:
         serializedVersion: 2
         x: 96
@@ -362,7 +378,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_18
+      name: hole2
       rect:
         serializedVersion: 2
         x: 160
@@ -383,7 +399,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_19
+      name: hole3
       rect:
         serializedVersion: 2
         x: 176
@@ -446,7 +462,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_25
+      name: corner_bottomleft
       rect:
         serializedVersion: 2
         x: 80
@@ -467,7 +483,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_26
+      name: corner_bottomright
       rect:
         serializedVersion: 2
         x: 96
@@ -530,7 +546,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_29
+      name: sewer0
       rect:
         serializedVersion: 2
         x: 160
@@ -551,7 +567,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_30
+      name: sewer1
       rect:
         serializedVersion: 2
         x: 176
@@ -656,7 +672,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_35
+      name: sewer2
       rect:
         serializedVersion: 2
         x: 160
@@ -677,7 +693,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_36
+      name: sewer3
       rect:
         serializedVersion: 2
         x: 176
@@ -719,7 +735,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_38
+      name: slab1
       rect:
         serializedVersion: 2
         x: 16
@@ -740,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_39
+      name: slab2
       rect:
         serializedVersion: 2
         x: 32
@@ -761,7 +777,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_40
+      name: slab3
       rect:
         serializedVersion: 2
         x: 48
@@ -782,7 +798,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_41
+      name: slant_bottomleft
       rect:
         serializedVersion: 2
         x: 80
@@ -793,7 +809,10 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: a9a39d07b668f6447999bfe3f2725085
@@ -803,7 +822,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_42
+      name: slant_bottomright
       rect:
         serializedVersion: 2
         x: 96
@@ -814,7 +833,10 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: f569033e39f7efa46a02a59f64e4cc79
@@ -929,7 +951,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_48
+      name: slab4
       rect:
         serializedVersion: 2
         x: 16
@@ -950,7 +972,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_49
+      name: slab5
       rect:
         serializedVersion: 2
         x: 32
@@ -971,7 +993,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_50
+      name: slab6
       rect:
         serializedVersion: 2
         x: 48
@@ -1139,7 +1161,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_58
+      name: slab7
       rect:
         serializedVersion: 2
         x: 16
@@ -1160,7 +1182,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_59
+      name: slab8
       rect:
         serializedVersion: 2
         x: 32
@@ -1181,7 +1203,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_60
+      name: slab9
       rect:
         serializedVersion: 2
         x: 48
@@ -1349,7 +1371,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_68
+      name: ladder_top
       rect:
         serializedVersion: 2
         x: 80
@@ -1370,70 +1392,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_69
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c66c317388e727c418639e53ab57a83c
-      internalID: -923458661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_70
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 904b514ee3467eb498805eca8b446e25
-      internalID: 174610230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_71
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c49ff5d86c248a2439a7bd6b7801bbae
-      internalID: -1814516278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_72
+      name: ladder
       rect:
         serializedVersion: 2
         x: 80
@@ -1454,7 +1413,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_73
+      name: shelf_lef
       rect:
         serializedVersion: 2
         x: 112
@@ -1475,7 +1434,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_74
+      name: shelf
       rect:
         serializedVersion: 2
         x: 128
@@ -1496,7 +1455,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_75
+      name: shelf_right
       rect:
         serializedVersion: 2
         x: 144
@@ -1517,7 +1476,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_76
+      name: rock
       rect:
         serializedVersion: 2
         x: 160
@@ -1538,7 +1497,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_77
+      name: key
       rect:
         serializedVersion: 2
         x: 176
@@ -1559,7 +1518,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_78
+      name: chest
       rect:
         serializedVersion: 2
         x: 192
@@ -1580,7 +1539,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_79
+      name: chest_open
       rect:
         serializedVersion: 2
         x: 208
@@ -1601,7 +1560,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_81
+      name: beam_left
       rect:
         serializedVersion: 2
         x: 16
@@ -1622,7 +1581,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_82
+      name: beam
       rect:
         serializedVersion: 2
         x: 32
@@ -1643,7 +1602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_83
+      name: beam_right
       rect:
         serializedVersion: 2
         x: 48
@@ -1664,7 +1623,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_84
+      name: ladder_broken
       rect:
         serializedVersion: 2
         x: 80
@@ -1685,7 +1644,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_85
+      name: sign_left
       rect:
         serializedVersion: 2
         x: 112
@@ -1706,7 +1665,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_86
+      name: sign_right
       rect:
         serializedVersion: 2
         x: 128
@@ -1727,7 +1686,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_87
+      name: crate
       rect:
         serializedVersion: 2
         x: 160
@@ -1748,7 +1707,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_88
+      name: door_top_open
       rect:
         serializedVersion: 2
         x: 192
@@ -1769,7 +1728,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_89
+      name: door_top
       rect:
         serializedVersion: 2
         x: 208
@@ -1790,7 +1749,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_90
+      name: beam_left_broken
       rect:
         serializedVersion: 2
         x: 16
@@ -1811,7 +1770,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_91
+      name: beam_right_broken
       rect:
         serializedVersion: 2
         x: 32
@@ -1832,7 +1791,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_92
+      name: ladder_bottom
       rect:
         serializedVersion: 2
         x: 80
@@ -1853,7 +1812,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_93
+      name: fense_single
       rect:
         serializedVersion: 2
         x: 112
@@ -1874,7 +1833,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_94
+      name: fence_left
       rect:
         serializedVersion: 2
         x: 128
@@ -1895,7 +1854,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_95
+      name: fence_right
       rect:
         serializedVersion: 2
         x: 144
@@ -1916,7 +1875,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_96
+      name: fence_middle
       rect:
         serializedVersion: 2
         x: 160
@@ -1937,7 +1896,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_97
+      name: door_bottom_open
       rect:
         serializedVersion: 2
         x: 192
@@ -1958,7 +1917,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_98
+      name: door_bottom
       rect:
         serializedVersion: 2
         x: 208
@@ -1979,7 +1938,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_99
+      name: chain_short
       rect:
         serializedVersion: 2
         x: 16
@@ -2000,7 +1959,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_100
+      name: chain
       rect:
         serializedVersion: 2
         x: 32
@@ -2021,7 +1980,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_101
+      name: chain_shorter
       rect:
         serializedVersion: 2
         x: 48
@@ -2042,7 +2001,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_102
+      name: chain_arc_left
       rect:
         serializedVersion: 2
         x: 64
@@ -2063,7 +2022,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_103
+      name: chain_arc_middle
       rect:
         serializedVersion: 2
         x: 80
@@ -2084,7 +2043,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_104
+      name: chain_arc_right
       rect:
         serializedVersion: 2
         x: 96
@@ -2105,13 +2064,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_105
+      name: cage
       rect:
         serializedVersion: 2
         x: 112
-        y: 48
-        width: 16
-        height: 16
+        y: 32
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2126,49 +2085,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_106
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af86e1660dbc7b748825306c5e3c7e44
-      internalID: 1382412847
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_107
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f6eb586c87b4604780e09f1579f47eb
-      internalID: -66544228
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_108
+      name: barrel
       rect:
         serializedVersion: 2
         x: 160
@@ -2189,7 +2106,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_109
+      name: pot
       rect:
         serializedVersion: 2
         x: 176
@@ -2210,7 +2127,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_110
+      name: stonepot
       rect:
         serializedVersion: 2
         x: 192
@@ -2231,7 +2148,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_111
+      name: chain_end
       rect:
         serializedVersion: 2
         x: 32
@@ -2252,7 +2169,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_112
+      name: bones_left
       rect:
         serializedVersion: 2
         x: 64
@@ -2273,7 +2190,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_113
+      name: bones
       rect:
         serializedVersion: 2
         x: 80
@@ -2294,7 +2211,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_114
+      name: bones_right
       rect:
         serializedVersion: 2
         x: 96
@@ -2315,70 +2232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_115
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d03ca8268fcc4d409bd04b83c5642eb
-      internalID: -678477632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_116
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d57d3dddbc9737a4d8560e1b6e9bd855
-      internalID: 318677373
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_117
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1371712d63cfb82468ab8e89ea548457
-      internalID: -1251542373
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_118
+      name: web0
       rect:
         serializedVersion: 2
         x: 160
@@ -2399,7 +2253,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_119
+      name: web1
       rect:
         serializedVersion: 2
         x: 176
@@ -2420,7 +2274,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_120
+      name: web2
       rect:
         serializedVersion: 2
         x: 192
@@ -2441,7 +2295,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_121
+      name: web3
       rect:
         serializedVersion: 2
         x: 208
@@ -2462,7 +2316,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_122
+      name: spikes0
       rect:
         serializedVersion: 2
         x: 16
@@ -2483,7 +2337,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_123
+      name: spikes1
       rect:
         serializedVersion: 2
         x: 32
@@ -2504,7 +2358,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_124
+      name: bloodspikes0
       rect:
         serializedVersion: 2
         x: 48
@@ -2525,7 +2379,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_125
+      name: bloodspikes1
       rect:
         serializedVersion: 2
         x: 64
@@ -2546,7 +2400,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_126
+      name: partbloodspikes0
       rect:
         serializedVersion: 2
         x: 80
@@ -2567,7 +2421,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_127
+      name: partbloodspikes1
       rect:
         serializedVersion: 2
         x: 96
@@ -2588,12 +2442,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_128
+      name: razor_top
       rect:
         serializedVersion: 2
         x: 112
         y: 16
-        width: 16
+        width: 48
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2609,54 +2463,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_129
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c589e5d922977f44db9dcb1d9f46c277
-      internalID: 2054508918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_130
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b47dca08db3611f4b87fb4dc7b6e1eef
-      internalID: -1653052934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_131
+      name: razor_bottom
       rect:
         serializedVersion: 2
         x: 160
         y: 16
-        width: 16
+        width: 48
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2672,28 +2484,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_132
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f2ad3e49e825d44f9016f4420fa45fe
-      internalID: 1208250704
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dungeon_0
+      name: brick1
       rect:
         serializedVersion: 2
         x: 16
@@ -2714,7 +2505,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_1
+      name: brick2
       rect:
         serializedVersion: 2
         x: 32
@@ -2735,7 +2526,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_2
+      name: brick3
       rect:
         serializedVersion: 2
         x: 48
@@ -2756,7 +2547,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_11
+      name: brick4
       rect:
         serializedVersion: 2
         x: 16
@@ -2777,7 +2568,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_12
+      name: brick5
       rect:
         serializedVersion: 2
         x: 32
@@ -2798,7 +2589,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_13
+      name: brick6
       rect:
         serializedVersion: 2
         x: 48
@@ -2819,7 +2610,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_22
+      name: brick7
       rect:
         serializedVersion: 2
         x: 16
@@ -2840,7 +2631,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_23
+      name: brick8
       rect:
         serializedVersion: 2
         x: 32
@@ -2861,7 +2652,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dungeon_24
+      name: brick9
       rect:
         serializedVersion: 2
         x: 48
@@ -2881,27 +2672,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: dungeon_133
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65595f0af2a08de46b94af36c4e97aad
-      internalID: 403251139
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2915,140 +2685,139 @@ TextureImporter:
     - texture: {fileID: 2800000, guid: 550880e1314a5bd47929acc8166adbb5, type: 3}
       name: _NormalMap
     nameFileIdTable:
-      dungeon_0: -2132922935
-      dungeon_1: -1068139057
+      barrel: 974955174
+      beam: 576433482
+      beam_left: -2096675736
+      beam_left_broken: 906919824
+      beam_right: 1024882391
+      beam_right_broken: -1886560521
+      bloodspikes0: 1393818448
+      bloodspikes1: -765687425
+      bones: -1676928356
+      bones_left: 1558387181
+      bones_right: -1915257986
+      brick1: -1068139057
+      brick2: -694438891
+      brick3: -1745432342
+      brick4: 1170500675
+      brick5: -2132944227
+      brick6: 2052794236
+      brick7: -1599876032
+      brick8: -1793282698
+      brick9: 589109102
+      cage: -1895107121
+      cage1: 1382412847
+      cage2: -66544228
+      cage3: -678477632
+      chain: 1373461386
+      chain_arc_left: 1288381050
+      chain_arc_middle: 1993948358
+      chain_arc_right: 1599965135
+      chain_end: -1574596205
+      chain_short: -1985702001
+      chain_shorter: 34812670
+      chest: 922453208
+      chest_open: 1218343715
+      corner_bottomleft: 1652542146
+      corner_bottomright: -332781851
+      corner_left: -2001773230
+      corner_right: -615569318
+      crate: -902663413
+      door_bottom: 1767118132
+      door_bottom_open: 396769289
+      door_top: 1758270474
+      door_top_open: 37345227
       dungeon_10: 1038562404
-      dungeon_100: 1373461386
-      dungeon_101: 34812670
-      dungeon_102: 1288381050
-      dungeon_103: 1993948358
-      dungeon_104: 1599965135
-      dungeon_105: -1895107121
-      dungeon_106: 1382412847
-      dungeon_107: -66544228
-      dungeon_108: 974955174
-      dungeon_109: -1722273001
-      dungeon_11: -1745432342
-      dungeon_110: -26109363
-      dungeon_111: -1574596205
-      dungeon_112: 1558387181
-      dungeon_113: -1676928356
-      dungeon_114: -1915257986
-      dungeon_115: -678477632
       dungeon_116: 318677373
       dungeon_117: -1251542373
-      dungeon_118: -949817432
-      dungeon_119: -1071619151
-      dungeon_12: 1170500675
-      dungeon_120: 149521452
-      dungeon_121: 242988513
-      dungeon_122: 1750119651
-      dungeon_123: 198965741
-      dungeon_124: 1393818448
-      dungeon_125: -765687425
-      dungeon_126: 1001457567
-      dungeon_127: 962250648
-      dungeon_128: -1673621549
       dungeon_129: 2054508918
-      dungeon_13: -2132944227
       dungeon_130: -1653052934
-      dungeon_131: 437923786
       dungeon_132: 1208250704
       dungeon_133: 403251139
-      dungeon_14: 731590593
-      dungeon_15: -2001773230
       dungeon_16: -208258369
       dungeon_17: 759395262
-      dungeon_18: 973532902
-      dungeon_19: 2090386672
-      dungeon_2: -694438891
       dungeon_20: 1255480775
       dungeon_21: 824073305
-      dungeon_22: 2052794236
-      dungeon_23: -1599876032
-      dungeon_24: -1793282698
-      dungeon_25: -391537051
-      dungeon_26: 1652542146
       dungeon_27: 1427679306
       dungeon_28: 284480252
-      dungeon_29: -325752982
-      dungeon_3: -615569318
-      dungeon_30: 244354627
-      dungeon_31: -1853240561
-      dungeon_32: 332771589
-      dungeon_33: 220704200
-      dungeon_34: 716520509
-      dungeon_35: -1520804814
-      dungeon_36: 1722050825
-      dungeon_37: 1991395013
-      dungeon_38: 589109102
-      dungeon_39: -1452715285
-      dungeon_4: -1626370936
-      dungeon_40: -945339120
-      dungeon_41: -332781851
-      dungeon_42: -1266081944
-      dungeon_43: 414456156
-      dungeon_44: 401587383
-      dungeon_45: 587391153
-      dungeon_46: 1524775164
-      dungeon_47: 1988233577
-      dungeon_48: -1856978031
-      dungeon_49: 103106915
-      dungeon_5: -748159316
-      dungeon_50: 587717435
-      dungeon_51: 887813329
-      dungeon_52: -1126788906
-      dungeon_53: -1040828068
-      dungeon_54: -347424003
-      dungeon_55: 925845472
-      dungeon_56: 1215837543
-      dungeon_57: 166682729
-      dungeon_58: -542606011
-      dungeon_59: -748680328
-      dungeon_6: -2047545116
-      dungeon_60: 1766519620
-      dungeon_61: -1100478726
-      dungeon_62: 1206668207
-      dungeon_63: 1557100403
-      dungeon_64: -1067325567
-      dungeon_65: -1335981465
-      dungeon_66: 2063665294
-      dungeon_67: 1189138939
-      dungeon_68: 1048293745
-      dungeon_69: -923458661
-      dungeon_7: -165535516
-      dungeon_70: 174610230
-      dungeon_71: -1814516278
-      dungeon_72: 779801696
-      dungeon_73: -279781263
-      dungeon_74: 1369395132
-      dungeon_75: -282135978
-      dungeon_76: -774753468
-      dungeon_77: 673824637
-      dungeon_78: 922453208
-      dungeon_79: 1218343715
-      dungeon_8: -1450475478
-      dungeon_80: -2105936604
-      dungeon_81: -2096675736
-      dungeon_82: 576433482
-      dungeon_83: 1024882391
-      dungeon_84: 1134373977
-      dungeon_85: 2139299455
-      dungeon_86: 339630791
-      dungeon_87: -902663413
-      dungeon_88: 37345227
-      dungeon_89: 1758270474
-      dungeon_9: 2073863354
-      dungeon_90: 906919824
-      dungeon_91: -1886560521
-      dungeon_92: 2113256166
-      dungeon_93: -1833004565
-      dungeon_94: 447990241
-      dungeon_95: 699675573
-      dungeon_96: -124034755
-      dungeon_97: 396769289
-      dungeon_98: 1767118132
-      dungeon_99: -1985702001
+      dungeon_31: 332771589
+      dungeon_32: 220704200
+      dungeon_33: 716520509
+      dungeon_34: -1520804814
+      dungeon_37: 414456156
+      dungeon_43: 401587383
+      dungeon_44: 587391153
+      dungeon_45: 1524775164
+      dungeon_46: 1988233577
+      dungeon_47: -748159316
+      dungeon_5: 887813329
+      dungeon_51: -1126788906
+      dungeon_52: -1040828068
+      dungeon_53: -347424003
+      dungeon_54: 925845472
+      dungeon_55: 1215837543
+      dungeon_56: 166682729
+      dungeon_57: -2047545116
+      dungeon_6: -1100478726
+      dungeon_61: 1206668207
+      dungeon_62: 1557100403
+      dungeon_63: -1067325567
+      dungeon_64: -1335981465
+      dungeon_65: 2063665294
+      dungeon_66: 1189138939
+      dungeon_67: 1048293745
+      dungeon_70: -1814516278
+      dungeon_71: 779801696
+      dungeon_80: -2096675736
+      dungeon_9: 906919824
+      fence_left: 447990241
+      fence_middle: -124034755
+      fence_right: 699675573
+      fense_single: -1833004565
+      hole0: -165535516
+      hole1: -1450475478
+      hole2: 973532902
+      hole3: 2090386672
+      key: 673824637
+      ladder: 779801696
+      ladder_bottom: 2113256166
+      ladder_broken: 1134373977
+      ladder_top: 1048293745
+      partbloodspikes0: 1001457567
+      partbloodspikes1: 962250648
+      pot: -1722273001
+      razor_bottom: 437923786
+      razor_top: -1673621549
+      rock: -774753468
+      sewer0: -325752982
+      sewer1: 244354627
+      sewer2: -1520804814
+      sewer3: 1722050825
+      shelf: 1369395132
+      shelf_lef: -279781263
+      shelf_right: -282135978
+      sign_left: 2139299455
+      sign_right: 339630791
+      slab1: -1452715285
+      slab2: -945339120
+      slab3: -1856978031
+      slab4: 103106915
+      slab5: 587717435
+      slab6: -542606011
+      slab7: -748680328
+      slab8: 1766519620
+      slab9: 731590593
+      slant_bottomleft: -1266081944
+      slant_bottomright: -325752982
+      spikes0: 1750119651
+      spikes1: 198965741
+      stairs_left: -1626370936
+      stairs_right: -391537051
+      stonepot: -26109363
+      web0: -949817432
+      web1: -1071619151
+      web2: 149521452
+      web3: 242988513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
