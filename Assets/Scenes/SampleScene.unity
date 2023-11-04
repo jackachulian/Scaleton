@@ -604,7 +604,7 @@ MonoBehaviour:
   m_RefResolutionX: 384
   m_RefResolutionY: 216
   m_CropFrame: 0
-  m_GridSnapping: 2
+  m_GridSnapping: 0
   m_FilterMode: 0
   m_UpscaleRT: 0
   m_PixelSnapping: 0
@@ -3291,7 +3291,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 0
   m_PointLightOuterAngle: 102.754135
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 6.75
+  m_PointLightOuterRadius: 10
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
