@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     private bool canWalkOnSlope;
     private bool canJump;
 
+    private bool jumpNextFixedUpdate;
+
     private Vector2 newVelocity;
     private Vector2 newForce;
     private Vector2 capsuleColliderSize;
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            Jump();
+            QueueJump();
         }
 
     }
@@ -183,10 +185,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void QueueJump()
+    {
+        jumpNextFixedUpdate = true;
+    }   
+
     private void Jump()
     {
-        if (canJump)
-        {
+        if (canJump) {
             canJump = false;
             isJumping = true;
             newVelocity.Set(0.0f, 0.0f);
@@ -194,7 +200,7 @@ public class PlayerController : MonoBehaviour
             newForce.Set(0.0f, jumpForce);
             rb.AddForce(newForce, ForceMode2D.Impulse);
         }
-    }   
+    }
 
     private void ApplyMovement()
     {
@@ -215,6 +221,10 @@ public class PlayerController : MonoBehaviour
             rb.velocity = newVelocity;
         }
 
+        if (jumpNextFixedUpdate) {
+            jumpNextFixedUpdate = false;
+            Jump();
+        }
     }
 
     private void Flip()
