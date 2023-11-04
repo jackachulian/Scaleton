@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private GrabBox grabBox;
+
     private float xInput;
     private float slopeDownAngle;
     private float slopeSideAngle;
@@ -82,6 +85,11 @@ public class PlayerController : MonoBehaviour
         else if (xInput == -1 && facingDirection == 1)
         {
             Flip();
+        }
+
+        if (Input.GetButtonDown("Grab"))
+        {
+            Grab();
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -192,6 +200,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.sharedMaterial = noFriction;
         }
+    }
+    private void Grab(){
+        grabBox.Grab();
     }
 
     private void QueueJump()

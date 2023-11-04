@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3145313352147296814}
   - component: {fileID: 1387163937187639957}
   - component: {fileID: 1520760645396095047}
+  - component: {fileID: 888752437397507172}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -185,7 +186,19 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -77394
+  m_InstanceId: 31238
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
+--- !u!114 &888752437397507172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2803743939383292349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e134987d72a8a3641914e13d05c195a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
