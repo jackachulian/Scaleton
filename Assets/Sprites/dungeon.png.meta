@@ -2672,6 +2672,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: beam_5unit
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 106
+        width: 80
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e6606f682ed2974ba02285ba9118898
+      internalID: 804036432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2687,6 +2708,7 @@ TextureImporter:
     nameFileIdTable:
       barrel: 974955174
       beam: 576433482
+      beam_5unit: 804036432
       beam_left: -2096675736
       beam_left_broken: 906919824
       beam_right: 1024882391
