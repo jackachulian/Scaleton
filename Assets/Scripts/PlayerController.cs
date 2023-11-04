@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField]
     private float movementSpeed;
     [SerializeField]
@@ -23,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private PhysicsMaterial2D noFriction;
     [SerializeField]
     private PhysicsMaterial2D fullFriction;
+
+    [SerializeField]
+    private Animator animator;
 
     private float xInput;
     private float slopeDownAngle;
@@ -58,7 +60,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CheckInput();     
+        CheckInput();
+        UpdateAnimation();
     }
 
     private void FixedUpdate()
@@ -87,6 +90,12 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    private void UpdateAnimation()
+    {
+        animator.SetBool("walking", xInput != 0);
+    }
+
     private void CheckGround()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
