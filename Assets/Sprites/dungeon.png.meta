@@ -121,8 +121,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 0, y: 8}
-        - {x: -8, y: 0}
+      - - {x: 2, y: 8}
+        - {x: 2, y: 3}
+        - {x: -3, y: 3}
+        - {x: -3, y: -2}
+        - {x: -8, y: -2}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 8}
@@ -150,11 +153,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 0, y: 8}
+      - - {x: 3, y: -2}
+        - {x: 3, y: 3}
+        - {x: -2, y: 3}
+        - {x: -2, y: 8}
         - {x: -8, y: 8}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 0}
+        - {x: 8, y: -2}
       physicsShape:
       - - {x: -8, y: 8}
         - {x: -8, y: -8}
@@ -2681,7 +2687,7 @@ TextureImporter:
         width: 80
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2689,6 +2695,64 @@ TextureImporter:
       bones: []
       spriteID: 9e6606f682ed2974ba02285ba9118898
       internalID: 804036432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stairs_left_sccorrected
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: 8}
+        - {x: 2, y: 3}
+        - {x: -3, y: 3}
+        - {x: -3, y: -2}
+        - {x: -8, y: -2}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64d081104fc247f49ac1dae0f319189a
+      internalID: -1690826912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stairs_right_sccorrected
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 3, y: -2}
+        - {x: 3, y: 3}
+        - {x: -2, y: 3}
+        - {x: -2, y: 8}
+        - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: -2}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5332661f31e2550469b36739f68dae42
+      internalID: -97722285
       vertices: []
       indices: 
       edges: []
@@ -2834,7 +2898,9 @@ TextureImporter:
       spikes0: 1750119651
       spikes1: 198965741
       stairs_left: -1626370936
+      stairs_left_sccorrected: -1690826912
       stairs_right: -391537051
+      stairs_right_sccorrected: -97722285
       stonepot: -26109363
       web0: -949817432
       web1: -1071619151

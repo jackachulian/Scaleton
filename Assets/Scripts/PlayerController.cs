@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-        if(isGrounded && !isJumping && slopeDownAngle <= maxSlopeAngle)
+        if(isGrounded && !isJumping) //  && slopeDownAngle <= maxSlopeAngle
         {
             canJump = true;
         }
