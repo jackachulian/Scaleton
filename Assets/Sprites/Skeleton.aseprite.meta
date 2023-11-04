@@ -121,14 +121,14 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Skeleton
     originalName: 
-    pivot: {x: 0.5097087, y: -0.032520324}
+    pivot: {x: 0.49047622, y: -0.032520324}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 206
+      width: 210
       height: 123
     spriteID: 66318a4670030484e817f97a9d679a27
     spriteBone: []
@@ -151,9 +151,9 @@ ScriptedImporter:
     - name: Skeleton
       frameIndex: 0
       cellRect:
-        x: 3
+        x: 5
         y: 4
-        width: 206
+        width: 210
         height: 123
       spriteId: 66318a4670030484e817f97a9d679a27
     linkedCells: []
