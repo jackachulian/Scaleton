@@ -7,6 +7,9 @@ public class GrabBox : MonoBehaviour
     private GameObject toGrab;
     public GameObject grabbedBox;
     public GameObject grabPoint;
+
+    private int grabbedObjectLayer;
+
     void OnTriggerEnter2D(Collider2D c){
         Debug.Log("SOMETHING ENTERED");
         if(toGrab == null && grabbedBox == null){
@@ -36,25 +39,25 @@ public class GrabBox : MonoBehaviour
     }
 
     public bool CanGrab(){
-        return(toGrab != null);
+        return toGrab != null;
     }
     public void Grab(){
         if(CanGrab()){
             grabbedBox = toGrab;
             toGrab = null;
             grabbedBox.GetComponent<Rigidbody2D>().isKinematic = true;
-            grabbedBox.transform.parent = transform;
+            grabbedBox.GetComponent<Collider2D>().enabled = false;
+            
+            grabbedObjectLayer = grabbedBox.layer;
+            grabbedBox.layer = LayerMask.NameToLayer("Grabbed");
+
+            grabbedBox.transform.parent = grabPoint.transform;
+            grabbedBox.transform.localPosition = Vector2.zero;
+            grabbedBox.transform.localRotation = Quaternion.identity;
             Debug.Log("Grab!");
         }
         else{
             Debug.Log("Can't grab!");
         }
     }
-
-    public void Update(){
-        if(grabbedBox != null){
-            grabbedBox.transform.position = Vector2.MoveTowards(grabPoint.transform.position,grabPoint.transform.position,Time.deltaTime*100);
-        }
-    }
-
 }
