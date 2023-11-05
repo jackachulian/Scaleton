@@ -29,6 +29,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GrabBox grabBox;
 
+    [SerializeField]
+    private float carrySpeedMultiplier = 0.333f;
+    [SerializeField]
+    private float carryJumpMultiplier = 0.25f;
+
     private float xInput;
     private float slopeDownAngle;
     private float slopeSideAngle;
@@ -218,28 +223,38 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
             newVelocity.Set(0.0f, 0.0f);
             rb.velocity = newVelocity;
-            newForce.Set(0.0f, jumpForce);
+
+            float carryMass = 0;
+            if (grabBox.BoxRb) carryMass += grabBox.BoxRb.mass;
+            float jumpMultiplier = 1 / (1 + carryMass*carryJumpMultiplier);
+            Debug.Log("jump mult: "+jumpMultiplier);
+            float force = jumpForce * jumpMultiplier * rb.mass;
+            newForce.Set(0.0f, force);
             rb.AddForce(newForce, ForceMode2D.Impulse);
         }
     }
 
     private void ApplyMovement()
     {
+        float carryMass = 0;
+        if (grabBox.BoxRb) carryMass += grabBox.BoxRb.mass;
+        float speedMultiplier = 1 / (1 + carryMass*carrySpeedMultiplier);
+        float moveSpeed = movementSpeed * speedMultiplier;
+
         if (isGrounded && !isOnSlope && !isJumping) //if not on slope
         {
-            newVelocity.Set(movementSpeed * xInput, 0.0f);
-            rb.velocity = newVelocity;
+            newVelocity.Set(moveSpeed * xInput, 0.0f);
         }
         else if (isGrounded && isOnSlope && canWalkOnSlope && !isJumping) //If on slope
         {
-            newVelocity.Set(movementSpeed * slopeNormalPerp.x * -xInput, movementSpeed * slopeNormalPerp.y * -xInput);
-            rb.velocity = newVelocity;
+            newVelocity.Set(moveSpeed * slopeNormalPerp.x * -xInput, moveSpeed * slopeNormalPerp.y * -xInput);
         }
         else if (!isGrounded) //If in air
         {
-            newVelocity.Set(movementSpeed * xInput, rb.velocity.y);
-            rb.velocity = newVelocity;
+            newVelocity.Set(moveSpeed * xInput, rb.velocity.y);
         }
+
+        rb.velocity = newVelocity;
 
         if (jumpNextFixedUpdate) {
             jumpNextFixedUpdate = false;

@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GrabBox : MonoBehaviour
 {
-    private GameObject toGrab;
+    private List<GameObject> grabbableObjects;
+
     private GameObject grabbedBox;
+
+    private Rigidbody2D playerRb;
+    private Rigidbody2D boxRb;
+    public Rigidbody2D BoxRb {get{return boxRb;}}
 
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject grabPoint;
@@ -19,52 +25,52 @@ public class GrabBox : MonoBehaviour
 
     private int grabbedObjectLayer;
 
+    private void Awake() {
+        grabbableObjects = new List<GameObject>();
+        playerRb = playerController.GetComponent<Rigidbody2D>();
+    }
+
     void OnTriggerEnter2D(Collider2D c){
-        Debug.Log("SOMETHING ENTERED");
-        if(toGrab == null && grabbedBox == null){
-            if(c.gameObject.GetComponent("isGrabable") != null){
-                Debug.Log("Grabbable object entered!");
-                toGrab = c.gameObject;
-            }
-            else{
-                Debug.Log("Non-grabbable object entered!");
-            }
+        if(c.gameObject.GetComponent("isGrabable") != null){
+            Debug.Log("Grabbable object entered!");
+            grabbableObjects.Add(c.gameObject);
         }
         else{
-            if(grabbedBox != null){
-                Debug.Log("An object entered, but you are already grabbing!");
-            }
-            if (toGrab != null){
-                Debug.Log("An object entered, but one is already in range!");
-            }
+            Debug.Log("Non-grabbable object entered!");
         }
     }
 
-    private void OnTriggerExit2D(Collider2D c){
-        if(c.gameObject == toGrab){
+    void OnTriggerExit2D(Collider2D c){
+        bool removed = grabbableObjects.Remove(c.gameObject);
+        if(removed){
             Debug.Log("Grabbable left range!");
-            toGrab = null;
         }
     }
 
     public void GrabPressed() {
-        if (toGrab != null) {
-            Grab();
-        } else if (grabbedBox != null) {
+        if (grabbedBox) {
             Drop();
-        } else {
+        } 
+        else if (grabbableObjects.Count > 0) {
+            Grab(); 
+        } 
+        else {
             Debug.Log("Can't grab!");
         }
     }
 
     public void Grab(){
-        grabbedBox = toGrab;
-        toGrab = null;
-        grabbedBox.GetComponent<Rigidbody2D>().isKinematic = true;
+        // grab the closest gameobject to grab point
+        grabbedBox = grabbableObjects.AsQueryable().OrderBy(obj => Vector2.Distance(obj.transform.position, grabPoint.transform.position)).First();
+
+        boxRb = grabbedBox.GetComponent<Rigidbody2D>();
+        boxRb.isKinematic = true;
         grabbedBox.GetComponent<Collider2D>().enabled = false;
         
         grabbedObjectLayer = grabbedBox.layer;
         grabbedBox.layer = LayerMask.NameToLayer("Grabbed");
+
+        playerRb.mass += boxRb.mass;
 
         grabbedBox.transform.parent = grabPoint.transform;
         grabbedBox.transform.localPosition = Vector2.zero;
@@ -81,13 +87,12 @@ public class GrabBox : MonoBehaviour
         if (obstruction) Debug.Log(LayerMask.LayerToName(obstruction.gameObject.layer));
 
         if (obstruction == null) {
-            Rigidbody2D playerRb = playerController.GetComponent<Rigidbody2D>();
-            Rigidbody2D boxRb = grabbedBox.GetComponent<Rigidbody2D>();
-
             boxRb.isKinematic = false;
             grabbedBox.GetComponent<Collider2D>().enabled = true;
 
             grabbedBox.layer = grabbedObjectLayer;
+
+            playerRb.mass -= boxRb.mass;
 
             grabbedBox.transform.parent = null;
             grabbedBox.transform.rotation = Quaternion.identity;
@@ -107,6 +112,7 @@ public class GrabBox : MonoBehaviour
             // playerRb.velocity = playerVelocity;
 
             grabbedBox = null;
+            boxRb = null;
             Debug.Log("Box dropped");
         } else {
             Debug.Log("Can't drop here!");
