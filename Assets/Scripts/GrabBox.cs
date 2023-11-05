@@ -111,9 +111,9 @@ public class GrabBox : MonoBehaviour
             if (throwPressed) {
                 float yInput = Input.GetAxisRaw("Vertical");
                 Vector2 force;
-                if (yInput > 0.6f) {
+                if (yInput > 0.7f) {
                     force = upwardThrowForce;
-                } else if (yInput < 0.6f && !playerController.IsGrounded) {
+                } else if (yInput < -0.7f && !playerController.IsGrounded) {
                     force = downwardThrowForce;
                 } else {
                     force = forwardThrowForce;

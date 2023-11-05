@@ -3717,7 +3717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selfShadows: 1
---- !u!43 &825773561
+--- !u!43 &951853055
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3939,6 +3939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1045232577}
   - component: {fileID: 1045232579}
+  - component: {fileID: 1045232581}
   - component: {fileID: 1045232580}
   m_Layer: 0
   m_Name: Grabbox
@@ -3979,8 +3980,8 @@ MonoBehaviour:
   dropCheckOffset: {x: -0.14, y: 0}
   dropCheckSize: {x: 0.59, y: 0.5}
   forwardThrowForce: {x: 6, y: 4}
-  upwardThrowForce: {x: 1.25, y: 6.75}
-  downwardThrowForce: {x: 0.25, y: -7.1}
+  upwardThrowForce: {x: 0.5, y: 7}
+  downwardThrowForce: {x: 0.25, y: -7}
   obstructionLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -4028,6 +4029,51 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.9183533, y: 0.8367063}
+  m_EdgeRadius: 0
+--- !u!61 &1045232581
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045232576}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.043961763, y: -0.67235774}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.09490347, y: 0.62761724}
   m_EdgeRadius: 0
 --- !u!1 &1063067614
 GameObject:
