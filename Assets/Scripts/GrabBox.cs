@@ -81,27 +81,30 @@ public class GrabBox : MonoBehaviour
         if (obstruction) Debug.Log(LayerMask.LayerToName(obstruction.gameObject.layer));
 
         if (obstruction == null) {
-            grabbedBox.GetComponent<Rigidbody2D>().isKinematic = false;
+            Rigidbody2D playerRb = playerController.GetComponent<Rigidbody2D>();
+            Rigidbody2D boxRb = grabbedBox.GetComponent<Rigidbody2D>();
+
+            boxRb.isKinematic = false;
             grabbedBox.GetComponent<Collider2D>().enabled = true;
 
             grabbedBox.layer = grabbedObjectLayer;
 
             grabbedBox.transform.parent = null;
             grabbedBox.transform.rotation = Quaternion.identity;
-            
-            // Conservation of momentum
-            Rigidbody2D playerRb = playerController.GetComponent<Rigidbody2D>();
-            Rigidbody2D boxRb = grabbedBox.GetComponent<Rigidbody2D>();
-            Vector2 initialPlayerMomentum = playerRb.velocity * playerRb.mass;
 
-            boxRb.velocity = playerRb.velocity;
-            Vector2 throwForce = new Vector2(forwardThrowForce.x * playerController.FacingDirection, forwardThrowForce.y);
+            boxRb.velocity = Vector2.zero;
+            Vector2 throwForce = new Vector2(forwardThrowForce.x*playerController.FacingDirection, forwardThrowForce.y);
             boxRb.AddForce(throwForce, ForceMode2D.Impulse);
 
-            Vector2 boxMomentum = boxRb.velocity * boxRb.mass;
-            Vector2 playerMomentum = initialPlayerMomentum - boxMomentum;
-            Vector2 playerVelocity = playerMomentum / playerRb.mass;
-            playerRb.velocity = playerVelocity;
+            // Conservation of momentum
+            // Vector2 initialPlayerMomentum = playerRb.velocity * playerRb.mass;
+            // Vector2 throwForce = new Vector2(forwardThrowForce.x * playerController.FacingDirection, forwardThrowForce.y);
+            // boxRb.AddForce(throwForce, ForceMode2D.Impulse);
+
+            // Vector2 boxMomentum = boxRb.velocity * boxRb.mass;
+            // Vector2 playerMomentum = initialPlayerMomentum - boxMomentum;
+            // Vector2 playerVelocity = playerMomentum / playerRb.mass;
+            // playerRb.velocity = playerVelocity;
 
             grabbedBox = null;
             Debug.Log("Box dropped");
