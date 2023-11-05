@@ -19,7 +19,9 @@ public class GrabBox : MonoBehaviour
     [SerializeField] private Vector2 dropCheckOffset = new Vector2(-0.25f, 0);
     [SerializeField] private Vector2 dropCheckSize = new Vector2(0.5f, 0.5f);
 
-    [SerializeField] private Vector2 forwardThrowForce = new Vector2(5f, 2f);
+    [SerializeField] private Vector2 forwardThrowForce = new Vector2(6f, 4f);
+    [SerializeField] private Vector2 upwardThrowForce = new Vector2(0.5f, 7f);
+    [SerializeField] private Vector2 downwardThrowForce = new Vector2(0.25f, -7.1f);
 
     [SerializeField] private LayerMask obstructionLayerMask;
 
@@ -47,9 +49,13 @@ public class GrabBox : MonoBehaviour
         }
     }
 
-    public void GrabPressed() {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="throwPressed">true if throw button (X), false if drop button (C)</param>
+    public void GrabPressed(bool throwPressed) {
         if (grabbedBox) {
-            Drop();
+            ReleaseGrabbed(throwPressed);
         } 
         else if (grabbableObjects.Count > 0) {
             Grab(); 
@@ -75,12 +81,15 @@ public class GrabBox : MonoBehaviour
         grabbedBox.transform.parent = grabPoint.transform;
         grabbedBox.transform.localPosition = Vector2.zero;
         grabbedBox.transform.localRotation = Quaternion.identity;
+
+        playerController.Animator.SetBool("carrying", true);
+
         Debug.Log("Grab!");
     }
 
     // Attempt to let go of the box.
     // If grab point is obstructed by terrain, cannot drop here
-    public void Drop() {
+    public void ReleaseGrabbed(bool throwPressed) {
         Collider2D obstruction = Physics2D.OverlapBox(grabPoint.transform.position + (Vector3)dropCheckOffset*playerController.FacingDirection, dropCheckSize, 0f, obstructionLayerMask);
 
         Debug.Log(obstruction);
@@ -98,8 +107,21 @@ public class GrabBox : MonoBehaviour
             grabbedBox.transform.rotation = Quaternion.identity;
 
             boxRb.velocity = Vector2.zero;
-            Vector2 throwForce = new Vector2(forwardThrowForce.x*playerController.FacingDirection, forwardThrowForce.y);
-            boxRb.AddForce(throwForce, ForceMode2D.Impulse);
+            
+            if (throwPressed) {
+                float yInput = Input.GetAxisRaw("Vertical");
+                Vector2 force;
+                if (yInput > 0.6f) {
+                    force = upwardThrowForce;
+                } else if (yInput < 0.6f && !playerController.IsGrounded) {
+                    force = downwardThrowForce;
+                } else {
+                    force = forwardThrowForce;
+                }
+
+                Vector2 throwForce = new Vector2(force.x*playerController.FacingDirection, force.y);
+                boxRb.AddForce(throwForce, ForceMode2D.Impulse);
+            }
 
             // Conservation of momentum
             // Vector2 initialPlayerMomentum = playerRb.velocity * playerRb.mass;
@@ -110,6 +132,8 @@ public class GrabBox : MonoBehaviour
             // Vector2 playerMomentum = initialPlayerMomentum - boxMomentum;
             // Vector2 playerVelocity = playerMomentum / playerRb.mass;
             // playerRb.velocity = playerVelocity;
+
+            playerController.Animator.SetBool("carrying", false);
 
             grabbedBox = null;
             boxRb = null;

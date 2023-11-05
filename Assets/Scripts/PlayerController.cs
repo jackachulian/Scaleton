@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Animator animator;
+    public Animator Animator {get{return animator;}}
 
     [SerializeField]
     private GrabBox grabBox;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public int FacingDirection {get{return facingDirection;}}
 
     private bool isGrounded;
+    public bool IsGrounded {get{return isGrounded;}}
     private bool isOnSlope;
     private bool isJumping;
     private bool canWalkOnSlope;
@@ -95,7 +97,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Grab"))
         {
-            Grab();
+            GrabOrThrow();
+        }
+
+        if (Input.GetButtonDown("Drop"))
+        {
+            GrabOrDrop();
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -207,8 +214,12 @@ public class PlayerController : MonoBehaviour
             rb.sharedMaterial = noFriction;
         }
     }
-    private void Grab(){
-        grabBox.GrabPressed();
+    private void GrabOrThrow(){
+        grabBox.GrabPressed(true);
+    }
+
+    private void GrabOrDrop(){
+        grabBox.GrabPressed(false);
     }
 
     private void QueueJump()
