@@ -60,12 +60,15 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  noFriction: {fileID: 6200000, guid: 5be472077b4d6644980b781ca75ef04f, type: 2}
+  noFriction: {fileID: 6200000, guid: e52112631e7f1b34fae85958c111820b, type: 2}
   fullFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
+  maxMovementForce: 25
+  maxStoppingForce: 50
+  carryingExtraForcePerMass: 5
   animator: {fileID: 8301269846219885631}
   grabBox: {fileID: 5216397015340684804}
   carrySpeedMultiplier: 0.4
-  carryJumpMultiplier: 0.23
+  carryJumpMultiplier: 0.3
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -75,7 +78,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 3417496166408329090}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 488611a2f723d3f48a7686a1b4a981c2, type: 2}
+  m_Material: {fileID: 6200000, guid: e52112631e7f1b34fae85958c111820b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -117,7 +120,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e52112631e7f1b34fae85958c111820b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

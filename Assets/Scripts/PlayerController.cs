@@ -22,6 +22,13 @@ public class PlayerController : MonoBehaviour
     private PhysicsMaterial2D noFriction;
     [SerializeField]
     private PhysicsMaterial2D fullFriction;
+    [SerializeField]
+    private float maxMovementForce = 30f;
+    [SerializeField]
+    private float maxStoppingForce = 50f;
+    [SerializeField]
+    private float carryingExtraForcePerMass = 5f;
+
 
     [SerializeField]
     private Animator animator;
@@ -119,7 +126,20 @@ public class PlayerController : MonoBehaviour
 
     private void CheckGround()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, whatIsGround);
+
+        // Check all collisions. For each grabbable, if it cannot be currently picked up (released recently),
+        // then player also cannot jump off of it
+        isGrounded = false;
+        foreach (Collider2D c in colliders) {
+            Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
+            if (grabbable && !grabbable.CanBeJumpedOff()) {
+                continue;
+            } else {
+                isGrounded = true;
+                break;
+            }
+        }
 
         if(rb.velocity.y <= 0.0f)
         {
@@ -208,10 +228,12 @@ public class PlayerController : MonoBehaviour
         if (isOnSlope && canWalkOnSlope && xInput == 0.0f)
         {
             rb.sharedMaterial = fullFriction;
+            cc.sharedMaterial = fullFriction;
         }
         else
         {
             rb.sharedMaterial = noFriction;
+            cc.sharedMaterial = noFriction;
         }
     }
     private void GrabOrThrow(){
@@ -232,8 +254,8 @@ public class PlayerController : MonoBehaviour
         if (canJump) {
             canJump = false;
             isJumping = true;
-            newVelocity.Set(0.0f, 0.0f);
-            rb.velocity = newVelocity;
+            // newVelocity.Set(0.0f, 0.0f);
+            // rb.velocity = newVelocity;
 
             float carryMass = 0;
             if (grabBox.BoxRb) carryMass += grabBox.BoxRb.mass;
@@ -265,7 +287,25 @@ public class PlayerController : MonoBehaviour
             newVelocity.Set(moveSpeed * xInput, rb.velocity.y);
         }
 
-        rb.velocity = newVelocity;
+        Vector2 velocityChange = newVelocity - rb.velocity;
+
+        // if (isOnSlope && isGrounded && xInput == 0 && Mathf.Abs(rb.velocity.magnitude) < 0.75f) {
+        //     Debug.Log("slope standing");
+        // } else 
+        if (xInput == 0 || Mathf.Sign(xInput) != Mathf.Sign(rb.velocity.x)) {
+            float stoppingForce = maxStoppingForce + carryingExtraForcePerMass * (maxStoppingForce/maxMovementForce)*(rb.mass-1);
+            velocityChange = Vector2.ClampMagnitude(velocityChange*5, stoppingForce*Time.deltaTime);
+            rb.AddForce(velocityChange, ForceMode2D.Impulse);
+            Debug.Log(velocityChange);
+        } else {
+            float movementForce = maxMovementForce + carryingExtraForcePerMass*(rb.mass-1);
+            velocityChange = Vector2.ClampMagnitude(velocityChange*5, movementForce*Time.deltaTime);
+            rb.AddForce(velocityChange, ForceMode2D.Impulse);
+            Debug.Log(velocityChange);
+        }
+        
+        
+        
 
         if (jumpNextFixedUpdate) {
             jumpNextFixedUpdate = false;

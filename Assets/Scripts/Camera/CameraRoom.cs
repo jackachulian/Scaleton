@@ -11,10 +11,10 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        virtualCam.enabled = true;
+        virtualCam.MoveToTopOfPrioritySubqueue();
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        virtualCam.enabled = false;
+        // virtualCam.enabled = false;
     }
 }

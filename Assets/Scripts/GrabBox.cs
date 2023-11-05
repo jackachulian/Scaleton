@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class GrabBox : MonoBehaviour
 {
-    private List<GameObject> grabbableObjects;
+    private List<Grabbable> grabbableObjects;
 
-    private GameObject grabbedBox;
+    private Grabbable grabbedBox;
 
     private Rigidbody2D playerRb;
     private Rigidbody2D boxRb;
@@ -28,14 +28,15 @@ public class GrabBox : MonoBehaviour
     private int grabbedObjectLayer;
 
     private void Awake() {
-        grabbableObjects = new List<GameObject>();
+        grabbableObjects = new List<Grabbable>();
         playerRb = playerController.GetComponent<Rigidbody2D>();
     }
 
     void OnTriggerEnter2D(Collider2D c){
-        if(c.gameObject.GetComponent("isGrabable") != null){
+        Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
+        if(grabbable){
             Debug.Log("Grabbable object entered!");
-            grabbableObjects.Add(c.gameObject);
+            grabbableObjects.Add(grabbable);
         }
         else{
             Debug.Log("Non-grabbable object entered!");
@@ -43,7 +44,10 @@ public class GrabBox : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D c){
-        bool removed = grabbableObjects.Remove(c.gameObject);
+        Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
+        if (!grabbable) return;
+
+        bool removed = grabbableObjects.Remove(grabbable);
         if(removed){
             Debug.Log("Grabbable left range!");
         }
@@ -67,16 +71,27 @@ public class GrabBox : MonoBehaviour
 
     public void Grab(){
         // grab the closest gameobject to grab point
-        grabbedBox = grabbableObjects.AsQueryable().OrderBy(obj => Vector2.Distance(obj.transform.position, grabPoint.transform.position)).First();
+        grabbedBox = grabbableObjects.AsQueryable()
+        // .Where(obj => obj.CanBeJumpedOff())
+        .OrderBy(obj => Vector2.Distance(obj.gameObject.transform.position, grabPoint.transform.position))
+        .FirstOrDefault();
+
+        if (!grabbedBox) {
+            Debug.Log("All grabbable objects in range are not currently grabbable");
+            return;
+        }
 
         boxRb = grabbedBox.GetComponent<Rigidbody2D>();
         boxRb.isKinematic = true;
         grabbedBox.GetComponent<Collider2D>().enabled = false;
         
-        grabbedObjectLayer = grabbedBox.layer;
-        grabbedBox.layer = LayerMask.NameToLayer("Grabbed");
+        grabbedObjectLayer = grabbedBox.gameObject.layer;
+        grabbedBox.gameObject.layer = LayerMask.NameToLayer("Grabbed");
 
+        // Conservation of momentum
+        Vector2 initialPlayerMomentum = playerRb.velocity * playerRb.mass;
         playerRb.mass += boxRb.mass;
+        playerRb.velocity = initialPlayerMomentum / playerRb.mass;
 
         grabbedBox.transform.parent = grabPoint.transform;
         grabbedBox.transform.localPosition = Vector2.zero;
@@ -99,7 +114,7 @@ public class GrabBox : MonoBehaviour
             boxRb.isKinematic = false;
             grabbedBox.GetComponent<Collider2D>().enabled = true;
 
-            grabbedBox.layer = grabbedObjectLayer;
+            grabbedBox.gameObject.layer = grabbedObjectLayer;
 
             playerRb.mass -= boxRb.mass;
 
@@ -134,6 +149,8 @@ public class GrabBox : MonoBehaviour
             // playerRb.velocity = playerVelocity;
 
             playerController.Animator.SetBool("carrying", false);
+
+            grabbedBox.Release();
 
             grabbedBox = null;
             boxRb = null;
