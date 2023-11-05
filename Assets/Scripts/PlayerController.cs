@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private float lastSlopeAngle;
 
     private int facingDirection = 1;
+    public int FacingDirection {get{return facingDirection;}}
 
     private bool isGrounded;
     private bool isOnSlope;
@@ -202,7 +203,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     private void Grab(){
-        grabBox.Grab();
+        grabBox.GrabPressed();
     }
 
     private void QueueJump()
@@ -226,7 +227,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded && !isOnSlope && !isJumping) //if not on slope
         {
-            Debug.Log("This one");
             newVelocity.Set(movementSpeed * xInput, 0.0f);
             rb.velocity = newVelocity;
         }
