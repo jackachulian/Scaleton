@@ -1383,7 +1383,7 @@ TextureImporter:
         x: 80
         y: 112
         width: 16
-        height: 16
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2757,6 +2757,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: beam_7unit
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 122
+        width: 112
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 601c799f46282864abe60a3f4598d8af
+      internalID: -782085140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beam_3unit
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 90
+        width: 48
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c20bd50c5d56d024d933d3fac2dbbe4e
+      internalID: 564517380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2774,7 +2816,9 @@ TextureImporter:
     nameFileIdTable:
       barrel: 974955174
       beam: 576433482
+      beam_3unit: 564517380
       beam_5unit: 804036432
+      beam_7unit: -782085140
       beam_left: -2096675736
       beam_left_broken: 906919824
       beam_right: 1024882391

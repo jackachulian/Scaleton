@@ -254,8 +254,8 @@ public class PlayerController : MonoBehaviour
         if (canJump) {
             canJump = false;
             isJumping = true;
-            // newVelocity.Set(0.0f, 0.0f);
-            // rb.velocity = newVelocity;
+            newVelocity.Set(rb.velocity.x, 0.0f);
+            rb.velocity = newVelocity;
 
             float carryMass = 0;
             if (grabBox.BoxRb) carryMass += grabBox.BoxRb.mass;
@@ -294,9 +294,9 @@ public class PlayerController : MonoBehaviour
         // } else 
         if (xInput == 0 || Mathf.Sign(xInput) != Mathf.Sign(rb.velocity.x)) {
             float stoppingForce = maxStoppingForce + carryingExtraForcePerMass * (maxStoppingForce/maxMovementForce)*(rb.mass-1);
-            velocityChange = Vector2.ClampMagnitude(velocityChange*5, stoppingForce*Time.deltaTime);
-            rb.AddForce(velocityChange, ForceMode2D.Impulse);
-            Debug.Log(velocityChange);
+                velocityChange = Vector2.ClampMagnitude(velocityChange*5, stoppingForce*Time.deltaTime);
+                rb.AddForce(velocityChange, ForceMode2D.Impulse);
+                Debug.Log(velocityChange);
         } else {
             float movementForce = maxMovementForce + carryingExtraForcePerMass*(rb.mass-1);
             velocityChange = Vector2.ClampMagnitude(velocityChange*5, movementForce*Time.deltaTime);

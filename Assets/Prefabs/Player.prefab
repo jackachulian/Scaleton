@@ -62,13 +62,13 @@ MonoBehaviour:
     m_Bits: 8
   noFriction: {fileID: 6200000, guid: e52112631e7f1b34fae85958c111820b, type: 2}
   fullFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
-  maxMovementForce: 25
-  maxStoppingForce: 50
-  carryingExtraForcePerMass: 5
+  maxMovementForce: 50
+  maxStoppingForce: 60
+  carryingExtraForcePerMass: 3
   animator: {fileID: 8301269846219885631}
   grabBox: {fileID: 5216397015340684804}
-  carrySpeedMultiplier: 0.4
-  carryJumpMultiplier: 0.3
+  carrySpeedMultiplier: 0.425
+  carryJumpMultiplier: 0.25
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
