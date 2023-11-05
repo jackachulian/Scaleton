@@ -68,6 +68,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
 
+    public CharState charState; 
+
+    public enum CharState{
+        NORMAL,
+        DISABLED
+    }
+
+    public npc interactibleNPC;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -91,32 +101,41 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInput()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
+        if(charState == CharState.NORMAL){
+            xInput = Input.GetAxisRaw("Horizontal");
 
-        if (xInput == 1 && facingDirection == -1)
-        {
-            Flip();
-        }
-        else if (xInput == -1 && facingDirection == 1)
-        {
-            Flip();
-        }
+            if (xInput == 1 && facingDirection == -1)
+            {
+                Flip();
+            }
+            else if (xInput == -1 && facingDirection == 1)
+            {
+                Flip();
+            }
 
-        if (Input.GetButtonDown("Grab"))
-        {
-            GrabOrThrow();
-        }
+            if (Input.GetButtonDown("Grab"))
+            {
+                GrabOrThrow();
+            }
 
-        if (Input.GetButtonDown("Drop"))
-        {
-            GrabOrDrop();
-        }
+            if (Input.GetButtonDown("Drop"))
+            {
+                GrabOrDrop();
+            }
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            QueueJump();
+            if (Input.GetButtonDown("Jump"))
+            {
+                if(interactibleNPC != null){
+                    interactibleNPC.talk();
+                }
+                else{
+                    QueueJump();
+                }
+            }
         }
-
+        else{
+            xInput = 0;
+        }
     }
 
     private void UpdateAnimation()
