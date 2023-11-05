@@ -1713,18 +1713,22 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door_top_open
+      name: door_closed
       rect:
         serializedVersion: 2
         x: 192
-        y: 80
+        y: 64
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 16}
+        - {x: -8, y: -16}
+        - {x: -1, y: -16}
+        - {x: -1, y: 16}
       tessellationDetail: 0
       bones: []
       spriteID: 0c3484bc9a6840e4abdc38af8e28935d
@@ -1734,13 +1738,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door_top
+      name: door_open
       rect:
         serializedVersion: 2
         x: 208
-        y: 80
+        y: 64
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1897,48 +1901,6 @@ TextureImporter:
       bones: []
       spriteID: 80559e916140f244e86806a55fcb7de4
       internalID: -124034755
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: door_bottom_open
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9eab97b4eb6dbda45bd60bacb12d18f8
-      internalID: 396769289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: door_bottom
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8acb8ffe1a2192b4592ad03f43aad7a1
-      internalID: 1767118132
       vertices: []
       indices: 
       edges: []
@@ -2787,7 +2749,7 @@ TextureImporter:
         width: 48
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2795,6 +2757,48 @@ TextureImporter:
       bones: []
       spriteID: c20bd50c5d56d024d933d3fac2dbbe4e
       internalID: 564517380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plate_pressed
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0da66c279788f64c8bc3bf3fde2d5ab
+      internalID: -997578202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plate
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2faa0980fd13c9468a6d8b0aa1346e7
+      internalID: -514099272
       vertices: []
       indices: 
       edges: []
@@ -2857,8 +2861,8 @@ TextureImporter:
       crate: -902663413
       door_bottom: 1767118132
       door_bottom_open: 396769289
-      door_top: 1758270474
-      door_top_open: 37345227
+      door_closed: 37345227
+      door_open: 1758270474
       dungeon_10: 1038562404
       dungeon_116: 318677373
       dungeon_117: -1251542373
@@ -2917,6 +2921,8 @@ TextureImporter:
       ladder_top: 1048293745
       partbloodspikes0: 1001457567
       partbloodspikes1: 962250648
+      plate: -514099272
+      plate_pressed: -997578202
       pot: -1722273001
       razor_bottom: 437923786
       razor_top: -1673621549
