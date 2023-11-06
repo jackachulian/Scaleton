@@ -66,9 +66,11 @@ MonoBehaviour:
   maxStoppingForce: 60
   carryingExtraForcePerMass: 3
   animator: {fileID: 8301269846219885631}
+  interaction: {fileID: 7478202207410652426}
   grabBox: {fileID: 5216397015340684804}
   carrySpeedMultiplier: 0.425
   carryJumpMultiplier: 0.25
+  charState: 0
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -143,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e134987d72a8a3641914e13d05c195a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!1 &4103984454215649808
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8652102996825113373}
   m_Layer: 0
-  m_Name: GrabPoint
+  m_Name: InteractAndGrabPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -431,11 +434,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6656194248139349992}
+  - component: {fileID: 7478202207410652426}
   - component: {fileID: 5216397015340684804}
   - component: {fileID: 206747284563389283}
   - component: {fileID: 4379789160492333218}
   m_Layer: 0
-  m_Name: Grabbox
+  m_Name: InteractionAndGrab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,6 +460,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8623312564519854348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7478202207410652426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477226618387166956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb91370646c3f24aa4acee810b37fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactPoint: {fileID: 8652102996825113373}
+  defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: 3cc0f0c40e99cc44a90087065fae7d99, type: 2}
+  grabBox: {fileID: 5216397015340684804}
 --- !u!114 &5216397015340684804
 MonoBehaviour:
   m_ObjectHideFlags: 0

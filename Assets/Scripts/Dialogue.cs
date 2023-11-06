@@ -18,7 +18,7 @@ public class Dialogue : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Interact") || Input.GetButtonDown("Cancel"))
         {
             if(textComponent.text == lines[index]){
                 NextLine();

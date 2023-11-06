@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class GrabBox : MonoBehaviour
 {
-    private List<Grabbable> grabbableObjects;
-
     private Grabbable grabbedBox;
 
     private Rigidbody2D playerRb;
@@ -28,59 +26,10 @@ public class GrabBox : MonoBehaviour
     private int grabbedObjectLayer;
 
     private void Awake() {
-        grabbableObjects = new List<Grabbable>();
         playerRb = playerController.GetComponent<Rigidbody2D>();
     }
 
-    void OnTriggerEnter2D(Collider2D c){
-        Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
-        if(grabbable){
-            Debug.Log("Grabbable object entered!");
-            grabbableObjects.Add(grabbable);
-        }
-        else{
-            Debug.Log("Non-grabbable object entered!");
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D c){
-        Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
-        if (!grabbable) return;
-
-        bool removed = grabbableObjects.Remove(grabbable);
-        if(removed){
-            Debug.Log("Grabbable left range!");
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="throwPressed">true if throw button (X), false if drop button (C)</param>
-    public void GrabPressed(bool throwPressed) {
-        if (grabbedBox) {
-            ReleaseGrabbed(throwPressed);
-        } 
-        else if (grabbableObjects.Count > 0) {
-            Grab(); 
-        } 
-        else {
-            Debug.Log("Can't grab!");
-        }
-    }
-
-    public void Grab(){
-        // grab the closest gameobject to grab point
-        grabbedBox = grabbableObjects.AsQueryable()
-        // .Where(obj => obj.CanBeJumpedOff())
-        .OrderBy(obj => Vector2.Distance(obj.gameObject.transform.position, grabPoint.transform.position))
-        .FirstOrDefault();
-
-        if (!grabbedBox) {
-            Debug.Log("All grabbable objects in range are not currently grabbable");
-            return;
-        }
-
+    public void Grab(Grabbable grabbable){
         boxRb = grabbedBox.GetComponent<Rigidbody2D>();
         boxRb.isKinematic = true;
         grabbedBox.GetComponent<Collider2D>().enabled = false;
@@ -104,7 +53,7 @@ public class GrabBox : MonoBehaviour
 
     // Attempt to let go of the box.
     // If grab point is obstructed by terrain, cannot drop here
-    public void ReleaseGrabbed(bool throwPressed) {
+    public void ReleaseGrabbed(bool throwBox) {
         Collider2D obstruction = Physics2D.OverlapBox(grabPoint.transform.position + (Vector3)dropCheckOffset*playerController.FacingDirection, dropCheckSize, 0f, obstructionLayerMask);
 
         Debug.Log(obstruction);
@@ -123,7 +72,7 @@ public class GrabBox : MonoBehaviour
 
             boxRb.velocity = Vector2.zero;
             
-            if (throwPressed) {
+            if (throwBox) {
                 float yInput = Input.GetAxisRaw("Vertical");
                 Vector2 force;
                 if (yInput > 0.7f) {
@@ -158,6 +107,11 @@ public class GrabBox : MonoBehaviour
         } else {
             Debug.Log("Can't drop here!");
         }
+    }
+
+    public bool HoldingBox()
+    {
+        return grabbedBox != null;
     }
 
     private void OnDrawGizmos() {

@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     public Animator Animator {get{return animator;}}
 
     [SerializeField]
+    private Interaction interaction;
+    [SerializeField]
     private GrabBox grabBox;
 
     [SerializeField]
@@ -70,12 +72,10 @@ public class PlayerController : MonoBehaviour
 
     public CharState charState; 
 
-    public enum CharState{
+    public enum CharState {
         NORMAL,
         DISABLED
     }
-
-    public npc interactibleNPC;
 
 
     private void Start()
@@ -113,24 +113,19 @@ public class PlayerController : MonoBehaviour
                 Flip();
             }
 
-            if (Input.GetButtonDown("Grab"))
+            if (Input.GetButtonDown("Interact"))
             {
-                GrabOrThrow();
+                Interact();
             }
 
-            if (Input.GetButtonDown("Drop"))
+            if (Input.GetButtonDown("Cancel"))
             {
-                GrabOrDrop();
+                Cancel();
             }
 
             if (Input.GetButtonDown("Jump"))
             {
-                if(interactibleNPC != null){
-                    interactibleNPC.talk();
-                }
-                else{
-                    QueueJump();
-                }
+                QueueJump();
             }
         }
         else{
@@ -255,12 +250,12 @@ public class PlayerController : MonoBehaviour
             cc.sharedMaterial = noFriction;
         }
     }
-    private void GrabOrThrow(){
-        grabBox.GrabPressed(true);
+    private void Interact(){
+        interaction.InteractNearest();
     }
 
-    private void GrabOrDrop(){
-        grabBox.GrabPressed(false);
+    private void Cancel(){
+        interaction.CancelNearest();
     }
 
     private void QueueJump()
@@ -322,9 +317,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(velocityChange, ForceMode2D.Impulse);
             Debug.Log(velocityChange);
         }
-        
-        
-        
 
         if (jumpNextFixedUpdate) {
             jumpNextFixedUpdate = false;
