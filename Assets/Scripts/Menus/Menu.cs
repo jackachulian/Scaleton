@@ -23,7 +23,7 @@ public class Menu : MonoBehaviour {
 
     private void Update() {
         if (focused) {
-            if (Input.GetButtonDown("Cancel")) {
+            if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("CancelUI")) {
                 Close();
             }
         }
