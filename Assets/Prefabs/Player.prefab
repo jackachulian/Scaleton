@@ -59,7 +59,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1389158471835670082}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 776
   noFriction: {fileID: 6200000, guid: 488611a2f723d3f48a7686a1b4a981c2, type: 2}
   fullFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
   maxMovementForce: 40
@@ -70,6 +70,7 @@ MonoBehaviour:
   grabBox: {fileID: 5216397015340684804}
   carrySpeedMultiplier: 0.35
   carryJumpMultiplier: 0.25
+  pauseMenu: {fileID: 0}
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
