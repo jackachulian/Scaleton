@@ -11,7 +11,10 @@ public class Scroll : InventoryItem
 
     public override void Use()
     {
-        foreach (var menu in Menu.openMenus) menu.Hide();
+        for (int i=0; i<Menu.openMenus.Count; i++) {
+            var menu = Menu.openMenus[i];
+            if (menu) menu.Hide();
+        }
         scrollDialogue.StartDialogue(lore);
     }
 }

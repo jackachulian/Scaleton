@@ -60,7 +60,7 @@ public class Dialogue : MonoBehaviour
     void EndDialogue()
     {
         gameObject.SetActive(false);
-        if (Menu.CurrentMenu)
+        if (Menu.openMenus.Count > 0)
         {
             for (int i = 0; i < Menu.openMenus.Count; i++) {
                 Menu.openMenus[i].Show();

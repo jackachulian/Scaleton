@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,10 @@ public class Menu : MonoBehaviour {
     public static Menu CurrentMenu {get{return currentMenu;}}
 
     public readonly static List<Menu> openMenus = new List<Menu>();
+    static Menu() {
+        openMenus = new List<Menu>();
+    }
+    
 
     private void Update() {
         if (focused) {
@@ -46,6 +51,12 @@ public class Menu : MonoBehaviour {
     }
 
     public void SelectFirstItem() {
+        transform.GetChild(0).GetComponent<Selectable>().Select();
+        StartCoroutine(SelectNextUpdate());
+    }
+
+    IEnumerator SelectNextUpdate() {
+        yield return new WaitForEndOfFrame();
         transform.GetChild(0).GetComponent<Selectable>().Select();
     }
 

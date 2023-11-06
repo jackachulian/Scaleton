@@ -268,7 +268,7 @@ InputManager:
     negativeButton: 
     positiveButton: enter
     altNegativeButton: 
-    altPositiveButton: space
+    altPositiveButton: x
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -492,7 +492,7 @@ InputManager:
     negativeButton: 
     positiveButton: x
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: return
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -525,6 +525,22 @@ InputManager:
     positiveButton: p
     altNegativeButton: 
     altPositiveButton: escape
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Interact
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 0
+    altNegativeButton: 
+    altPositiveButton: enter
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
