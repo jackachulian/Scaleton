@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float carryJumpMultiplier = 0.25f;
 
+    [SerializeField]
+    private Menu pauseMenu;
+
     private float xInput;
     private float slopeDownAngle;
     private float slopeSideAngle;
@@ -116,19 +119,24 @@ public class PlayerController : MonoBehaviour
                 Flip();
             }
 
-            if (Input.GetButtonDown("Interact"))
+            if (Input.GetButtonDown("Jump")) // Z
+            {
+                QueueJump();
+            }
+
+            if (Input.GetButtonDown("Interact")) // X
             {
                 Interact();
             }
 
-            if (Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("Cancel")) // C
             {
                 Cancel();
             }
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Pause")) // P/esc
             {
-                QueueJump();
+                OpenMenu();
             }
         }
         else{
@@ -259,6 +267,11 @@ public class PlayerController : MonoBehaviour
 
     private void Cancel(){
         interaction.CancelNearest();
+    }
+
+    private void OpenMenu() {
+        DisableControl();
+        pauseMenu.Show();
     }
 
     private void QueueJump()
