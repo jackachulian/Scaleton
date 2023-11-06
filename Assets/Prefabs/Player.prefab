@@ -65,11 +65,12 @@ MonoBehaviour:
   maxMovementForce: 40
   maxStoppingForce: 70
   carryingExtraForcePerMass: 3
+  throwingExtraForcePerMass: 3
   animator: {fileID: 8301269846219885631}
   interaction: {fileID: 7478202207410652426}
   grabBox: {fileID: 5216397015340684804}
   carrySpeedMultiplier: 0.35
-  carryJumpMultiplier: 0.25
+  carryJumpMultiplier: 0.2
   pauseMenu: {fileID: 0}
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:

@@ -21,6 +21,8 @@ public class GrabBox : MonoBehaviour
     [SerializeField] private Vector2 upwardThrowForce = new Vector2(0.5f, 7f);
     [SerializeField] private Vector2 downwardThrowForce = new Vector2(0.25f, -7.1f);
 
+    [SerializeField] private float throwingExtraForcePerMass = 3f;
+
     [SerializeField] private LayerMask obstructionLayerMask;
 
     private int grabbedObjectLayer;
@@ -85,6 +87,11 @@ public class GrabBox : MonoBehaviour
                 }
 
                 Vector2 throwForce = new Vector2(force.x*playerController.FacingDirection, force.y);
+
+                float forceMagnitude = throwForce.magnitude;
+                float extraForce = boxRb.mass * throwingExtraForcePerMass;
+                throwForce = throwForce.normalized * (forceMagnitude*extraForce);
+
                 boxRb.AddForce(throwForce, ForceMode2D.Impulse);
             }
 

@@ -27,8 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float maxStoppingForce = 50f;
     [SerializeField]
-    private float carryingExtraForcePerMass = 5f;
-
+    private float carryingExtraForcePerMass = 3f;
 
     [SerializeField]
     private Animator animator;
@@ -75,6 +74,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
+
+    private Rigidbody2D currentMovingPlatform;
 
     private PlayerState playerState; 
 
@@ -156,7 +157,17 @@ public class PlayerController : MonoBehaviour
         // Check all collisions. For each grabbable, if it cannot be currently picked up (released recently),
         // then player also cannot jump off of it
         isGrounded = false;
+        currentMovingPlatform = null;
         foreach (Collider2D c in colliders) {
+            // Check for rigidbody if current moving platform not found yet
+            if (!currentMovingPlatform) {
+                // If floor has a rigidbody, track it so that it can be snapped to
+                Rigidbody2D rb = c.gameObject.GetComponent<Rigidbody2D>();
+                if (rb) {
+                    currentMovingPlatform = rb;
+                }
+            }
+            
             Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
             if (grabbable && !grabbable.CanBeJumpedOff()) {
                 continue;
@@ -320,6 +331,11 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 velocityChange = newVelocity - rb.velocity;
+
+        // Move target velocity in same direction of platform velocity if on one
+        if (currentMovingPlatform) {
+            velocityChange += currentMovingPlatform.velocity;
+        }
 
         // if (isOnSlope && isGrounded && xInput == 0 && Mathf.Abs(rb.velocity.magnitude) < 0.75f) {
         //     Debug.Log("slope standing");
