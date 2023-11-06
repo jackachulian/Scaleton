@@ -60,18 +60,26 @@ public class Interaction : MonoBehaviour {
     }
 
     bool CanBeInteracted(Interactable interactable) {
-        if (grabBox.HoldingBox() && interactable.isGrabbable) return false;
+        if (grabBox.IsHoldingBox() && interactable.IsGrabbable) return false;
         return true;
     }
 
     public void InteractNearest() {
-        if (GrabNearestIfPossible()) return;
-        closestInteractable.Interact();
+        if (closestInteractable) {
+            if (GrabNearestIfPossible()) return;
+            closestInteractable.Interact();
+        } else {
+            grabBox.ReleaseGrabbed(true);
+        }
     }
 
     public void CancelNearest() {
-        if (GrabNearestIfPossible()) return;
-        closestInteractable.Cancel();
+        if (closestInteractable) {
+            if (GrabNearestIfPossible()) return;
+            closestInteractable.Cancel();
+        } else {
+            grabBox.ReleaseGrabbed(false);
+        }
     }
 
     /// <summary>
@@ -79,7 +87,7 @@ public class Interaction : MonoBehaviour {
     /// </summary>
     /// <returns>true if the nearest interactable was a box and was grabbed</returns>
     bool GrabNearestIfPossible() {
-        if (closestInteractable.isGrabbable) {
+        if (!grabBox.IsHoldingBox() && closestInteractable.IsGrabbable) {
             Grabbable grabbable = closestInteractable.GetComponent<Grabbable>();
             grabBox.Grab(grabbable);
             return true;

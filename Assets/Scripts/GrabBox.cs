@@ -30,6 +30,7 @@ public class GrabBox : MonoBehaviour
     }
 
     public void Grab(Grabbable grabbable){
+        grabbedBox = grabbable;
         boxRb = grabbedBox.GetComponent<Rigidbody2D>();
         boxRb.isKinematic = true;
         grabbedBox.GetComponent<Collider2D>().enabled = false;
@@ -109,7 +110,7 @@ public class GrabBox : MonoBehaviour
         }
     }
 
-    public bool HoldingBox()
+    public bool IsHoldingBox()
     {
         return grabbedBox != null;
     }

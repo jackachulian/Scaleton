@@ -7,13 +7,14 @@ public abstract class Interactable : MonoBehaviour {
     [SerializeField] private SpriteRenderer spriteRenderer;
     public SpriteRenderer SpriteRenderer{get{return spriteRenderer;}}
 
-    public readonly bool isGrabbable = false;
+    [SerializeField] private bool isGrabbable = false;
+    public bool IsGrabbable {get{return isGrabbable;}}
 
     // When X is pressed
     public abstract void Interact();
 
     // When C is pressed (optional)
-    public virtual void Cancel(){}
+    public virtual void Cancel() {}
 
     // When walking towards interactable (optional)
     public virtual void Hover() {}
