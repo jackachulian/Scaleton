@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d551aef1f189a54ab1d5e6c8193114e, type: 3}
+  m_Name: TestScroll
+  m_EditorClassIdentifier: 
+  title: Test Scroll
+  lore:
+  - This is lore this is lore this is lore this is lore this is lore
+  - This is more lore this is more lore this is more lore
+  - This is even more lore yep yep yes
