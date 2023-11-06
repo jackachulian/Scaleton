@@ -53,7 +53,19 @@ public class Dialogue : MonoBehaviour
             StartCoroutine(TypeLine());
         }
         else{
-            gameObject.SetActive(false);
+            EndDialogue();
+        }
+    }
+
+    void EndDialogue()
+    {
+        gameObject.SetActive(false);
+        if (Menu.CurrentMenu)
+        {
+            for (int i = 0; i < Menu.openMenus.Count; i++) {
+                Menu.openMenus[i].Show();
+            }
+        } else {
             player.EnableControl();
         }
     }

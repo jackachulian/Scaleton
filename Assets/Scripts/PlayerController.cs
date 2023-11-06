@@ -266,7 +266,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Cancel(){
-        interaction.CancelNearest();
+        bool canceled = interaction.CancelNearest();
+        // open pause menu if nothing else was canceled
+        if (!canceled) OpenMenu();
     }
 
     private void OpenMenu() {

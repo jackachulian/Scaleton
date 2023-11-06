@@ -86,14 +86,16 @@ public class Interaction : MonoBehaviour {
         }
     }
 
-    public void CancelNearest() {
+    public bool CancelNearest() {
         if (playerController.GrabBox.IsHoldingBox()) {
             playerController.GrabBox.ReleaseGrabbed(false);
+            return true;
         }
         else if (closestInteractable) {
-            if (GrabNearestIfPossible()) return;
+            if (GrabNearestIfPossible()) return true;
             closestInteractable.Cancel();
         }
+        return false;
     }
 
     /// <summary>

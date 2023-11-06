@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class Menu : MonoBehaviour {
     private bool focused;
 
     private static Menu currentMenu;
+    public static Menu CurrentMenu {get{return currentMenu;}}
+
+    public readonly static List<Menu> openMenus = new List<Menu>();
 
     private void Update() {
         if (focused) {
@@ -31,13 +35,18 @@ public class Menu : MonoBehaviour {
     }
 
     // Show this window on the screen
-    public void Show() {
+    public virtual void Show() {
         currentMenu = this;
+        if (!openMenus.Contains(currentMenu)) openMenus.Add(currentMenu);
         gameObject.SetActive(true);
         if (!canvasGroup) canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
         Focus();
-        transform.GetChild(0).GetComponent<Button>().Select();
+        SelectFirstItem();
+    }
+
+    public void SelectFirstItem() {
+        transform.GetChild(0).GetComponent<Selectable>().Select();
     }
 
     // Hide menu without returning to parent.
@@ -71,6 +80,7 @@ public class Menu : MonoBehaviour {
     // Hide menu and return to parent if any; if not return control to player
     public void Close() {
         Hide();
+        openMenus.Remove(this);
         if (parentMenu) {
             parentMenu.Show();
         } else {
