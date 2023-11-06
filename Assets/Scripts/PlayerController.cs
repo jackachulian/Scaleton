@@ -36,8 +36,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Interaction interaction;
+    public Interaction Interaction {get{return interaction;}}
+
     [SerializeField]
     private GrabBox grabBox;
+    public GrabBox GrabBox {get{return grabBox;}}
 
     [SerializeField]
     private float carrySpeedMultiplier = 0.333f;
@@ -70,9 +73,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
 
-    public CharState charState; 
+    private PlayerState playerState; 
 
-    public enum CharState {
+    private enum PlayerState {
         NORMAL,
         DISABLED
     }
@@ -101,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInput()
     {
-        if(charState == CharState.NORMAL){
+        if(playerState == PlayerState.NORMAL){
             xInput = Input.GetAxisRaw("Horizontal");
 
             if (xInput == 1 && facingDirection == -1)
@@ -328,6 +331,20 @@ public class PlayerController : MonoBehaviour
     {
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public void EnableControl() {
+        playerState = PlayerState.NORMAL;
+        interaction.RefreshNearestInteractable();
+    }
+
+    public void DisableControl() {
+        playerState = PlayerState.DISABLED;
+        interaction.RefreshNearestInteractable();
+    }
+
+    public bool HasControl() {
+        return playerState == PlayerState.NORMAL;
     }
 
     private void OnDrawGizmos()

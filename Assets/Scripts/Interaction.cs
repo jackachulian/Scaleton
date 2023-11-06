@@ -9,11 +9,13 @@ public class Interaction : MonoBehaviour {
 
     private Interactable closestInteractable;
 
+    private Interactable checkClosestInteractable;
+
     [SerializeField] private Transform interactPoint;
 
     [SerializeField] private Material defaultMaterial, outlineMaterial;
 
-    [SerializeField] private GrabBox grabBox;
+    [SerializeField] private PlayerController playerController;
 
     private void Awake() {
         nearbyInteractables = new List<Interactable>();
@@ -35,14 +37,23 @@ public class Interaction : MonoBehaviour {
         if (interactable) nearbyInteractables.Remove(interactable);
     }
 
-    void RefreshNearestInteractable(){
-        Interactable checkClosestInteractable = nearbyInteractables.AsQueryable()
-        .Where(obj => CanBeInteracted(obj))
-        .OrderBy(obj => Vector2.Distance(obj.gameObject.transform.position, interactPoint.transform.position))
-        .FirstOrDefault();
+    public void RefreshNearestInteractable(){
+        // if player doesn't have control, they can't interact with anything.
+        // if holding something, also can't interact with anything else.
+        if (!playerController.HasControl() || playerController.GrabBox.IsHoldingBox()) {
+            checkClosestInteractable = null;
+        } 
+        // otherwise check all nearby objects to update which is the closest
+        else {
+            checkClosestInteractable = nearbyInteractables.AsQueryable()
+            // .Where(obj => CanBeInteracted(obj))
+            .OrderBy(obj => Vector2.Distance(obj.gameObject.transform.position, interactPoint.transform.position))
+            .FirstOrDefault();
+        }
 
         if (checkClosestInteractable != closestInteractable) 
         {
+            // unhover previous closest if it exists
             if (closestInteractable) 
             {
                 if (closestInteractable.SpriteRenderer) closestInteractable.SpriteRenderer.material = defaultMaterial;
@@ -51,6 +62,7 @@ public class Interaction : MonoBehaviour {
 
             closestInteractable = checkClosestInteractable;
 
+            // hover new closest if it exists
             if (closestInteractable) 
             {
                 if (closestInteractable.SpriteRenderer) closestInteractable.SpriteRenderer.material = outlineMaterial;
@@ -59,26 +71,28 @@ public class Interaction : MonoBehaviour {
         }
     }
 
-    bool CanBeInteracted(Interactable interactable) {
-        if (grabBox.IsHoldingBox() && interactable.IsGrabbable) return false;
-        return true;
-    }
+    // bool CanBeInteracted(Interactable interactable) {
+    //     if (grabBox.IsHoldingBox() && interactable.IsGrabbable) return false;
+    //     return true;
+    // }
 
     public void InteractNearest() {
-        if (closestInteractable) {
+        if (playerController.GrabBox.IsHoldingBox()) {
+            playerController.GrabBox.ReleaseGrabbed(true);
+        }
+        else if (closestInteractable) {
             if (GrabNearestIfPossible()) return;
             closestInteractable.Interact();
-        } else {
-            grabBox.ReleaseGrabbed(true);
         }
     }
 
     public void CancelNearest() {
-        if (closestInteractable) {
+        if (playerController.GrabBox.IsHoldingBox()) {
+            playerController.GrabBox.ReleaseGrabbed(false);
+        }
+        else if (closestInteractable) {
             if (GrabNearestIfPossible()) return;
             closestInteractable.Cancel();
-        } else {
-            grabBox.ReleaseGrabbed(false);
         }
     }
 
@@ -87,9 +101,9 @@ public class Interaction : MonoBehaviour {
     /// </summary>
     /// <returns>true if the nearest interactable was a box and was grabbed</returns>
     bool GrabNearestIfPossible() {
-        if (!grabBox.IsHoldingBox() && closestInteractable.IsGrabbable) {
+        if (!playerController.GrabBox.IsHoldingBox() && closestInteractable.IsGrabbable) {
             Grabbable grabbable = closestInteractable.GetComponent<Grabbable>();
-            grabBox.Grab(grabbable);
+            playerController.GrabBox.Grab(grabbable);
             return true;
         }
 

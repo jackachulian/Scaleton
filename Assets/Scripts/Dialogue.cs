@@ -8,13 +8,13 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     private string[] lines;
     public float speed;
-
     private int index;
 
     [SerializeField]
     private PlayerController player;
 
-    void Start(){
+    void Reset(){
+        if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     void Update(){
@@ -34,7 +34,7 @@ public class Dialogue : MonoBehaviour
         gameObject.SetActive(true);
         lines = l;
         textComponent.text = string.Empty;
-        player.charState = PlayerController.CharState.DISABLED;
+        player.DisableControl();
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -54,7 +54,7 @@ public class Dialogue : MonoBehaviour
         }
         else{
             gameObject.SetActive(false);
-            player.charState = PlayerController.CharState.NORMAL;
+            player.EnableControl();
         }
     }
 }
