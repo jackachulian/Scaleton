@@ -84,6 +84,9 @@ public class PlayerController : MonoBehaviour
         DISABLED
     }
 
+    private void Awake() {
+        unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
+    }
 
     private void Start()
     {
@@ -150,6 +153,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("walking", xInput != 0);
     }
 
+    private int unstableLayerMask;
     private void CheckGround()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -164,7 +168,10 @@ public class PlayerController : MonoBehaviour
                 // If floor has a rigidbody, track it so that it can be snapped to
                 Rigidbody2D rb = c.gameObject.GetComponent<Rigidbody2D>();
                 if (rb) {
-                    currentMovingPlatform = rb;
+                    // Check that it's not in the unstable object layer, which cannot be trated as a moving platform
+                    if (( unstableLayerMask & (1 << c.gameObject.layer)) == 0) {
+                        currentMovingPlatform = rb;
+                    }
                 }
             }
             

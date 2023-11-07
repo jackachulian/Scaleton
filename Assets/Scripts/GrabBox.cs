@@ -37,8 +37,8 @@ public class GrabBox : MonoBehaviour
         boxRb.isKinematic = true;
         grabbedBox.GetComponent<Collider2D>().enabled = false;
         
-        grabbedObjectLayer = grabbedBox.gameObject.layer;
-        grabbedBox.gameObject.layer = LayerMask.NameToLayer("Grabbed");
+        // grabbedObjectLayer = grabbedBox.gameObject.layer;
+        // grabbedBox.gameObject.layer = LayerMask.NameToLayer("Grabbed");
 
         // Conservation of momentum
         Vector2 initialPlayerMomentum = playerRb.velocity * playerRb.mass;
@@ -66,7 +66,7 @@ public class GrabBox : MonoBehaviour
             boxRb.isKinematic = false;
             grabbedBox.GetComponent<Collider2D>().enabled = true;
 
-            grabbedBox.gameObject.layer = grabbedObjectLayer;
+            // grabbedBox.gameObject.layer = grabbedObjectLayer;
 
             playerRb.mass -= boxRb.mass;
 

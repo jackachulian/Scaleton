@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Long Beam Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 678772607728175542, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1586847941474720878, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_Size.x
       value: 7
@@ -62,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2641482462976440631, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_InstanceId
-      value: -389762
+      value: -23772
       objectReference: {fileID: 0}
     - target: {fileID: 2641482462976440631, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_ShapePathHash
@@ -122,11 +126,19 @@ PrefabInstance:
       objectReference: {fileID: -782085140, guid: 1b7bbe7d08e876343bde9efee83cf0d6, type: 3}
     - target: {fileID: 4419968390992295879, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -24
+      value: 43.46219
       objectReference: {fileID: 0}
     - target: {fileID: 4419968390992295879, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.75
+      value: -4.4538374
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763796652106410113, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466821643867042494, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8249156402108287417, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_Mass
@@ -135,6 +147,10 @@ PrefabInstance:
     - target: {fileID: 8249156402108287417, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539598088615265840, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

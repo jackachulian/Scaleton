@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5952704858911267912}
   - component: {fileID: 5690411224584138841}
   - component: {fileID: 2529716497051948151}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: RightPlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: -467278
+  m_InstanceId: 40080
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8922436723294501453}
   - component: {fileID: 8680534432381295436}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Rope LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803674600634136748}
   - component: {fileID: 5956626819517546784}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4749747805314702654}
   - component: {fileID: 6052430022627295478}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Scale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 320498115238885009}
   - component: {fileID: 9146642960299687231}
   - component: {fileID: 2739332639529640106}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: LeftPlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: -456938
+  m_InstanceId: 40032
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -679,7 +679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110125675303503088}
   - component: {fileID: 5865058029789798412}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Fulcrum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9165409075565836483}
   - component: {fileID: 7557440440353957534}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Rope LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,7 +900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4985452736060565771}
   - component: {fileID: 7850474748606600590}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,7 +984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 987155235365752714}
   - component: {fileID: 3487540422441450601}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,7 +1071,7 @@ GameObject:
   - component: {fileID: 8628248311488447942}
   - component: {fileID: 6902521820285539523}
   - component: {fileID: 6536969940087589155}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1182,7 +1182,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -24, y: 0.75}
+  m_ConnectedAnchor: {x: 21.17, y: 2.05}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   - {x: 3.50074, y: -0.19127637, z: 0}
   m_ShapePathHash: 952756541
   m_Mesh: {fileID: 0}
-  m_InstanceId: -389762
+  m_InstanceId: 40088
   m_LocalBounds:
     m_Center: {x: -0.00001335144, y: -0.0015386045, z: 0}
     m_Extent: {x: 3.501173, y: 0.18973777, z: 0}

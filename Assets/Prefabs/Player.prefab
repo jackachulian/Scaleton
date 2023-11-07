@@ -59,13 +59,12 @@ MonoBehaviour:
   groundCheck: {fileID: 1389158471835670082}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 776
+    m_Bits: 1928
   noFriction: {fileID: 6200000, guid: 488611a2f723d3f48a7686a1b4a981c2, type: 2}
   fullFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
   maxMovementForce: 40
   maxStoppingForce: 70
   carryingExtraForcePerMass: 3
-  throwingExtraForcePerMass: 3
   animator: {fileID: 8301269846219885631}
   interaction: {fileID: 7478202207410652426}
   grabBox: {fileID: 5216397015340684804}
@@ -497,6 +496,7 @@ MonoBehaviour:
   forwardThrowForce: {x: 6, y: 4}
   upwardThrowForce: {x: 0.5, y: 7}
   downwardThrowForce: {x: 0.5, y: -6.75}
+  throwingExtraForcePerMass: 3
   obstructionLayerMask:
     serializedVersion: 2
     m_Bits: 8
