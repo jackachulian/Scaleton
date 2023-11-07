@@ -103,7 +103,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 3
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.2
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: f5ad1e5ee0693dc4fad34c72a765ae0c, type: 2}
   m_IncludeLayers:
@@ -189,7 +189,7 @@ MonoBehaviour:
   - {x: -0.452837, y: -0.21854615, z: 0}
   m_ShapePathHash: -1014349219
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61826
+  m_InstanceId: 77122
   m_LocalBounds:
     m_Center: {x: -0.0033426285, y: -0.025014162, z: 0}
     m_Extent: {x: 0.49931574, y: 0.49637055, z: 0}

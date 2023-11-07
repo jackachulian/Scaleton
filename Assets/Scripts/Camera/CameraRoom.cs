@@ -16,6 +16,6 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        virtualCam.enabled = false;
+        // virtualCam.enabled = false;
     }
 }

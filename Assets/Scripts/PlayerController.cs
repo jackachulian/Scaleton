@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
     public Interaction Interaction {get{return interaction;}}
 
     [SerializeField]
-    private GrabBox grabBox;
-    public GrabBox GrabBox {get{return grabBox;}}
+    private GrabAndThrow grabBox;
+    public GrabAndThrow GrabBox {get{return grabBox;}}
 
     [SerializeField]
     private float carrySpeedMultiplier = 0.333f;

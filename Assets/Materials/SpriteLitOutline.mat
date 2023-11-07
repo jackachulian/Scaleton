@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Outline:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -46,7 +50,7 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _OutlineColor: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
+    - _OutlineColor: {r: 4, g: 4, b: 4, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7861329878871614610
 MonoBehaviour:

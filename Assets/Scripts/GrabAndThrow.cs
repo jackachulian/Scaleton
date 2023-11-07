@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GrabBox : MonoBehaviour
+public class GrabAndThrow : MonoBehaviour
 {
     private Grabbable grabbedBox;
 
@@ -25,8 +25,6 @@ public class GrabBox : MonoBehaviour
 
     [SerializeField] private LayerMask obstructionLayerMask;
 
-    private int grabbedObjectLayer;
-
     private void Awake() {
         playerRb = playerController.GetComponent<Rigidbody2D>();
     }
@@ -36,9 +34,6 @@ public class GrabBox : MonoBehaviour
         boxRb = grabbedBox.GetComponent<Rigidbody2D>();
         boxRb.isKinematic = true;
         grabbedBox.GetComponent<Collider2D>().enabled = false;
-        
-        // grabbedObjectLayer = grabbedBox.gameObject.layer;
-        // grabbedBox.gameObject.layer = LayerMask.NameToLayer("Grabbed");
 
         // Conservation of momentum
         Vector2 initialPlayerMomentum = playerRb.velocity * playerRb.mass;
@@ -66,8 +61,6 @@ public class GrabBox : MonoBehaviour
             boxRb.isKinematic = false;
             grabbedBox.GetComponent<Collider2D>().enabled = true;
 
-            // grabbedBox.gameObject.layer = grabbedObjectLayer;
-
             playerRb.mass -= boxRb.mass;
 
             grabbedBox.transform.parent = null;
@@ -89,8 +82,9 @@ public class GrabBox : MonoBehaviour
                 Vector2 throwForce = new Vector2(force.x*playerController.FacingDirection, force.y);
 
                 float forceMagnitude = throwForce.magnitude;
-                float extraForce = boxRb.mass * throwingExtraForcePerMass;
-                throwForce = throwForce.normalized * (forceMagnitude*extraForce);
+                // add extra force - use 1 as the default throw and extra is beyond 1 mass
+                float extraForce = (boxRb.mass-1) * throwingExtraForcePerMass;
+                throwForce = throwForce.normalized * (forceMagnitude + extraForce);
 
                 boxRb.AddForce(throwForce, ForceMode2D.Impulse);
             }
