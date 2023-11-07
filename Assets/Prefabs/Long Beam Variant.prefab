@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2641482462976440631, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_InstanceId
-      value: -23772
+      value: -46458
       objectReference: {fileID: 0}
     - target: {fileID: 2641482462976440631, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_ShapePathHash
@@ -142,7 +142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249156402108287417, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_Mass
-      value: 12
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249156402108287417, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8249156402108287417, guid: 0cfa7b6ef24de0f4498640062eb44a95, type: 3}
       propertyPath: m_CollisionDetection
