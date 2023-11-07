@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7940500051032580275}
   - component: {fileID: 6708524054932468995}
   m_Layer: 0
-  m_Name: CenterTorque
+  m_Name: Centerweight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 96328
+  m_InstanceId: 149546
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -705,7 +705,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 96280
+  m_InstanceId: 149498
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -1262,7 +1262,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 21.17, y: 2.05}
+  m_ConnectedAnchor: {x: 52, y: 2}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -1297,7 +1297,7 @@ MonoBehaviour:
   - {x: 3.50074, y: -0.19127637, z: 0}
   m_ShapePathHash: 952756541
   m_Mesh: {fileID: 0}
-  m_InstanceId: 96336
+  m_InstanceId: 149554
   m_LocalBounds:
     m_Center: {x: -0.00001335144, y: -0.0015386045, z: 0}
     m_Extent: {x: 3.501173, y: 0.18973777, z: 0}
