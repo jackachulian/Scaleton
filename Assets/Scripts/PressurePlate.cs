@@ -13,6 +13,7 @@ public class PressurePlate : MonoBehaviour {
     List<Collider2D> collisions;
 
     private void Awake() {
+        collisions = new List<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

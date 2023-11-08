@@ -69,7 +69,7 @@ MonoBehaviour:
   interaction: {fileID: 7478202207410652426}
   grabBox: {fileID: 5216397015340684804}
   carrySpeedMultiplier: 0.35
-  carryJumpMultiplier: 0.2
+  carryJumpMultiplier: 0.25
   pauseMenu: {fileID: 0}
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:
@@ -494,9 +494,9 @@ MonoBehaviour:
   dropCheckOffset: {x: -0.05, y: 0}
   dropCheckSize: {x: 0.59, y: 0.5}
   forwardThrowForce: {x: 6, y: 4}
-  upwardThrowForce: {x: 0.5, y: 7}
-  downwardThrowForce: {x: 0.5, y: -6.75}
-  throwingExtraForcePerMass: 1
+  upwardThrowForce: {x: 0.5, y: 7.25}
+  downwardThrowForce: {x: 0.5, y: -7}
+  throwingExtraForcePerMass: 0.5
   obstructionLayerMask:
     serializedVersion: 2
     m_Bits: 8
