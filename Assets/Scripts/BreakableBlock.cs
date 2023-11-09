@@ -25,15 +25,20 @@ public class BreakableBlock : MonoBehaviour
     }
 
     void Break(Vector2 force) {
+        if (!breakShatterPrefab) {
+            Destroy(gameObject); 
+            return;
+        }
+        
         GameObject breakShatter = Instantiate(breakShatterPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
 
         Vector2 impulseForce = force.normalized * (force.magnitude - breakForce);
         
         foreach (Rigidbody2D rb in breakShatter.GetComponentsInChildren<Rigidbody2D>()) {
-            rb.AddForce(impulseForce * 0.5f, ForceMode2D.Impulse);
-            rb.AddForce(UnityEngine.Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            rb.AddTorque(UnityEngine.Random.Range(-5f, 5f));
+            rb.AddForce(impulseForce * 0.5f * rb.mass, ForceMode2D.Impulse);
+            rb.AddForce(UnityEngine.Random.insideUnitCircle * 2f * rb.mass, ForceMode2D.Impulse);
+            rb.AddTorque(UnityEngine.Random.Range(-8f, 8f) * rb.mass);
             Destroy(rb.gameObject, 30f);
         }
     }

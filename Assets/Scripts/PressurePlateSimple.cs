@@ -8,6 +8,8 @@ public class PressurePlateSimple : MonoBehaviour {
     [SerializeField] Sprite unpressedSprite;
     [SerializeField] Sprite pressedSprite;
     [SerializeField] private List<Door> doors;
+    [SerializeField] private UnityEvent onPress;
+    [SerializeField] private UnityEvent onUnpress;
     SpriteRenderer spriteRenderer;
     List<Collider2D> collisions;
 
@@ -39,6 +41,7 @@ public class PressurePlateSimple : MonoBehaviour {
             pressed = true;
             spriteRenderer.sprite = pressedSprite;
             foreach (var door in doors) door.Open();
+            onPress.Invoke();
         }
     }
 
@@ -47,6 +50,7 @@ public class PressurePlateSimple : MonoBehaviour {
             pressed = false;
             spriteRenderer.sprite = unpressedSprite;
             foreach (var door in doors) door.Close();
+            onUnpress.Invoke();
         }
     }
 }

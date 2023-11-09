@@ -2922,6 +2922,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: brick4_cracked
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65d55c63796bafc499d0797db0f63dbb
+      internalID: -343752393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brick6_cracked
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ef5e40d28547a44683a42eb8246eb5c
+      internalID: -1896862290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2955,8 +2997,10 @@ TextureImporter:
       brick2: -694438891
       brick3: -1745432342
       brick4: 1170500675
+      brick4_cracked: -343752393
       brick5: -2132944227
       brick6: 2052794236
+      brick6_cracked: -1896862290
       brick7: -1599876032
       brick8: -1793282698
       brick9: 589109102

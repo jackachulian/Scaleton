@@ -79,6 +79,9 @@ public class PlayerController : MonoBehaviour
 
     private PlayerState playerState; 
 
+    // Set to false the moment the user regains control. Prevents double inputs. Also will prevent opening the menu.
+    private bool canInteractThisFrame = true;
+
     private enum PlayerState {
         NORMAL,
         DISABLED
@@ -128,17 +131,17 @@ public class PlayerController : MonoBehaviour
                 QueueJump();
             }
 
-            if (Input.GetButtonDown("Interact")) // X
+            if (Input.GetButtonDown("Interact") && canInteractThisFrame) // X
             {
                 Interact();
             }
 
-            if (Input.GetButtonDown("Cancel")) // C
+            if (Input.GetButtonDown("Cancel") && canInteractThisFrame) // C
             {
                 Cancel();
             }
 
-            if (Input.GetButtonDown("Pause")) // P/esc
+            if (Input.GetButtonDown("Pause") && canInteractThisFrame) // P/esc
             {
                 OpenMenu();
             }
@@ -146,6 +149,8 @@ public class PlayerController : MonoBehaviour
         else{
             xInput = 0;
         }
+
+        canInteractThisFrame = true;
     }
 
     private void UpdateAnimation()
@@ -372,6 +377,7 @@ public class PlayerController : MonoBehaviour
     public void EnableControl() {
         playerState = PlayerState.NORMAL;
         interaction.RefreshNearestInteractable();
+        canInteractThisFrame = false;
     }
 
     public void DisableControl() {
