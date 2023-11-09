@@ -19,6 +19,7 @@ public class CameraRoom : MonoBehaviour {
     
         for (int i = 0; i < collider.pathCount; i++) {
             EdgeCollider2D edge = grabbableBlocker.AddComponent<EdgeCollider2D>();
+            edge.edgeRadius = 0.025f;
             Vector2[] points = collider.GetPath(i);
             Array.Resize(ref points, points.Length+1);
             points[points.Length-1] = points[0];

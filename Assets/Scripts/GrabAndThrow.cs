@@ -46,6 +46,8 @@ public class GrabAndThrow : MonoBehaviour
 
         playerController.Animator.SetBool("carrying", true);
 
+        playerController.gameObject.layer = LayerMask.NameToLayer("PlayerHoldingGrabbable");
+
         Debug.Log("Grab!");
     }
 
@@ -100,6 +102,8 @@ public class GrabAndThrow : MonoBehaviour
             // playerRb.velocity = playerVelocity;
 
             playerController.Animator.SetBool("carrying", false);
+
+            playerController.gameObject.layer = LayerMask.NameToLayer("Player");
 
             grabbedBox.Release();
 

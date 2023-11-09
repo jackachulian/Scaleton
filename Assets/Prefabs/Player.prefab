@@ -464,7 +464,7 @@ MonoBehaviour:
   playerController: {fileID: 1720975310263787412}
   interactBlockMask:
     serializedVersion: 2
-    m_Bits: 520
+    m_Bits: 4616
 --- !u!114 &5216397015340684804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,7 +487,7 @@ MonoBehaviour:
   throwingExtraForcePerMass: 0.5
   obstructionLayerMask:
     serializedVersion: 2
-    m_Bits: 520
+    m_Bits: 4616
 --- !u!61 &206747284563389283
 BoxCollider2D:
   m_ObjectHideFlags: 0
