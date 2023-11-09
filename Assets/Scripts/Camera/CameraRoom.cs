@@ -32,7 +32,14 @@ public class CameraRoom : MonoBehaviour {
         virtualCam.MoveToTopOfPrioritySubqueue();
     }
 
+    private void OnTriggerStay(Collider2D other) {
+        if(virtualCam.enabled == false){
+            virtualCam.enabled = true;
+            virtualCam.MoveToTopOfPrioritySubqueue();
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D other) {
-        // virtualCam.enabled = false;
+        virtualCam.enabled = false;
     }
 }
