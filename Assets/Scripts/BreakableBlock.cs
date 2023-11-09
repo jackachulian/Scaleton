@@ -14,7 +14,11 @@ public class BreakableBlock : MonoBehaviour
 
         Debug.Log("relvel: "+c.relativeVelocity + " - "+c.relativeVelocity.magnitude);
         Vector2 force = c.relativeVelocity * c.rigidbody.mass;
-        if(force.magnitude > breakForce) {
+        Debug.Log("force: "+force+" (magnitude: "+force.magnitude+")");
+        float centerForce = Vector2.Dot(force, transform.position - c.transform.position);
+        Debug.Log("center force: "+centerForce);
+
+        if(centerForce > breakForce) {
             Break(force);
         }
     }
@@ -26,9 +30,9 @@ public class BreakableBlock : MonoBehaviour
         Vector2 impulseForce = force.normalized * (force.magnitude - breakForce);
         
         foreach (Rigidbody2D rb in breakShatter.GetComponentsInChildren<Rigidbody2D>()) {
-            rb.AddForce(impulseForce * 0.75f, ForceMode2D.Impulse);
+            rb.AddForce(impulseForce * 0.5f, ForceMode2D.Impulse);
             rb.AddForce(UnityEngine.Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            rb.AddTorque(UnityEngine.Random.Range(-30f, 30f));
+            rb.AddTorque(UnityEngine.Random.Range(-5f, 5f));
         }
     }
 }
