@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;
+    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private bool canRespawn = true;
 
     private void Start() {
         if (virtualCam.Follow == null) {
@@ -30,12 +32,18 @@ public class CameraRoom : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
+        if(canRespawn){
+            GameObject.Find("Player").GetComponent<PlayerController>().respawnPoint = spawnPoint;
+        }
     }
 
     private void OnTriggerStay(Collider2D other) {
         if(virtualCam.enabled == false){
             virtualCam.enabled = true;
             virtualCam.MoveToTopOfPrioritySubqueue();
+            if(canRespawn){
+                GameObject.Find("Player").GetComponent<PlayerController>().respawnPoint = spawnPoint;
+            }
         }
     }
 

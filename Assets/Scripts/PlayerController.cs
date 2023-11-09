@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Menu pauseMenu;
 
+    [SerializeField] public GameObject respawnPoint;
+
     private float xInput;
     private float slopeDownAngle;
     private float slopeSideAngle;
@@ -144,6 +146,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Pause") && canInteractThisFrame) // P/esc
             {
                 OpenMenu();
+            }
+
+            if (Input.GetButtonDown("Respawn") && canInteractThisFrame) // P/esc
+            {
+                Respawn();
             }
         }
         else{
@@ -372,6 +379,13 @@ public class PlayerController : MonoBehaviour
     {
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    private void Respawn()
+    {
+        newVelocity.Set(0.0f, 0.0f);
+        rb.velocity = newVelocity;
+        transform.position = respawnPoint.transform.position;
     }
 
     public void EnableControl() {
