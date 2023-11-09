@@ -351,12 +351,10 @@ public class PlayerController : MonoBehaviour
             float stoppingForce = maxStoppingForce + carryingExtraForcePerMass * (maxStoppingForce/maxMovementForce)*(rb.mass-1);
                 velocityChange = Vector2.ClampMagnitude(velocityChange, stoppingForce*Time.deltaTime);
                 rb.AddForce(velocityChange, ForceMode2D.Impulse);
-                Debug.Log(velocityChange);
         } else {
             float movementForce = maxMovementForce + carryingExtraForcePerMass*(rb.mass-1);
             velocityChange = Vector2.ClampMagnitude(velocityChange, movementForce*Time.deltaTime);
             rb.AddForce(velocityChange, ForceMode2D.Impulse);
-            Debug.Log(velocityChange);
         }
 
         if (jumpNextFixedUpdate) {

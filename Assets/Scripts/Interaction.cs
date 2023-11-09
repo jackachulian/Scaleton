@@ -11,11 +11,16 @@ public class Interaction : MonoBehaviour {
 
     private Interactable checkClosestInteractable;
 
+    private Collider2D playerCollider;
+
     [SerializeField] private Transform interactPoint;
 
     [SerializeField] private Material defaultMaterial, outlineMaterial;
 
     [SerializeField] private PlayerController playerController;
+
+    // Mainly to prevent picking up boxes from behind doors.
+    [SerializeField] private LayerMask interactBlockMask;
 
     private void Awake() {
         nearbyInteractables = new List<Interactable>();
@@ -23,18 +28,28 @@ public class Interaction : MonoBehaviour {
 
     private void FixedUpdate() {
         RefreshNearestInteractable();
+        playerCollider = playerController.GetComponent<Collider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D c)
     {
         Interactable interactable = c.gameObject.GetComponent<Interactable>();
-        if(interactable) nearbyInteractables.Add(interactable);
+        if(interactable) {
+            nearbyInteractables.Add(interactable);
+        } 
     }
 
     void OnTriggerExit2D(Collider2D c)
     {
         Interactable interactable = c.gameObject.GetComponent<Interactable>();
         if (interactable) nearbyInteractables.Remove(interactable);
+    }
+
+    bool IsObstructed(Interactable interactable) {
+        // if line from player to interactable is blocked by an obstacle, cannot be interacted with
+        Debug.DrawLine(playerController.transform.position, interactable.transform.position, Color.magenta);
+        var hit = Physics2D.Linecast(playerController.transform.position, interactable.transform.position, interactBlockMask);
+        return hit.collider != null && hit.transform.gameObject != interactable.gameObject;
     }
 
     public void RefreshNearestInteractable(){
@@ -46,7 +61,7 @@ public class Interaction : MonoBehaviour {
         // otherwise check all nearby objects to update which is the closest
         else {
             checkClosestInteractable = nearbyInteractables.AsQueryable()
-            // .Where(obj => CanBeInteracted(obj))
+            .Where(obj => !IsObstructed(obj))
             .OrderBy(obj => Vector2.Distance(obj.gameObject.transform.position, interactPoint.transform.position))
             .FirstOrDefault();
         }

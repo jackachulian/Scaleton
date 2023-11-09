@@ -5,7 +5,6 @@ using UnityEngine;
 public class Grabbable : Interactable
 {
     private float timeReleased;
-    public bool isPlayer = false;
 
     // If thrown/dropped less than 0.5s ago, cannot be jumped off of (prevents flying glitch)
     public bool CanBeJumpedOff() {

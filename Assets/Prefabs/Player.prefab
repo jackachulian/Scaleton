@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1720975310263787412}
   - component: {fileID: 2670604293160675288}
   - component: {fileID: 257289927229488394}
-  - component: {fileID: 448915907997462235}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -133,20 +132,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &448915907997462235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3417496166408329090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e134987d72a8a3641914e13d05c195a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  isGrabbable: 0
 --- !u!1 &4103984454215649808
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +462,9 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   outlineMaterial: {fileID: 2100000, guid: 3cc0f0c40e99cc44a90087065fae7d99, type: 2}
   playerController: {fileID: 1720975310263787412}
+  interactBlockMask:
+    serializedVersion: 2
+    m_Bits: 520
 --- !u!114 &5216397015340684804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +487,7 @@ MonoBehaviour:
   throwingExtraForcePerMass: 0.5
   obstructionLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 520
 --- !u!61 &206747284563389283
 BoxCollider2D:
   m_ObjectHideFlags: 0
