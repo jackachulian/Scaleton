@@ -1811,7 +1811,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fense_single
+      name: fence0
       rect:
         serializedVersion: 2
         x: 112
@@ -1832,7 +1832,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fence_left
+      name: fence1
       rect:
         serializedVersion: 2
         x: 128
@@ -1853,7 +1853,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fence_right
+      name: fence2
       rect:
         serializedVersion: 2
         x: 144
@@ -1874,7 +1874,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fence_middle
+      name: fence3
       rect:
         serializedVersion: 2
         x: 160
@@ -2816,6 +2816,112 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: rock_shatter0
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -1}
+        - {x: -1, y: -1}
+        - {x: 1, y: 0}
+        - {x: 1, y: 4}
+        - {x: -1, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cca9e984fde9e44d9173c1c3a93f6aa
+      internalID: -822060961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_shatter1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -2, y: 8}
+        - {x: 0, y: 1}
+        - {x: 8, y: 0}
+        - {x: 8, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5632503ad409034b96189af40daeb6e
+      internalID: 816986344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_shatter2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -1, y: -8}
+        - {x: -2, y: -6}
+        - {x: -2, y: 0}
+        - {x: -8, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee8e41b1451dd5e4d88980b8455e59c9
+      internalID: -1237422529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_shatter3
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -3, y: 0}
+        - {x: -3, y: -6}
+        - {x: -2, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 1}
+        - {x: 6, y: 2}
+        - {x: 0, y: 2}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 957ee1baff4757d428444bfb13181ff0
+      internalID: -1912389823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2919,10 +3025,10 @@ TextureImporter:
       dungeon_71: 779801696
       dungeon_80: -2096675736
       dungeon_9: 906919824
-      fence_left: 447990241
-      fence_middle: -124034755
-      fence_right: 699675573
-      fense_single: -1833004565
+      fence0: -1833004565
+      fence1: -1833004565
+      fence2: -1833004565
+      fence3: 699675573
       hole0: -165535516
       hole1: -1450475478
       hole2: 973532902
@@ -2940,6 +3046,10 @@ TextureImporter:
       razor_bottom: 437923786
       razor_top: -1673621549
       rock: -774753468
+      rock_shatter0: -822060961
+      rock_shatter1: -822060961
+      rock_shatter2: -822060961
+      rock_shatter3: -822060961
       sewer0: -325752982
       sewer1: 244354627
       sewer2: -1520804814
