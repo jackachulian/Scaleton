@@ -50,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 39788922888419809}
   spawnPoint: {fileID: 8254131021465372402}
+  canRespawn: 1
+  objects: {fileID: 3666898997343934905}
 --- !u!60 &6430863613549729845
 PolygonCollider2D:
   m_ObjectHideFlags: 0

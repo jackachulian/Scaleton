@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;
-    [SerializeField] private GameObject spawnPoint;
-    [SerializeField] private bool canRespawn = true;
+    [SerializeField] public GameObject spawnPoint;
+    [SerializeField] public bool canRespawn = true;
+    [SerializeField] private GameObject objects;
 
     private void Start() {
         if (virtualCam.Follow == null) {
@@ -33,7 +34,7 @@ public class CameraRoom : MonoBehaviour {
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
         if(canRespawn){
-            GameObject.Find("Player").GetComponent<PlayerController>().respawnPoint = spawnPoint;
+            GameObject.Find("Player").GetComponent<PlayerController>().currentRoom = this;
         }
     }
 
@@ -42,12 +43,20 @@ public class CameraRoom : MonoBehaviour {
             virtualCam.enabled = true;
             virtualCam.MoveToTopOfPrioritySubqueue();
             if(canRespawn){
-                GameObject.Find("Player").GetComponent<PlayerController>().respawnPoint = spawnPoint;
+            GameObject.Find("Player").GetComponent<PlayerController>().currentRoom = this;
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         virtualCam.enabled = false;
+    }
+
+    public void respawnItems(){
+        foreach(Transform i in objects.transform){
+            if(i.GetComponent<ItemRespawnCords>()){
+                i.GetComponent<ItemRespawnCords>().Respawn();
+            }
+        }
     }
 }

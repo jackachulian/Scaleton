@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Menu pauseMenu;
 
-    [SerializeField] public GameObject respawnPoint;
+    [SerializeField] public CameraRoom currentRoom;
 
     private float xInput;
     private float slopeDownAngle;
@@ -383,9 +383,15 @@ public class PlayerController : MonoBehaviour
 
     private void Respawn()
     {
-        newVelocity.Set(0.0f, 0.0f);
-        rb.velocity = newVelocity;
-        transform.position = respawnPoint.transform.position;
+        if(currentRoom.canRespawn){
+            if(GrabBox.IsHoldingBox()){
+                GrabBox.ReleaseGrabbed(GrabBox.currentlyGrabbed(),true);
+            }
+            newVelocity.Set(0.0f, 0.0f);
+            rb.velocity = newVelocity;
+            transform.position = currentRoom.spawnPoint.transform.position;
+            currentRoom.respawnItems();
+        }
     }
 
     public void EnableControl() {
