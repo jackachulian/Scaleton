@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class BreakableBlock : MonoBehaviour
 {   
@@ -33,6 +34,7 @@ public class BreakableBlock : MonoBehaviour
             rb.AddForce(impulseForce * 0.5f, ForceMode2D.Impulse);
             rb.AddForce(UnityEngine.Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
             rb.AddTorque(UnityEngine.Random.Range(-5f, 5f));
+            Destroy(rb.gameObject, 30f);
         }
     }
 }
