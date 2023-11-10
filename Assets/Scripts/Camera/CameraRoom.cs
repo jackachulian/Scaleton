@@ -8,12 +8,15 @@ public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;
     [SerializeField] public GameObject spawnPoint;
     [SerializeField] public bool canRespawn = true;
-    [SerializeField] private GameObject objects;
+    [SerializeField] private Transform objectsTransform;
 
     private PolygonCollider2D polygonCollider;
 
+    private Respawnable[] respawnables;
+
     private void OnValidate() {
         polygonCollider = GetComponent<PolygonCollider2D>();
+        respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
     }
 
     private readonly Color roomBorderGizmoColor = new Color(0f, 0.5f, 1f, 0.5f);
@@ -35,7 +38,7 @@ public class CameraRoom : MonoBehaviour {
             virtualCam.Follow = GameObject.Find("Player").transform;
         }
 
-        // Create a collider that will block StableObjects
+        // Create a collider that will block boxes
         GameObject grabbableBlocker = new GameObject("GrabbableBlocker") { layer = LayerMask.NameToLayer("GrabbableBlocker") };
         grabbableBlocker.transform.SetParent(transform, false);
     
@@ -57,7 +60,7 @@ public class CameraRoom : MonoBehaviour {
         }
     }
 
-    private void OnTriggerStay(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         if(virtualCam.enabled == false){
             virtualCam.enabled = true;
             virtualCam.MoveToTopOfPrioritySubqueue();
@@ -71,11 +74,9 @@ public class CameraRoom : MonoBehaviour {
         virtualCam.enabled = false;
     }
 
-    public void respawnItems(){
-        foreach(Transform i in objects.transform){
-            if(i.GetComponent<ItemRespawnCords>()){
-                i.GetComponent<ItemRespawnCords>().Respawn();
-            }
+    public void RespawnItems(){
+        foreach(Respawnable r in respawnables){
+            r.Respawn();
         }
     }
 }

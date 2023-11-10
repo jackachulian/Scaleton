@@ -391,12 +391,11 @@ public class PlayerController : MonoBehaviour
     {
         if(currentRoom.canRespawn){
             if(GrabBox.IsHoldingBox()){
-                GrabBox.ReleaseGrabbed(GrabBox.currentlyGrabbed(),true);
+                GrabBox.ReleaseGrabbed(GrabBox.GetHeldBox(), true);
             }
-            newVelocity.Set(0.0f, 0.0f);
-            rb.velocity = newVelocity;
-            transform.position = currentRoom.spawnPoint.transform.position;
-            currentRoom.respawnItems();
+            rb.velocity.Set(0.0f, 0.0f);
+            transform.position = currentRoom.spawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
+            currentRoom.RespawnItems();
         }
     }
 

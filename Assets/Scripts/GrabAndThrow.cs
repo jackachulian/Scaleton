@@ -125,14 +125,9 @@ public class GrabAndThrow : MonoBehaviour
         return grabbedBox != null;
     }
 
-    public Grabbable currentlyGrabbed()
+    public Grabbable GetHeldBox()
     {
-        if(IsHoldingBox()){
-            return grabbedBox;
-        }
-        else{
-            return null;
-        }
+        return grabbedBox;
     }
 
     private void OnDrawGizmos() {

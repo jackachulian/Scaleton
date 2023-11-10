@@ -51,7 +51,7 @@ MonoBehaviour:
   virtualCam: {fileID: 39788922888419809}
   spawnPoint: {fileID: 8254131021465372402}
   canRespawn: 1
-  objects: {fileID: 3666898997343934905}
+  objectsTransform: {fileID: 6330989068292642863}
 --- !u!60 &6430863613549729845
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ GameObject:
   m_Layer: 11
   m_Name: SpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
