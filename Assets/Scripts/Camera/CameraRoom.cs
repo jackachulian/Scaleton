@@ -56,7 +56,7 @@ public class CameraRoom : MonoBehaviour {
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
         if(canRespawn){
-            GameObject.Find("Player").GetComponent<PlayerController>().currentRoom = this;
+            GameObject.Find("Player").GetComponent<PlayerController>().SetCameraRoom(this);
         }
     }
 
@@ -65,7 +65,7 @@ public class CameraRoom : MonoBehaviour {
             virtualCam.enabled = true;
             virtualCam.MoveToTopOfPrioritySubqueue();
             if(canRespawn){
-            GameObject.Find("Player").GetComponent<PlayerController>().currentRoom = this;
+            GameObject.Find("Player").GetComponent<PlayerController>().SetCameraRoom(this);
             }
         }
     }

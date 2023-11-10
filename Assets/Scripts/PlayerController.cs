@@ -49,8 +49,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Menu pauseMenu;
 
-    [SerializeField] public CameraRoom currentRoom;
-
+    private CameraRoom currentRoom;
     private float xInput;
     private float slopeDownAngle;
     private float slopeSideAngle;
@@ -151,6 +150,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Respawn") && canInteractThisFrame) // P/esc
             {
                 Respawn();
+            }
+
+            if (Input.GetKeyDown(KeyCode.O)) {
+                transform.position = transform.position + Vector3.right * 8f;
             }
         }
         else{
@@ -412,6 +415,13 @@ public class PlayerController : MonoBehaviour
 
     public bool HasControl() {
         return playerState == PlayerState.NORMAL;
+    }
+
+    public CameraRoom GetCurrentRoom() {
+        return currentRoom;
+    }
+    public void SetCameraRoom(CameraRoom room) {
+        currentRoom = room;
     }
 
     private void OnDrawGizmos()

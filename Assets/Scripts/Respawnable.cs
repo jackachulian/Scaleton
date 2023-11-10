@@ -15,7 +15,7 @@ public class Respawnable : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Respawn(){
+    public virtual void Respawn(){
         transform.position = rPos;
         transform.rotation = rRotation;
 
