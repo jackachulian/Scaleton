@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     private bool canWalkOnSlope;
     private bool canJump;
-
     private bool jumpNextFixedUpdate;
 
     private Vector2 newVelocity;
@@ -74,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
+    public CapsuleCollider2D capsuleCollider {get{return cc;}}
 
     private Rigidbody2D currentMovingPlatform;
 
@@ -168,6 +168,10 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         currentMovingPlatform = null;
         foreach (Collider2D c in colliders) {
+            if (!c.enabled) continue;
+
+            if (Physics2D.GetIgnoreCollision(cc, c)) continue;
+
             // Check for rigidbody if current moving platform not found yet
             if (!currentMovingPlatform) {
                 // If floor has a rigidbody, track it so that it can be snapped to
@@ -197,8 +201,10 @@ public class PlayerController : MonoBehaviour
         if(isGrounded && !isJumping) //  && slopeDownAngle <= maxSlopeAngle
         {
             canJump = true;
-        }
-
+        } 
+        // else if (!isGrounded) {
+        //     canJump = false;
+        // }
     }
 
     private void SlopeCheck()

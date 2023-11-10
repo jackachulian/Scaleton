@@ -276,7 +276,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 0.375}
+  m_Size: {x: 4.8125, y: 0.375}
   m_EdgeRadius: 0
 --- !u!233 &4419968390992295879
 HingeJoint2D:
@@ -294,7 +294,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 43.46219, y: -4.4538374}
+  m_ConnectedAnchor: {x: 93.5, y: -15.25}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -329,7 +329,7 @@ MonoBehaviour:
   - {x: 2.5, y: -0.1875, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 56550
+  m_InstanceId: 291062
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.5, y: 0.1875, z: 0}

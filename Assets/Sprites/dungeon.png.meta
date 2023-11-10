@@ -1384,8 +1384,8 @@ TextureImporter:
         y: 96
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.44444445}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1895,7 +1895,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chain_short
+      name: chain_start
       rect:
         serializedVersion: 2
         x: 16
@@ -1916,7 +1916,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chain
+      name: chain_ring
       rect:
         serializedVersion: 2
         x: 32
@@ -2931,7 +2931,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2952,7 +2952,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2960,6 +2960,48 @@ TextureImporter:
       bones: []
       spriteID: 2ef5e40d28547a44683a42eb8246eb5c
       internalID: -1896862290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a848678971b267647a98276d1fb07d2c
+      internalID: 1553910863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_partial
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1200c6de1ed5564e95a7fbf8c339e21
+      internalID: 262833923
       vertices: []
       indices: 
       edges: []
@@ -3008,13 +3050,15 @@ TextureImporter:
       cage1: 1382412847
       cage2: -66544228
       cage3: -678477632
-      chain: 1373461386
+      chain: 1553910863
       chain_arc_left: 1288381050
       chain_arc_middle: 1993948358
       chain_arc_right: 1599965135
       chain_end: -1574596205
-      chain_short: -1985702001
+      chain_partial: 262833923
+      chain_ring: 1373461386
       chain_shorter: 34812670
+      chain_start: -1985702001
       chest: 922453208
       chest_open: 1218343715
       corner_bottomleft: 1652542146

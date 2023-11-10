@@ -121,15 +121,15 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: dungeon
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5714286, y: -0.071428575}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 256
-      height: 256
+      width: 224
+      height: 224
     spriteID: bb6c41aa88a5fb240a5d542c78ac43a6
     spriteBone: []
     spriteOutline: []
@@ -152,9 +152,9 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 0
-        y: 0
-        width: 256
-        height: 256
+        y: 16
+        width: 224
+        height: 224
       spriteId: bb6c41aa88a5fb240a5d542c78ac43a6
     linkedCells: []
     parentIndex: -1
