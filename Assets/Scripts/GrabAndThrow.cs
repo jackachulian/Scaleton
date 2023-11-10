@@ -53,13 +53,13 @@ public class GrabAndThrow : MonoBehaviour
 
     // Attempt to let go of the box.
     // If grab point is obstructed by terrain, cannot drop here
-    public void ReleaseGrabbed(bool throwBox) {
+    public void ReleaseGrabbed(bool throwBox, bool forced = false) {
         Collider2D obstruction = Physics2D.OverlapBox(grabPoint.transform.position + (Vector3)dropCheckOffset*playerController.FacingDirection, dropCheckSize, 0f, obstructionLayerMask);
 
         Debug.Log(obstruction);
-        if (obstruction) Debug.Log(LayerMask.LayerToName(obstruction.gameObject.layer));
+        if (obstruction && !forced) Debug.Log(LayerMask.LayerToName(obstruction.gameObject.layer));
 
-        if (obstruction == null) {
+        if (obstruction == null || forced) {
             boxRb.isKinematic = false;
             grabbedBox.GetComponent<Collider2D>().enabled = true;
 
@@ -109,7 +109,12 @@ public class GrabAndThrow : MonoBehaviour
 
             grabbedBox = null;
             boxRb = null;
-            Debug.Log("Box dropped");
+            if(forced){
+                Debug.Log("Box forcefully dropped");
+            }
+            else{
+                Debug.Log("Box dropped");
+            }
         } else {
             Debug.Log("Can't drop here!");
         }
@@ -118,6 +123,16 @@ public class GrabAndThrow : MonoBehaviour
     public bool IsHoldingBox()
     {
         return grabbedBox != null;
+    }
+
+    public Grabbable currentlyGrabbed()
+    {
+        if(IsHoldingBox()){
+            return grabbedBox;
+        }
+        else{
+            return null;
+        }
     }
 
     private void OnDrawGizmos() {
