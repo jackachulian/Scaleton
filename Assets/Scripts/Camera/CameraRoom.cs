@@ -12,25 +12,13 @@ public class CameraRoom : MonoBehaviour {
 
     private PolygonCollider2D polygonCollider;
 
+    private bool usesConfiner;
     private Respawnable[] respawnables;
 
     private void OnValidate() {
         polygonCollider = GetComponent<PolygonCollider2D>();
         respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
-    }
-
-    private readonly Color roomBorderGizmoColor = new Color(0f, 0.5f, 1f, 0.5f);
-    private void OnDrawGizmos() {
-        Gizmos.color = roomBorderGizmoColor;
-        for (int i = 0; i < polygonCollider.points.Length-1; i++) {
-            Gizmos.DrawLine(
-                transform.TransformPoint(polygonCollider.points[i]), 
-                transform.TransformPoint(polygonCollider.points[i+1])
-            );
-        }
-        Gizmos.DrawLine(
-            transform.TransformPoint(polygonCollider.points[0]),
-            transform.TransformPoint(polygonCollider.points[polygonCollider.points.Length-1]));
+        usesConfiner = virtualCam.GetComponent<CinemachineConfiner>() != null;
     }
 
     private void Start() {
@@ -80,5 +68,29 @@ public class CameraRoom : MonoBehaviour {
         foreach(Respawnable r in respawnables){
             r.Respawn();
         }
+    }
+
+
+    private static readonly Color roomBorderGizmoColor = new Color(0f, 0.5f, 1f, 0.5f);
+    private static readonly Vector2 unitScreenSize = new Vector2(24f, 13.5f);
+    private void OnDrawGizmos() {
+        Gizmos.color = roomBorderGizmoColor;
+
+        if (usesConfiner) {
+            for (int i = 0; i < polygonCollider.points.Length-1; i++) {
+                Gizmos.DrawLine(
+                    transform.TransformPoint(polygonCollider.points[i]), 
+                    transform.TransformPoint(polygonCollider.points[i+1])
+                );
+            }
+            Gizmos.DrawLine(
+                transform.TransformPoint(polygonCollider.points[0]),
+                transform.TransformPoint(polygonCollider.points[polygonCollider.points.Length-1]));
+        }
+
+        else {
+            Gizmos.DrawWireCube(virtualCam.transform.position, unitScreenSize);
+        }
+        
     }
 }
