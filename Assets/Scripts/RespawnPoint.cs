@@ -6,6 +6,6 @@ public class RespawnPoint : MonoBehaviour {
         if (!playerController) return;
 
         CameraRoom currentRoom = playerController.GetCurrentRoom();
-        if (currentRoom) currentRoom.SetRespawnPoint(transform);
+        if (currentRoom) currentRoom.SetRespawnPoint(this);
     }
 }

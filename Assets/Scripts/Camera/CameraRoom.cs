@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;
 
-    [SerializeField] private Transform[] respawnPoints;
+    [SerializeField] private RespawnPoint[] respawnPoints;
 
     [SerializeField] private bool canRespawn = true;
     public bool CanRespawn {get{return canRespawn;}}
@@ -24,19 +24,26 @@ public class CameraRoom : MonoBehaviour {
 
     // Upon entering a room, this is set to the nearest respawn point.
     // item in index 0 by default
-    public Transform currentRespawnPoint { get; private set; }
+    public RespawnPoint currentRespawnPoint { get; private set; }
 
     private PlayerController player;
+
+    // Minimum time a player mst not be in this room in order to respawn its items when re-entering
+    private float minRespawnTime = 0.75f;
+    private float exitTime = 0f;
 
     private void OnValidate() {
         if (!polygonCollider) polygonCollider = GetComponent<PolygonCollider2D>();
         if (!objectsTransform) objectsTransform = transform.Find("Objects");
-        respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
+        
         usesConfiner = virtualCam.GetComponent<CinemachineConfiner>() != null;
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
+        respawnPoints = transform.GetComponentsInChildren<RespawnPoint>();
     }
 
     private void Start() {
+        respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
+        
         if (virtualCam.Follow == null) {
             virtualCam.Follow = GameObject.Find("Player").transform;
         }
@@ -64,15 +71,16 @@ public class CameraRoom : MonoBehaviour {
         if(canRespawn){
             // Respawn items and set them to their original position when re-entering this area from another room.
             // Don't respawn if the room the player was in is a sub-room, meaning it's a sub-room of this room.
+            // Also, don't respawn if the player just exited this room very recently.
             CameraRoom previousRoom = player.GetCurrentRoom();
-            if (!previousRoom || !previousRoom.isSubRoom) RespawnItems();
+            if ((!previousRoom || !previousRoom.isSubRoom) && Time.time - exitTime > minRespawnTime) RespawnItems();
 
             // Find closest spawn point and set that to the respawn point upon entering
             currentRespawnPoint = respawnPoints[0];
-            float distance = Vector2.Distance(currentRespawnPoint.position, player.transform.position);
+            float distance = Vector2.Distance(currentRespawnPoint.transform.position, player.transform.position);
             for (int i=1; i<respawnPoints.Length; i++) {
                 var respawnPoint = respawnPoints[i];
-                float newDistance = Vector2.Distance(respawnPoint.position, player.transform.position);
+                float newDistance = Vector2.Distance(respawnPoint.transform.position, player.transform.position);
                 if (newDistance < distance) {
                     currentRespawnPoint = respawnPoint;
                     distance = newDistance;
@@ -95,6 +103,8 @@ public class CameraRoom : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D other) {
         virtualCam.enabled = false;
+
+        exitTime = Time.time;
     }
 
     public void RespawnItems(){
@@ -103,7 +113,7 @@ public class CameraRoom : MonoBehaviour {
         }
     }
 
-    public void SetRespawnPoint(Transform respawnPoint) {
+    public void SetRespawnPoint(RespawnPoint respawnPoint) {
         currentRespawnPoint = respawnPoint;
     }
 

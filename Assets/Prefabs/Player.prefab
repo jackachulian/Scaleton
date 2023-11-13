@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2670604293160675288}
   - component: {fileID: 257289927229488394}
   - component: {fileID: 5417755302787831906}
+  - component: {fileID: 6252395289835112382}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -144,6 +145,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef03245f598ca66468a21a270798b054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6252395289835112382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417496166408329090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9629cc05ed434524e92f589dd639033d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4097192702203388777
@@ -5409,9 +5422,9 @@ MonoBehaviour:
   grabPoint: {fileID: 4103984454215649808}
   dropCheckOffset: {x: -0.05, y: 0}
   dropCheckSize: {x: 0.59, y: 0.5}
-  forwardThrowForce: {x: 6, y: 4}
-  upwardThrowForce: {x: 0.5, y: 7.25}
-  downwardThrowForce: {x: 0.5, y: -7}
+  forwardThrowForce: {x: 6.5, y: 4}
+  upwardThrowForce: {x: 0.5, y: 8}
+  downwardThrowForce: {x: 0.5, y: -7.5}
   throwingExtraForcePerMass: 0.5
   obstructionLayerMask:
     serializedVersion: 2

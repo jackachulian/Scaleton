@@ -400,7 +400,7 @@ public class PlayerController : MonoBehaviour
                 GrabBox.ReleaseGrabbed(throwBox: false, forced: true);
             }
             rb.velocity.Set(0.0f, 0.0f);
-            transform.position = currentRoom.currentRespawnPoint.position + Vector3.up * cc.size.y / 2f;
+            transform.position = currentRoom.currentRespawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
             currentRoom.RespawnItems();
         }
     }

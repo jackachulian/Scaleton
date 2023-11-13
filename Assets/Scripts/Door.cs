@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Door : MonoBehaviour {
     bool opened;
+    int power; // amount of things powering this door to open. will open if 1 or higher and close if 0 or somehow lower
 
     [SerializeField] Sprite closedSprite;
     [SerializeField] Sprite openSprite;
@@ -15,7 +15,9 @@ public class Door : MonoBehaviour {
     }
 
     public void Open() {
-        if (!opened) {
+        power++;
+
+        if (power > 0 && !opened) {
             opened = true;
             spriteRenderer.sprite = openSprite;
             activeWhenClosed.SetActive(false);
@@ -23,7 +25,9 @@ public class Door : MonoBehaviour {
     }
 
     public void Close() {
-        if (opened) {
+        power--;
+
+        if (power == 0 && opened) {
             opened = false;
             spriteRenderer.sprite = closedSprite;
             activeWhenClosed.SetActive(true);
