@@ -56,6 +56,8 @@ public class CameraRoom : MonoBehaviour {
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
         if(canRespawn){
+            // Respawn items and set them to their original position when re-entering this area from another room.
+            RespawnItems();
             GameObject.Find("Player").GetComponent<PlayerController>().SetCameraRoom(this);
         }
     }

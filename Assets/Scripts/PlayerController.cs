@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     private GrabAndThrow grabBox;
     public GrabAndThrow GrabBox {get{return grabBox;}}
 
+    [SerializeField] 
+    private GameObject spriteObject;
+
     [SerializeField]
     private float carrySpeedMultiplier = 0.333f;
     [SerializeField]
@@ -331,7 +334,6 @@ public class PlayerController : MonoBehaviour
             float carryMass = 0;
             if (grabBox.BoxRb) carryMass += grabBox.BoxRb.mass;
             float jumpMultiplier = 1 / (1 + carryMass*carryJumpMultiplier);
-            Debug.Log("jump mult: "+jumpMultiplier);
             float force = jumpForce * jumpMultiplier * rb.mass;
             newForce.Set(0.0f, force);
             rb.AddForce(newForce, ForceMode2D.Impulse);
@@ -387,7 +389,7 @@ public class PlayerController : MonoBehaviour
     private void Flip()
     {
         facingDirection *= -1;
-        transform.Rotate(0.0f, 180.0f, 0.0f);
+        spriteObject.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
     private void Respawn()
