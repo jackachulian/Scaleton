@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 379609740420541591, guid: 25efc32f7d3eebc4daf04b9dc4356ccb, type: 3}
       propertyPath: m_Name
-      value: MovingCameraDustLeft Variant
+      value: MovingCameraDust
       objectReference: {fileID: 0}
     - target: {fileID: 3988749920535142211, guid: 25efc32f7d3eebc4daf04b9dc4356ccb, type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3988749920535142211, guid: 25efc32f7d3eebc4daf04b9dc4356ccb, type: 3}
       propertyPath: ShapeModule.m_Position.x
-      value: -17
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 3988749920535142211, guid: 25efc32f7d3eebc4daf04b9dc4356ccb, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
