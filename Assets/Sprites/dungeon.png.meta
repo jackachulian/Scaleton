@@ -1398,7 +1398,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf_lef
+      name: shelf_leftedge
       rect:
         serializedVersion: 2
         x: 112
@@ -1447,7 +1447,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf_right
+      name: shelf_rightedge
       rect:
         serializedVersion: 2
         x: 144
@@ -2994,7 +2994,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3002,6 +3002,56 @@ TextureImporter:
       bones: []
       spriteID: f1200c6de1ed5564e95a7fbf8c339e21
       internalID: 262833923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shelf_left
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -5, y: 8}
+        - {x: -1, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf00ca7d567b07047b9af964ab218a1c
+      internalID: 1526978523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shelf_right
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 5, y: 8}
+        - {x: -8, y: 8}
+        - {x: -8, y: 4}
+        - {x: 1, y: 4}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33dfa48c9522b44488513b0614886a2b
+      internalID: -1483051481
       vertices: []
       indices: 
       edges: []
@@ -3143,8 +3193,10 @@ TextureImporter:
       sewer2: -1520804814
       sewer3: 1722050825
       shelf: 1369395132
-      shelf_lef: -279781263
-      shelf_right: -282135978
+      shelf_left: 1526978523
+      shelf_leftedge: -279781263
+      shelf_right: -1483051481
+      shelf_rightedge: -282135978
       sign_left: 2139299455
       sign_right: 339630791
       slab1: -1452715285
