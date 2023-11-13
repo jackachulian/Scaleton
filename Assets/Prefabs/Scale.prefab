@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 5952704858911267912}
   - component: {fileID: 5690411224584138841}
   - component: {fileID: 2529716497051948151}
+  - component: {fileID: 1848113306652443578}
   m_Layer: 7
   m_Name: RightPlate
   m_TagString: Untagged
@@ -215,7 +216,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 36362
+  m_InstanceId: 104930
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -259,6 +260,18 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.229731
   m_MaxDistanceOnly: 0
+--- !u!114 &1848113306652443578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071241976446852039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2386061608004910074
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4749747805314702654}
   - component: {fileID: 6052430022627295478}
+  - component: {fileID: 6532025865874808283}
   m_Layer: 7
   m_Name: Scale
   m_TagString: Untagged
@@ -569,6 +583,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6532025865874808283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707623485254692976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4776641092164693374
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +609,7 @@ GameObject:
   - component: {fileID: 320498115238885009}
   - component: {fileID: 9146642960299687231}
   - component: {fileID: 2739332639529640106}
+  - component: {fileID: 3923646823827237800}
   m_Layer: 7
   m_Name: LeftPlate
   m_TagString: Untagged
@@ -705,7 +732,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 36314
+  m_InstanceId: 104882
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -749,6 +776,18 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.229731
   m_MaxDistanceOnly: 0
+--- !u!114 &3923646823827237800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776641092164693374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4906616394226464908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1190,7 @@ GameObject:
   - component: {fileID: 8628248311488447942}
   - component: {fileID: 6902521820285539523}
   - component: {fileID: 6536969940087589155}
+  - component: {fileID: 6534339091748417499}
   m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
@@ -1262,7 +1302,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 46.5, y: 2.25}
+  m_ConnectedAnchor: {x: 63.9, y: -19.695358}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -1297,7 +1337,19 @@ MonoBehaviour:
   - {x: 3.50074, y: -0.19127637, z: 0}
   m_ShapePathHash: 952756541
   m_Mesh: {fileID: 0}
-  m_InstanceId: 36370
+  m_InstanceId: 104938
   m_LocalBounds:
     m_Center: {x: -0.00001335144, y: -0.0015386045, z: 0}
     m_Extent: {x: 3.501173, y: 0.18973777, z: 0}
+--- !u!114 &6534339091748417499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997093447866896829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
