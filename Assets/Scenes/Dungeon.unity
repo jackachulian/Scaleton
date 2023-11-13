@@ -44705,37 +44705,6 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 97.999985, y: -26.125, z: 0}
     m_Extent: {x: 0.8124199, y: 0.125, z: 0}
---- !u!1 &955948781
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 955948782}
-  m_Layer: 11
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &955948782
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955948781}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.499998, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1349367043}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &966150285 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5952141940209467015, guid: cb77981cceefedf4b9415e916a0d09fd, type: 3}
@@ -52168,6 +52137,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 22.47
       objectReference: {fileID: 0}
+    - target: {fileID: 4124130187733917892, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124130187733917892, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4287020480312805432, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 96
@@ -52279,7 +52256,7 @@ PrefabInstance:
     - target: {fileID: 6539129842166516994, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: spawnPoint
       value: 
-      objectReference: {fileID: 955948781}
+      objectReference: {fileID: 0}
     - target: {fileID: 6539129842166516994, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: respawnPoints.Array.size
       value: 1
@@ -52292,13 +52269,14 @@ PrefabInstance:
       propertyPath: respawnPoints.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7971169867782826826, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
+      propertyPath: m_Name
+      value: RespawnPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8254131021465372402, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4287020480312805432, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 955948782}
     - targetCorrespondingSourceObject: {fileID: 6330989068292642863, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 322061691}
@@ -61226,7 +61204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4287020480312805432, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 72
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 4287020480312805432, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: m_LocalPosition.y
