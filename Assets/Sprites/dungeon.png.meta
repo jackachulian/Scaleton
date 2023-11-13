@@ -1410,8 +1410,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 3, y: 8}
-        - {x: 8, y: 3}
+      - - {x: 4, y: 8}
+        - {x: 8, y: 4}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
@@ -1435,8 +1435,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: 3}
-        - {x: 8, y: 3}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
@@ -1460,8 +1460,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: 3}
-        - {x: -3, y: 8}
+        - {x: -8, y: 4}
+        - {x: -4, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 01750c2db0f98834bb54db3f28b9227e
@@ -1566,7 +1566,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 2}
+        - {x: 8, y: 2}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 8a718edf3b309ec49b0242c366a39132
@@ -1587,8 +1591,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 2}
+        - {x: 8, y: 2}
+        - {x: 8, y: 8}
+      tessellationDetail: 1
       bones: []
       spriteID: 38cb38fa5493f1e468e65e0c60a01b0d
       internalID: 576433482
@@ -1608,8 +1616,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 2}
+        - {x: 8, y: 2}
+        - {x: 8, y: 8}
+      tessellationDetail: 1
       bones: []
       spriteID: 9fb88d92fe584224db041bd34a291a73
       internalID: 1024882391
