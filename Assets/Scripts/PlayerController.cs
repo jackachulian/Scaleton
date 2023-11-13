@@ -392,7 +392,7 @@ public class PlayerController : MonoBehaviour
         spriteObject.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         if(currentRoom.canRespawn){
             if(GrabBox.IsHoldingBox()){
