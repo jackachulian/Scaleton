@@ -93,11 +93,18 @@ public class Menu : MonoBehaviour {
         Hide();
         openMenus.Remove(this);
         if (parentMenu) {
-            parentMenu.Show();
+            parentMenu.StartCoroutine(FocusParentNextFrame());
         } else {
             GameObject.Find("Player").GetComponent<PlayerController>().EnableControl();
         }
     }
+
+    // Prevents double-inputs between menus.
+    IEnumerator FocusParentNextFrame() {
+        yield return new WaitForEndOfFrame();
+        parentMenu.Show();
+    }
+
 
     // Navigate to a window, setting its parent to this window for when it closes
     public void NavigateToWindowAndHide(Menu child) {

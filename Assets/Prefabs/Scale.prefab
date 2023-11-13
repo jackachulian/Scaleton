@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8436226232308880378}
   - component: {fileID: 7940500051032580275}
   - component: {fileID: 6708524054932468995}
+  - component: {fileID: 4018916962631012192}
   m_Layer: 0
   m_Name: Centerweight
   m_TagString: Untagged
@@ -79,6 +80,18 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: -5}
   m_DampingRatio: 0
   m_Frequency: 0
+--- !u!114 &4018916962631012192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289997027471596350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1071241976446852039
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +229,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 104930
+  m_InstanceId: 249930
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -732,7 +745,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 104882
+  m_InstanceId: 249878
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -1302,7 +1315,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 63.9, y: -19.695358}
+  m_ConnectedAnchor: {x: 63.9, y: -19.702095}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -1337,7 +1350,7 @@ MonoBehaviour:
   - {x: 3.50074, y: -0.19127637, z: 0}
   m_ShapePathHash: 952756541
   m_Mesh: {fileID: 0}
-  m_InstanceId: 104938
+  m_InstanceId: 249942
   m_LocalBounds:
     m_Center: {x: -0.00001335144, y: -0.0015386045, z: 0}
     m_Extent: {x: 3.501173, y: 0.18973777, z: 0}

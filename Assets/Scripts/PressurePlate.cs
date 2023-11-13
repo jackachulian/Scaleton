@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class PressurePlateSimple : MonoBehaviour {
     bool pressed;
+    // if stepoffTime is above 0, this may be false while pressed is true.
+    bool stepped;
 
     [SerializeField] Sprite unpressedSprite;
     [SerializeField] Sprite pressedSprite;
@@ -12,6 +14,11 @@ public class PressurePlateSimple : MonoBehaviour {
     [SerializeField] private UnityEvent onUnpress;
     SpriteRenderer spriteRenderer;
     List<Collider2D> collisions;
+
+    // Delay between stepping off plate and the plate showing unpresssed and closing connected doors/running unpress
+    [SerializeField] float stepoffDelay;
+    float stepoffTime = 0f;
+
 
     private void Awake() {
         collisions = new List<Collider2D>();
@@ -30,9 +37,15 @@ public class PressurePlateSimple : MonoBehaviour {
 
     private void UpdatePressure() {
         if (collisions.Count > 0) {
+            stepped = true;
             Press();
         } else {
-            Unpress();
+            if (stepoffDelay > 0) {
+                stepped = false;
+                stepoffTime = stepoffDelay;
+            } else {
+                Unpress();
+            }
         }
     }
 
@@ -51,6 +64,16 @@ public class PressurePlateSimple : MonoBehaviour {
             spriteRenderer.sprite = unpressedSprite;
             foreach (var door in doors) door.Close();
             onUnpress.Invoke();
+        }
+    }
+
+    private void Update() {
+        if (pressed && !stepped) {
+            if (stepoffTime > 0f) {
+                stepoffTime -= Time.deltaTime;
+            } else {
+                Unpress();
+            }
         }
     }
 }
