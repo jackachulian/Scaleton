@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2018371146598609796}
   - component: {fileID: 7147558312694211907}
+  - component: {fileID: 6665535169031702692}
   m_Layer: 3
   m_Name: Beam
   m_TagString: Untagged
@@ -86,6 +87,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6665535169031702692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678772607728175542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6763796652106410113
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +196,7 @@ GameObject:
   - component: {fileID: 1586847941474720878}
   - component: {fileID: 4419968390992295879}
   - component: {fileID: 2641482462976440631}
+  - component: {fileID: 2787951146848103569}
   m_Layer: 3
   m_Name: Beam
   m_TagString: Untagged
@@ -294,7 +308,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 93.5, y: -15.25}
+  m_ConnectedAnchor: {x: 72.87936, y: -20.820583}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -329,10 +343,22 @@ MonoBehaviour:
   - {x: 2.5, y: -0.1875, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 291062
+  m_InstanceId: 109964
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.5, y: 0.1875, z: 0}
+--- !u!114 &2787951146848103569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7466821643867042494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8539598088615265840
 GameObject:
   m_ObjectHideFlags: 0
