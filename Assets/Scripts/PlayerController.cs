@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake() {
         unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
+        hazardLayer = LayerMask.NameToLayer("Hazard");
     }
 
     private void Start()
@@ -396,7 +397,7 @@ public class PlayerController : MonoBehaviour
     {
         if(currentRoom.canRespawn){
             if(GrabBox.IsHoldingBox()){
-                GrabBox.ReleaseGrabbed(GrabBox.GetHeldBox(), true);
+                GrabBox.ReleaseGrabbed(throwBox: false, forced: true);
             }
             rb.velocity.Set(0.0f, 0.0f);
             transform.position = currentRoom.spawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
@@ -424,6 +425,14 @@ public class PlayerController : MonoBehaviour
     }
     public void SetCameraRoom(CameraRoom room) {
         currentRoom = room;
+    }
+
+    private int hazardLayer;
+    private void OnCollisionEnter2D(Collision2D other) {
+        // When colliding with spikes/other hazards, respawn if on the hazard layer
+        if (other.gameObject.layer == hazardLayer) {
+            Respawn();
+        }
     }
 
     private void OnDrawGizmos()
