@@ -24,7 +24,7 @@ public class BreakableBlock : Respawnable
 
     void Break(Vector2 force) {
         if (!breakShatterPrefab) {
-            Destroy(gameObject); 
+            gameObject.SetActive(false);
             return;
         }
         
