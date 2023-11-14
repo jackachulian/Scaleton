@@ -37,16 +37,19 @@ public class CameraRoom : MonoBehaviour {
         if (!objectsTransform) objectsTransform = transform.Find("Objects");
         
         usesConfiner = virtualCam.GetComponent<CinemachineConfiner>() != null;
-        if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
         respawnPoints = transform.GetComponentsInChildren<RespawnPoint>();
     }
 
     private void Start() {
         respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
-        
+
+        if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
+
         if (virtualCam.Follow == null) {
-            virtualCam.Follow = GameObject.Find("Player").transform;
+            virtualCam.Follow = player.transform;
         }
+
+
 
         // Create a collider that will block boxes
         GameObject grabbableBlocker = new GameObject("GrabbableBlocker") { layer = LayerMask.NameToLayer("GrabbableBlocker") };

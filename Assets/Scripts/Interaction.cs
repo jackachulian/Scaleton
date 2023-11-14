@@ -5,13 +5,11 @@ using System.Linq;
 using UnityEngine;
 
 public class Interaction : MonoBehaviour {
-    private List<Interactable> nearbyInteractables;
+    private HashSet<Interactable> nearbyInteractables;
 
     private Interactable closestInteractable;
 
     private Interactable checkClosestInteractable;
-
-    private Collider2D playerCollider;
 
     [SerializeField] private Transform interactPoint;
 
@@ -23,12 +21,11 @@ public class Interaction : MonoBehaviour {
     [SerializeField] private LayerMask interactBlockMask;
 
     private void Awake() {
-        nearbyInteractables = new List<Interactable>();
+        nearbyInteractables = new HashSet<Interactable>();
     }
 
     private void FixedUpdate() {
         RefreshNearestInteractable();
-        playerCollider = playerController.GetComponent<Collider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D c)
@@ -60,10 +57,23 @@ public class Interaction : MonoBehaviour {
         } 
         // otherwise check all nearby objects to update which is the closest
         else {
-            checkClosestInteractable = nearbyInteractables.AsQueryable()
-            .Where(obj => !IsObstructed(obj))
-            .OrderBy(obj => Vector2.Distance(obj.gameObject.transform.position, interactPoint.transform.position))
-            .FirstOrDefault();
+            // checkClosestInteractable = nearbyInteractables.AsQueryable()
+            // .Where(obj => !IsObstructed(obj))
+            // .OrderBy(obj => Vector2.Distance(obj.gameObject.transform.position, interactPoint.transform.position))
+            // .FirstOrDefault();
+
+            if (nearbyInteractables.Count == 0) {
+                checkClosestInteractable = null;
+            } else {
+                float closestDistance = float.MaxValue;
+                foreach (var obj in nearbyInteractables) {
+                    if (IsObstructed(obj)) continue;
+                    float distance = Vector2.Distance(obj.gameObject.transform.position, interactPoint.transform.position);
+                    if (distance < closestDistance) {
+                        checkClosestInteractable = obj;
+                    }
+                }
+            }
         }
 
         if (checkClosestInteractable != closestInteractable) 
