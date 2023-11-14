@@ -6,6 +6,8 @@ public class BreakableBlock : Respawnable
 
     [SerializeField] private GameObject breakShatterPrefab;
 
+    [SerializeField] private bool respawns;
+
     private GameObject breakShatter;
 
     void OnCollisionEnter2D(Collision2D c){
@@ -43,8 +45,10 @@ public class BreakableBlock : Respawnable
 
     public override void Respawn()
     {
-        base.Respawn();
-        Destroy(breakShatter);
-        gameObject.SetActive(true);
+        if (respawns) {
+            base.Respawn();
+            Destroy(breakShatter);
+            gameObject.SetActive(true);
+        }
     }
 }

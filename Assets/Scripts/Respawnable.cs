@@ -8,7 +8,7 @@ public class Respawnable : MonoBehaviour
     private Quaternion rRotation;
     private Rigidbody2D rb;
 
-    void Start()
+    void Awake()
     {
         rPos = transform.position;
         rRotation = transform.rotation;
