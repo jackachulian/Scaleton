@@ -62,6 +62,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1928
   noFriction: {fileID: 6200000, guid: 488611a2f723d3f48a7686a1b4a981c2, type: 2}
+  lowFriction: {fileID: 6200000, guid: e52112631e7f1b34fae85958c111820b, type: 2}
   fullFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
   maxMovementForce: 40
   maxStoppingForce: 70

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;
+    public CinemachineVirtualCamera VirtualCam {get{return virtualCam;}}
 
     [SerializeField] private RespawnPoint[] respawnPoints;
 

@@ -19,9 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
     [SerializeField]
-    private PhysicsMaterial2D noFriction;
-    [SerializeField]
-    private PhysicsMaterial2D fullFriction;
+    private PhysicsMaterial2D noFriction, lowFriction, fullFriction;
     [SerializeField]
     private float maxMovementForce = 30f;
     [SerializeField]
@@ -115,7 +113,7 @@ public class PlayerController : MonoBehaviour
         if (playerState == PlayerState.DEAD) {
             return;
         }
-        
+
         CheckGround();
         SlopeCheck();
         ApplyMovement();
@@ -402,8 +400,9 @@ public class PlayerController : MonoBehaviour
         
         rb.drag = 1f;
         rb.gravityScale = 1.5f;
-        rb.sharedMaterial = fullFriction;
-        cc.sharedMaterial = fullFriction;
+        rb.sharedMaterial = lowFriction;
+        cc.sharedMaterial = lowFriction;
+        currentRoom.VirtualCam.Follow = null; // prevent camera follow movement while dead
 
         StartCoroutine(RespawnAfterDelay());
     }
@@ -416,6 +415,7 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         ForceReleaseGrabbed();
+        currentRoom.VirtualCam.Follow = transform;
         rb.velocity.Set(0.0f, 0.0f);
         transform.position = currentRoom.currentRespawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
         currentRoom.RespawnItems();
