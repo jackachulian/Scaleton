@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] 
     private GameObject spriteObject;
+    private AudioSource audioSource;
 
     [SerializeField]
     private float carrySpeedMultiplier = 0.333f;
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
     private int facingDirection = 1;
     public int FacingDirection {get{return facingDirection;}}
 
-    private bool isGrounded;
+    private bool isGrounded = true;
     public bool IsGrounded {get{return isGrounded;}}
     private bool isOnSlope;
     private bool isJumping;
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
+        audioSource = GetComponent<AudioSource>();
         capsuleColliderSize = cc.size;
         unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
         hazardLayer = LayerMask.NameToLayer("Hazard");
@@ -179,6 +181,7 @@ public class PlayerController : MonoBehaviour
 
         // Check all collisions. For each grabbable, if it cannot be currently picked up (released recently),
         // then player also cannot jump off of it
+        bool groundedLastUpdate = isGrounded;
         isGrounded = false;
         currentMovingPlatform = null;
         foreach (Collider2D c in colliders) {
@@ -202,6 +205,9 @@ public class PlayerController : MonoBehaviour
             if (grabbable && !grabbable.CanBeJumpedOff()) {
                 continue;
             } else {
+                if (!groundedLastUpdate) {
+                    SoundManager.PlaySound(audioSource, "land");
+                }
                 isGrounded = true;
                 break;
             }
@@ -338,6 +344,8 @@ public class PlayerController : MonoBehaviour
             float force = jumpForce * jumpMultiplier * rb.mass;
             newForce.Set(0.0f, force);
             rb.AddForce(newForce, ForceMode2D.Impulse);
+
+            SoundManager.PlaySound(audioSource, "jump");
         }
     }
 
