@@ -51,13 +51,15 @@ public class Menu : MonoBehaviour {
     }
 
     public void SelectFirstItem() {
-        transform.GetChild(0).GetComponent<Selectable>().Select();
         StartCoroutine(SelectNextUpdate());
     }
 
     IEnumerator SelectNextUpdate() {
         yield return new WaitForEndOfFrame();
-        transform.GetChild(0).GetComponent<Selectable>().Select();
+        if (transform.childCount > 0) {
+            var selectable = transform.GetChild(0).GetComponent<Selectable>();
+            if (selectable) selectable.Select();
+        }
     }
 
     // Hide menu without returning to parent.
