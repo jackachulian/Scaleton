@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 88970465929570432}
   - component: {fileID: 4526717669216844696}
   - component: {fileID: 1588227399777618085}
+  - component: {fileID: 5735687495491439291}
   m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
@@ -188,7 +189,7 @@ MonoBehaviour:
   - {x: -0.452837, y: -0.21854615, z: 0}
   m_ShapePathHash: -1014349219
   m_Mesh: {fileID: 0}
-  m_InstanceId: 50952
+  m_InstanceId: 629300
   m_LocalBounds:
     m_Center: {x: -0.0033426285, y: -0.025014162, z: 0}
     m_Extent: {x: 0.49931574, y: 0.49637055, z: 0}
@@ -206,3 +207,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 313466435631583612}
   isGrabbable: 1
+--- !u!114 &5735687495491439291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4582384191893952672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4950511b49a6238429ed528f84e6d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
