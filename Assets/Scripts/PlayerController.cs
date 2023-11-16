@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D currentMovingPlatform;
 
+    private float initialDrag;
+
     private PlayerState playerState; 
 
     // Set to false the moment the user regains control. Prevents double inputs. Also will prevent opening the menu.
@@ -88,20 +90,17 @@ public class PlayerController : MonoBehaviour
 
     private enum PlayerState {
         NORMAL,
-        DISABLED
+        DISABLED,
+        DEAD
     }
 
     private void Awake() {
-        unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
-        hazardLayer = LayerMask.NameToLayer("Hazard");
-    }
-
-    private void Start()
-    {
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
-
         capsuleColliderSize = cc.size;
+        unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
+        hazardLayer = LayerMask.NameToLayer("Hazard");
+        initialDrag = rb.drag;
     }
 
     private void Update()
@@ -112,6 +111,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // If dead, do ot apply any player movement forces, player has gone limp
+        if (playerState == PlayerState.DEAD) {
+            return;
+        }
+        
         CheckGround();
         SlopeCheck();
         ApplyMovement();
@@ -151,13 +155,9 @@ public class PlayerController : MonoBehaviour
                 OpenMenu();
             }
 
-            if (Input.GetButtonDown("Respawn") && canInteractThisFrame) // P/esc
+            if (Input.GetButtonDown("Respawn") && canInteractThisFrame) // R
             {
-                Respawn();
-            }
-
-            if (Input.GetKeyDown(KeyCode.O)) {
-                transform.position = transform.position + Vector3.right * 8f;
+                if(currentRoom.CanRespawn) Die();
             }
         }
         else{
@@ -175,6 +175,8 @@ public class PlayerController : MonoBehaviour
     private int unstableLayerMask;
     private void CheckGround()
     {
+        
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, whatIsGround);
 
         // Check all collisions. For each grabbable, if it cannot be currently picked up (released recently),
@@ -262,7 +264,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
-    {      
+    {
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
 
         if (hit)
@@ -393,15 +395,41 @@ public class PlayerController : MonoBehaviour
         spriteObject.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
+    private void Die() {
+        ForceReleaseGrabbed();
+        playerState = PlayerState.DEAD;
+        animator.SetBool("dead", true);
+        
+        rb.drag = 1f;
+        rb.gravityScale = 1.5f;
+        rb.sharedMaterial = fullFriction;
+        cc.sharedMaterial = fullFriction;
+
+        StartCoroutine(RespawnAfterDelay());
+    }
+
+    IEnumerator RespawnAfterDelay() {
+        yield return new WaitForSeconds(1f);
+        Respawn();
+    }
+
     public void Respawn()
     {
-        if(currentRoom.CanRespawn){
-            if(GrabBox.IsHoldingBox()){
-                GrabBox.ReleaseGrabbed(throwBox: false, forced: true);
-            }
-            rb.velocity.Set(0.0f, 0.0f);
-            transform.position = currentRoom.currentRespawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
-            currentRoom.RespawnItems();
+        ForceReleaseGrabbed();
+        rb.velocity.Set(0.0f, 0.0f);
+        transform.position = currentRoom.currentRespawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
+        currentRoom.RespawnItems();
+
+        rb.drag = initialDrag;
+        rb.gravityScale = 1f;
+
+        animator.SetBool("dead", false);
+        playerState = PlayerState.NORMAL;
+    }
+
+    void ForceReleaseGrabbed() {
+        if(GrabBox.IsHoldingBox()){
+            GrabBox.ReleaseGrabbed(throwBox: false, forced: true);
         }
     }
 
@@ -431,7 +459,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         // When colliding with spikes/other hazards, respawn if on the hazard layer
         if (other.gameObject.layer == hazardLayer) {
-            Respawn();
+            Die();
         }
     }
 
