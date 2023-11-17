@@ -402,6 +402,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Die() {
+        if (playerState == PlayerState.DEAD) return;
+
         ForceReleaseGrabbed();
         playerState = PlayerState.DEAD;
         animator.SetBool("dead", true);
@@ -412,11 +414,13 @@ public class PlayerController : MonoBehaviour
         cc.sharedMaterial = lowFriction;
         currentRoom.VirtualCam.Follow = null; // prevent camera follow movement while dead
 
+        SoundManager.PlaySound(audioSource, "death");
+
         StartCoroutine(RespawnAfterDelay());
     }
 
     IEnumerator RespawnAfterDelay() {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         Respawn();
     }
 
