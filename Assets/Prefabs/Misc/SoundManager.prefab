@@ -49,14 +49,19 @@ MonoBehaviour:
     - Key: grab
       Value:
       - {fileID: 8300000, guid: 8b3af361531e6a54382763b850e5bde7, type: 3}
+    - Key: boxcollision
+      Value:
+      - {fileID: 8300000, guid: aeb6a52f73ef3094aa1de52744b45513, type: 3}
+      - {fileID: 8300000, guid: 7394e81ae2a9cc9429de2a42a8bd8e50, type: 3}
+      - {fileID: 8300000, guid: 1cf353a86b376dc4bb3380ffa9f33317, type: 3}
     - Key: death
       Value:
       - {fileID: 8300000, guid: bc6f8407872ded0408c0d64fde0093ea, type: 3}
     - Key: step
       Value:
-      - {fileID: 8300000, guid: aeb6a52f73ef3094aa1de52744b45513, type: 3}
-      - {fileID: 8300000, guid: 7394e81ae2a9cc9429de2a42a8bd8e50, type: 3}
-      - {fileID: 8300000, guid: 1cf353a86b376dc4bb3380ffa9f33317, type: 3}
+      - {fileID: 8300000, guid: fba98219eee46e642a23f29b35812e54, type: 3}
+      - {fileID: 8300000, guid: 130317841cb167b4ab708cb73bacc23f, type: 3}
+      - {fileID: 8300000, guid: 67dce353aaa01224e92a7a39d775f675, type: 3}
     - Key: door_open
       Value:
       - {fileID: 8300000, guid: 2c8729f09c7f81941aaba80e0a263360, type: 3}

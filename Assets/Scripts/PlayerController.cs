@@ -111,12 +111,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckGround();
+
         // If dead, do ot apply any player movement forces, player has gone limp
         if (playerState == PlayerState.DEAD) {
             return;
         }
-
-        CheckGround();
+        
         SlopeCheck();
         ApplyMovement();
     }
