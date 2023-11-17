@@ -48,6 +48,8 @@ public class GrabAndThrow : MonoBehaviour
 
         playerController.gameObject.layer = LayerMask.NameToLayer("PlayerHoldingGrabbable");
 
+        SoundManager.PlaySound(playerController.audioSource, "grab");
+
         Debug.Log("Grab!");
     }
 
@@ -89,6 +91,10 @@ public class GrabAndThrow : MonoBehaviour
                 throwForce = throwForce.normalized * (forceMagnitude + extraForce);
 
                 boxRb.AddForce(throwForce, ForceMode2D.Impulse);
+
+                SoundManager.PlaySound(playerController.audioSource, "throw");
+            } else {
+                SoundManager.PlaySound(playerController.audioSource, "drop");
             }
 
             // Conservation of momentum

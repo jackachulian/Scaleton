@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] 
     private GameObject spriteObject;
-    private AudioSource audioSource;
+    public AudioSource audioSource {get; private set;}
 
     [SerializeField]
     private float carrySpeedMultiplier = 0.333f;

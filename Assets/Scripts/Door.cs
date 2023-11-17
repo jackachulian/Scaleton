@@ -8,10 +8,14 @@ public class Door : MonoBehaviour {
     [SerializeField] Sprite openSprite;
     [SerializeField] GameObject activeWhenClosed;
     SpriteRenderer spriteRenderer;
+
+
+    AudioSource audioSource;
     
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Open() {
@@ -21,6 +25,7 @@ public class Door : MonoBehaviour {
             opened = true;
             spriteRenderer.sprite = openSprite;
             activeWhenClosed.SetActive(false);
+            SoundManager.PlaySound(audioSource, "door_open");
         }
     }
 
@@ -31,6 +36,7 @@ public class Door : MonoBehaviour {
             opened = false;
             spriteRenderer.sprite = closedSprite;
             activeWhenClosed.SetActive(true);
+            SoundManager.PlaySound(audioSource, "door_close");
         }
     }
 }
