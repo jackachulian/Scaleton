@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour {
     [SerializeField] private SerializedDictionary<string, AudioClip[]> soundEffects;
 
     public static void PlaySound(AudioSource source, string id) {
+        if (!source.enabled) return;
+        if (!source.gameObject.activeInHierarchy) return;
         AudioClip[] clips;
         if (Instance.soundEffects.TryGetValue(id, out clips)) {
             if (clips.Length == 0) return;

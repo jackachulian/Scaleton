@@ -3152,6 +3152,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: lockbox
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f6655747b5452b4f8d459e1ef863f76
+      internalID: 1856652320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3278,6 +3299,7 @@ TextureImporter:
       ladder_bottom: 2113256166
       ladder_broken: 1134373977
       ladder_top: 1048293745
+      lockbox: 1856652320
       partbloodspikes0: 1001457567
       partbloodspikes1: 962250648
       plate: -514099272
