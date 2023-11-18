@@ -57,6 +57,7 @@ public class ShadowCaster2DCreator : MonoBehaviour
 		var tempList = transform.Cast<Transform>().ToList();
 		foreach (var child in tempList)
 		{
+			if (child.GetComponent<ShadowCaster2D>())
 			DestroyImmediate(child.gameObject);
 		}
 	}
