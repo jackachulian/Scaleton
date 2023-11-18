@@ -70,6 +70,8 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (player.IsDead()) return;
+
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
 
@@ -97,6 +99,8 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerStay2D(Collider2D other) {
+        if (player.IsDead()) return;
+        
         if(virtualCam.enabled == false){
             virtualCam.enabled = true;
             virtualCam.MoveToTopOfPrioritySubqueue();
@@ -107,6 +111,8 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
+        if (player.IsDead()) return;
+
         virtualCam.enabled = false;
 
         exitTime = Time.time;

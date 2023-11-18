@@ -461,6 +461,10 @@ public class PlayerController : MonoBehaviour
         return playerState == PlayerState.NORMAL;
     }
 
+    public bool IsDead() {
+        return playerState == PlayerState.DEAD;
+    }
+
     public CameraRoom GetCurrentRoom() {
         return currentRoom;
     }
