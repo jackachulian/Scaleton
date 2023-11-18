@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour {
+public class Door : Respawnable {
     bool opened;
     int power; // amount of things powering this door to open. will open if 1 or higher and close if 0 or somehow lower
 
@@ -38,5 +38,10 @@ public class Door : MonoBehaviour {
             activeWhenClosed.SetActive(true);
             SoundManager.PlaySound(audioSource, "door_close");
         }
+    }
+
+    public override void Respawn()
+    {
+        Close();
     }
 }

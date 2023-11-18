@@ -19,11 +19,25 @@ public class SoundManager : MonoBehaviour {
     public static void PlaySound(AudioSource source, string id) {
         if (!source.enabled) return;
         if (!source.gameObject.activeInHierarchy) return;
+        
+        AudioClip clip = GetClip(id);
+        if (clip) source.PlayOneShot(clip);
+    }
+
+    public static void PlaySound(Vector3 position, string id) {
+        AudioClip clip = GetClip(id);
+        if (clip) {
+            AudioSource.PlayClipAtPoint(clip, position);
+            Debug.Log(clip+" played");
+        }
+    }
+
+    public static AudioClip GetClip(string id) {
         AudioClip[] clips;
         if (Instance.soundEffects.TryGetValue(id, out clips)) {
-            if (clips.Length == 0) return;
-            var clip = clips[Random.Range(0, clips.Length)];
-            source.PlayOneShot(clip);
+            if (clips.Length == 0) return null;
+            return clips[Random.Range(0, clips.Length)];
         }
+        return null;
     }
 }
