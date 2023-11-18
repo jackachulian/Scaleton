@@ -3161,7 +3161,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3169,6 +3169,48 @@ TextureImporter:
       bones: []
       spriteID: 2f6655747b5452b4f8d459e1ef863f76
       internalID: 1856652320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonedoor_closed
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ae0ce385f61524eb1795a6b1b18bf1
+      internalID: 456614430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonedoor_open
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 64
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ab01ff9b41e89b4897e8640381ee1ad
+      internalID: -1808402371
       vertices: []
       indices: 
       edges: []
@@ -3340,6 +3382,8 @@ TextureImporter:
       stairs_left_sccorrected: -1690826912
       stairs_right: -391537051
       stairs_right_sccorrected: -97722285
+      stonedoor_closed: 456614430
+      stonedoor_open: -1808402371
       stonepot: -26109363
       web0: -949817432
       web1: -1071619151
