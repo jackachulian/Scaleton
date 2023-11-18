@@ -10,7 +10,6 @@ using UnityEngine.Rendering.Universal;
 
 #if UNITY_EDITOR
 
-[RequireComponent(typeof(CompositeCollider2D))]
 public class TilemapLightCreator : MonoBehaviour {
     [Serializable]
     public class TileLightData {
@@ -22,7 +21,7 @@ public class TilemapLightCreator : MonoBehaviour {
     }
 
     [SerializedDictionary("ID", "Audio Clips")]
-    [SerializeField] private SerializedDictionary<Tile, TileLightData> tileLightDatas;
+    [SerializeField] private SerializedDictionary<TileBase, TileLightData> tileLightDatas;
 	private Tilemap tilemap;
 
     public void Create()
@@ -36,7 +35,7 @@ public class TilemapLightCreator : MonoBehaviour {
         for (int y = bounds.min.y; y < bounds.max.x; y++) {
             for (int x = bounds.min.x; x < bounds.max.x; x++) {
                 Vector3Int pos = new Vector3Int(x, y, 0);
-                Tile tile = (Tile)tilemap.GetTile(pos);
+                TileBase tile = tilemap.GetTile(pos);
 
                 if (tile && tileLightDatas.ContainsKey(tile)) {
                     TileLightData data = tileLightDatas[tile];
