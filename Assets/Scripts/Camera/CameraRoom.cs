@@ -16,6 +16,11 @@ public class CameraRoom : MonoBehaviour {
     /// </summary>
     [SerializeField] private bool isSubRoom = false;
 
+    [SerializeField] private ParticleSystem ambientParticles;
+
+    // controls the density of the ambient dust particles, average particles per tile (particles/unit^2)
+    [SerializeField] private float particleDensity = 1f; 
+
     private Transform objectsTransform;
 
     private PolygonCollider2D polygonCollider;
@@ -31,7 +36,7 @@ public class CameraRoom : MonoBehaviour {
 
     // Minimum time a player mst not be in this room in order to respawn its items when re-entering
     private float minRespawnTime = 0.75f;
-    private float exitTime = 0f;
+    private float exitTimer = 0f;
 
     private void OnValidate() {
         if (!polygonCollider) polygonCollider = GetComponent<PolygonCollider2D>();
@@ -39,6 +44,28 @@ public class CameraRoom : MonoBehaviour {
         
         usesConfiner = virtualCam.GetComponent<CinemachineConfiner>() != null;
         respawnPoints = transform.GetComponentsInChildren<RespawnPoint>();
+    }
+
+    private void RepositionAmbientParticles() {
+        if (!polygonCollider) return;
+        var bounds = polygonCollider.bounds;
+        
+        ParticleSystem.ShapeModule shape = ambientParticles.shape;
+        shape.position = transform.InverseTransformPoint(bounds.center);
+        shape.scale = bounds.size;
+
+        ParticleSystem.EmissionModule emission = ambientParticles.emission;
+        float duration = ambientParticles.main.duration;
+        float area = bounds.size.x * bounds.size.y;
+        emission.rateOverTime = particleDensity * area / duration;
+
+        Debug.Log(gameObject + " calculated rate: "+emission.rateOverTime.constant);
+
+        // particleCount = duration * rateOverTime;
+        // density = particleCount / area
+        // density = duration * rateOverTime / area;
+        // density*area = duration*rateOverTime;
+        /// density*area / duration = rateOverTime;
     }
 
     private void Start() {
@@ -51,7 +78,7 @@ public class CameraRoom : MonoBehaviour {
             virtualCam.Follow = player.transform;
         }
 
-
+        RepositionAmbientParticles();
 
         // Create a collider that will block boxes
         GameObject grabbableBlocker = new GameObject("GrabbableBlocker") { layer = LayerMask.NameToLayer("GrabbableBlocker") };
@@ -69,18 +96,32 @@ public class CameraRoom : MonoBehaviour {
         if (canRespawn) currentRespawnPoint = respawnPoints[0];
     }
 
+    private void Update() {
+        if (exitTimer > 0) {
+            exitTimer -= Time.deltaTime;
+            if (exitTimer <= 0) {
+                Debug.Log("particles turned off for "+gameObject);
+                ambientParticles.Stop();
+            }
+        }
+        
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (player.IsDead()) return;
 
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
 
+        Debug.Log("particles turned on for "+gameObject);
+        ambientParticles.Play();
+
         if(canRespawn){
             // Respawn items and set them to their original position when re-entering this area from another room.
             // Don't respawn if the room the player was in is a sub-room, meaning it's a sub-room of this room.
             // Also, don't respawn if the player just exited this room very recently.
             CameraRoom previousRoom = player.GetCurrentRoom();
-            if ((!previousRoom || !previousRoom.isSubRoom) && Time.time - exitTime > minRespawnTime) RespawnItems();
+            if ((!previousRoom || !previousRoom.isSubRoom) && exitTimer > minRespawnTime) RespawnItems();
 
             // Find closest spawn point and set that to the respawn point upon entering
             currentRespawnPoint = respawnPoints[0];
@@ -115,7 +156,7 @@ public class CameraRoom : MonoBehaviour {
 
         virtualCam.enabled = false;
 
-        exitTime = Time.time;
+        exitTimer = minRespawnTime;
     }
 
     public void RespawnItems(){

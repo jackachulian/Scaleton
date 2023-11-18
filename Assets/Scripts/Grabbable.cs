@@ -24,7 +24,12 @@ public class Grabbable : Interactable
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.relativeVelocity.magnitude > 5f) {
-            if (!audioSource) audioSource = gameObject.AddComponent<AudioSource>();
+            if (!audioSource) {
+                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.spatialBlend = 1f;
+                audioSource.rolloffMode = AudioRolloffMode.Linear;
+                audioSource.maxDistance = 30f;
+            }
 
             SoundManager.PlaySound(audioSource, "boxcollision");
         }

@@ -182,9 +182,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -217,7 +217,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.489
-  m_Color: {r: 1, g: 0.9285026, b: 0.3537736, a: 1}
+  m_Color: {r: 1, g: 0.9426297, b: 0.47547168, a: 1}
   m_Intensity: 20
   m_LightVolumeIntensity: 0.06
   m_LightVolumeIntensityEnabled: 0

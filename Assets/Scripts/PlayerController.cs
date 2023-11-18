@@ -404,6 +404,7 @@ public class PlayerController : MonoBehaviour
     {
         facingDirection *= -1;
         spriteObject.transform.Rotate(0.0f, 180.0f, 0.0f);
+        if (followingItems.Count > 0) followingItems[0].followOffset = Vector2.right * facingDirection * -1.5f;
     }
 
     private void Die() {
@@ -469,10 +470,11 @@ public class PlayerController : MonoBehaviour
     public void FollowingItemTrailUpdate() {
         if (followingItems.Count == 0) return;
 
-        followingItems[0].Follow(transform);
+        followingItems[0].Follow(spriteObject.transform);
+        followingItems[0].followOffset = Vector2.right * facingDirection * -1.5f;
 
-        for (int i = 1; i < followingItems.Count - 1; i++) {
-            followingItems[i].Follow(followingItems[i-1].transform);
+        for (int i = 1; i < followingItems.Count; i++) {
+            followingItems[i].Follow(followingItems[i-1]);
         }
     }
 
