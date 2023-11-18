@@ -43,5 +43,6 @@ public class Door : Respawnable {
     public override void Respawn()
     {
         Close();
+        power++;
     }
 }

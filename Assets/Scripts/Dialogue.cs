@@ -13,6 +13,9 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private PlayerController player;
 
+    [SerializeField]
+    private GameObject[] disableDuringDialogue;
+
     void Reset(){
         if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
@@ -32,6 +35,7 @@ public class Dialogue : MonoBehaviour
 
     public void StartDialogue(string[] l){
         gameObject.SetActive(true);
+        foreach (var obj in disableDuringDialogue) obj.SetActive(false);
         lines = l;
         textComponent.text = string.Empty;
         player.DisableControl();
@@ -60,6 +64,7 @@ public class Dialogue : MonoBehaviour
     void EndDialogue()
     {
         gameObject.SetActive(false);
+        foreach (var obj in disableDuringDialogue) obj.SetActive(true);
         if (Menu.openMenus.Count > 0)
         {
             for (int i = 0; i < Menu.openMenus.Count; i++) {

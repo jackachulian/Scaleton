@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8553924648449889885}
   - component: {fileID: 904230691611034237}
   - component: {fileID: 5568056217216263026}
-  m_Layer: 17
+  m_Layer: 3
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 810032779922757058}
   - component: {fileID: 332622773476746568}
   - component: {fileID: 8143614763641380600}
-  m_Layer: 17
+  m_Layer: 11
   m_Name: Lockbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 4.5, y: 4.5}
   m_EdgeRadius: 0
 --- !u!114 &332622773476746568
 MonoBehaviour:

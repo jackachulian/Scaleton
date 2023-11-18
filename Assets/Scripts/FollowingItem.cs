@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class FollowingKey : MonoBehaviour {
+public class FollowingItem : MonoBehaviour {
     Transform target;
 
     Vector3 targetPosition;
@@ -24,11 +24,14 @@ public class FollowingKey : MonoBehaviour {
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref vel, followTime);
     }
 
+    // Player pickup
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.GetComponent<PlayerController>() != null) {
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player != null) {
             target = other.transform.GetChild(0); // will target the sprite which is flipped left/right, use to follow behind player
             gameObject.layer = LayerMask.NameToLayer("FollowingItem"); // will allow this to collide with radius surrounding lockboxes
             GetComponent<BoxCollider2D>().isTrigger = false;
+            player.followingItems.Add(this);
         }
     }
 

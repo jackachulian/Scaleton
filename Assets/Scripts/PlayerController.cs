@@ -84,6 +84,9 @@ public class PlayerController : MonoBehaviour
 
     private PlayerState playerState; 
 
+
+    public List<FollowingItem> followingItems {get; private set;}
+
     // Set to false the moment the user regains control. Prevents double inputs. Also will prevent opening the menu.
     private bool canInteractThisFrame = true;
 
@@ -101,6 +104,7 @@ public class PlayerController : MonoBehaviour
         unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
         hazardLayer = LayerMask.NameToLayer("Hazard");
         initialDrag = rb.drag;
+        followingItems = new List<FollowingItem>();
     }
 
     private void Update()
@@ -455,6 +459,21 @@ public class PlayerController : MonoBehaviour
     public void DisableControl() {
         playerState = PlayerState.DISABLED;
         interaction.RefreshNearestInteractable();
+    }
+
+    public void PickupFollowingItem(FollowingItem item) {
+        followingItems.Add(item);
+        FollowingItemTrailUpdate();
+    }
+
+    public void FollowingItemTrailUpdate() {
+        if (followingItems.Count == 0) return;
+
+        followingItems[0].Follow(transform);
+
+        for (int i = 1; i < followingItems.Count - 1; i++) {
+            followingItems[i].Follow(followingItems[i-1].transform);
+        }
     }
 
     public bool HasControl() {
