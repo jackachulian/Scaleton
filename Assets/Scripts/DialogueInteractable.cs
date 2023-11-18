@@ -11,9 +11,9 @@ public class DialogueInteractable : Interactable
     [SerializeField]
     private Dialogue dialogueBox;
 
-    private void Reset() {
+    private void Awake() {
         if (!dialogueBox) {
-            dialogueBox = GameObject.Find("Dialogue Box").GetComponent<Dialogue>();
+            dialogueBox = GameObject.Find("Canvas").transform.Find("Dialogue Box").GetComponent<Dialogue>();
         }
     }
 
