@@ -28,18 +28,26 @@ public class Interaction : MonoBehaviour {
         RefreshNearestInteractable();
     }
 
+    public void AddInteractable(Interactable interactable) {
+        nearbyInteractables.Add(interactable);
+    }
+
     void OnTriggerEnter2D(Collider2D c)
     {
         Interactable interactable = c.gameObject.GetComponent<Interactable>();
         if(interactable) {
             nearbyInteractables.Add(interactable);
+            Debug.Log(interactable + " entered range");
         } 
     }
 
     void OnTriggerExit2D(Collider2D c)
     {
         Interactable interactable = c.gameObject.GetComponent<Interactable>();
-        if (interactable) nearbyInteractables.Remove(interactable);
+        if (interactable) {
+            nearbyInteractables.Remove(interactable);
+            Debug.Log(interactable + " exited range");
+        }
     }
 
     bool IsObstructed(Interactable interactable) {

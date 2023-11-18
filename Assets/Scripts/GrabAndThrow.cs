@@ -63,7 +63,9 @@ public class GrabAndThrow : MonoBehaviour
 
         if (obstruction == null || forced) {
             boxRb.isKinematic = false;
-            grabbedBox.GetComponent<Collider2D>().enabled = true;
+            var bc = grabbedBox.GetComponent<Collider2D>();
+            bc.enabled = true;
+            // GetComponent<Interaction>().AddInteractable(grabbedBox);
 
             playerRb.mass -= boxRb.mass;
 
@@ -97,21 +99,13 @@ public class GrabAndThrow : MonoBehaviour
                 SoundManager.PlaySound(playerController.audioSource, "drop");
             }
 
-            // Conservation of momentum
-            // Vector2 initialPlayerMomentum = playerRb.velocity * playerRb.mass;
-            // Vector2 throwForce = new Vector2(forwardThrowForce.x * playerController.FacingDirection, forwardThrowForce.y);
-            // boxRb.AddForce(throwForce, ForceMode2D.Impulse);
-
-            // Vector2 boxMomentum = boxRb.velocity * boxRb.mass;
-            // Vector2 playerMomentum = initialPlayerMomentum - boxMomentum;
-            // Vector2 playerVelocity = playerMomentum / playerRb.mass;
-            // playerRb.velocity = playerVelocity;
-
             playerController.Animator.SetBool("carrying", false);
 
             playerController.gameObject.layer = LayerMask.NameToLayer("Player");
 
             grabbedBox.Release();
+
+
 
             grabbedBox = null;
             boxRb = null;
