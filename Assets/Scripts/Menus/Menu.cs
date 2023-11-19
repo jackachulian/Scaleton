@@ -41,7 +41,7 @@ public class Menu : MonoBehaviour {
 
     // Show this window on the screen
     public virtual void Show() {
-        if (!gameObject) {
+        if (gameObject == null) {
             Debug.LogError("Trying to open menu that was destroyed: "+gameObject);
             return;
         }

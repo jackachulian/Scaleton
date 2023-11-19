@@ -9,4 +9,8 @@ public class SettingsMenu : Menu {
         Debug.Log(volume);
         mixer.SetFloat(mixerParam, volume);
     }
+
+    public void SetFullscreen(bool isFullscreen) {
+        Screen.fullScreen = isFullscreen;
+    }
 }
