@@ -41,6 +41,10 @@ public class Menu : MonoBehaviour {
 
     // Show this window on the screen
     public virtual void Show() {
+        if (!gameObject) {
+            Debug.LogError("Trying to open menu that was destroyed: "+gameObject);
+            return;
+        }
         currentMenu = this;
         if (!openMenus.Contains(currentMenu)) openMenus.Add(currentMenu);
         gameObject.SetActive(true);
@@ -57,7 +61,7 @@ public class Menu : MonoBehaviour {
     IEnumerator SelectNextUpdate() {
         yield return new WaitForEndOfFrame();
         if (transform.childCount > 0) {
-            var selectable = transform.GetChild(0).GetComponent<Selectable>();
+            var selectable = transform.GetComponentInChildren<Selectable>();
             if (selectable) selectable.Select();
         }
     }
@@ -95,6 +99,7 @@ public class Menu : MonoBehaviour {
         Hide();
         openMenus.Remove(this);
         if (parentMenu) {
+            parentMenu.gameObject.SetActive(true);
             parentMenu.StartCoroutine(FocusParentNextFrame());
         } else {
             GameObject.Find("Player").GetComponent<PlayerController>().EnableControl();

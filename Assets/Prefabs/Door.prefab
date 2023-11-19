@@ -59,7 +59,7 @@ MonoBehaviour:
   - {x: 0, y: -1, z: 0}
   m_ShapePathHash: -174721771
   m_Mesh: {fileID: 0}
-  m_InstanceId: 1139926
+  m_InstanceId: 1206752
   m_LocalBounds:
     m_Center: {x: -0.25, y: 0, z: 0}
     m_Extent: {x: 0.25, y: 1, z: 0}
@@ -219,7 +219,7 @@ AudioSource:
   m_GameObject: {fileID: 6293712515682985577}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6622755744674060956, guid: a54e89cabf6fe0741bd7749ea37f7ca2, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -275,7 +275,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -290,7 +290,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.025
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

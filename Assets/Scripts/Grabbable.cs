@@ -8,6 +8,10 @@ public class Grabbable : Interactable
 
     private AudioSource audioSource;
 
+    private void Awake() {
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
     // If thrown/dropped less than 0.5s ago, cannot be jumped off of (prevents flying glitch)
     public bool CanBeJumpedOff() {
         return timeReleased+0.25f < Time.time;
@@ -27,13 +31,6 @@ public class Grabbable : Interactable
         if (Time.time < 1.5f) return;
 
         if (other.relativeVelocity.magnitude > 5f) {
-            if (!audioSource) {
-                audioSource = gameObject.AddComponent<AudioSource>();
-                audioSource.spatialBlend = 1f;
-                audioSource.rolloffMode = AudioRolloffMode.Linear;
-                audioSource.maxDistance = 30f;
-            }
-
             SoundManager.PlaySound(audioSource, "boxcollision");
         }
     }
