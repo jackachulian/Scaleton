@@ -25,9 +25,8 @@ public class BreakableBlock : Respawnable
     }
 
     void Break(Vector2 force) {
-        SoundManager.PlaySound(transform.position, "break");
-
         if (!breakShatterPrefab) {
+            SoundManager.PlaySound(transform.position, "break");
             gameObject.SetActive(false);
             return;
         }
