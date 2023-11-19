@@ -78,7 +78,7 @@ public class CameraRoom : MonoBehaviour {
 
     private void Start() {
         if (!objectsTransform) objectsTransform = transform.Find("Objects");
-        respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
+        if (respawnables == null) respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
 
         if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
 
