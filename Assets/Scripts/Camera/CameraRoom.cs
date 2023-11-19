@@ -1,6 +1,7 @@
 using System;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;
@@ -15,6 +16,8 @@ public class CameraRoom : MonoBehaviour {
     /// If true, objects will not be respawned when exiting from this room.
     /// </summary>
     [SerializeField] private bool isSubRoom = false;
+
+    [SerializeField] private float brightness = 0.5f;
 
     [SerializeField] private ParticleSystem ambientParticles;
 
@@ -115,6 +118,8 @@ public class CameraRoom : MonoBehaviour {
 
         Debug.Log("particles turned on for "+gameObject);
         ambientParticles.Play();
+
+        GlobalLight.SetBrightness(brightness);
 
         if(canRespawn){
             // Respawn items and set them to their original position when re-entering this area from another room.
