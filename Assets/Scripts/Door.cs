@@ -25,7 +25,7 @@ public class Door : Respawnable {
             opened = true;
             spriteRenderer.sprite = openSprite;
             activeWhenClosed.SetActive(false);
-            SoundManager.PlaySound(audioSource, "door_open");
+            if (Time.time > 1f) SoundManager.PlaySound(audioSource, "door_open");
         }
     }
 
@@ -36,7 +36,7 @@ public class Door : Respawnable {
             opened = false;
             spriteRenderer.sprite = closedSprite;
             activeWhenClosed.SetActive(true);
-            SoundManager.PlaySound(audioSource, "door_close");
+            if (Time.time > 1f) SoundManager.PlaySound(audioSource, "door_close");
         }
     }
 

@@ -23,6 +23,9 @@ public class Grabbable : Interactable
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        // don't play sounds within the first ~1s - this is when blocks are first falling nto the level
+        if (Time.time < 1.5f) return;
+
         if (other.relativeVelocity.magnitude > 5f) {
             if (!audioSource) {
                 audioSource = gameObject.AddComponent<AudioSource>();
