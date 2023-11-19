@@ -23,8 +23,6 @@ public class Respawnable : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
-
-        Debug.Log("Respawned item");
     }
 
 }

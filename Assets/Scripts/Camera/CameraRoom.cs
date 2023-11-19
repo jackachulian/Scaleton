@@ -12,6 +12,9 @@ public class CameraRoom : MonoBehaviour {
     [SerializeField] private bool canRespawn = true;
     public bool CanRespawn {get{return canRespawn;}}
 
+    // true while player is within this room
+    private bool playerWithin = false;
+
     /// <summary>
     /// If true, objects will not be respawned when exiting from this room.
     /// </summary>
@@ -100,7 +103,7 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void Update() {
-        if (exitTimer > 0) {
+        if (!playerWithin && exitTimer > 0) {
             exitTimer -= Time.deltaTime;
             if (exitTimer <= 0) {
                 Debug.Log("particles turned off for "+gameObject);
@@ -113,11 +116,14 @@ public class CameraRoom : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (player.IsDead()) return;
 
+        playerWithin = true;
+        exitTimer = 0f;
+
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
 
         Debug.Log("particles turned on for "+gameObject);
-        ambientParticles.Play();
+        if (!ambientParticles.isPlaying) ambientParticles.Play();
 
         GlobalLight.SetBrightness(brightness);
 
@@ -146,6 +152,8 @@ public class CameraRoom : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D other) {
         if (player.IsDead()) return;
+
+        playerWithin = true;
         
         if(virtualCam.enabled == false){
             virtualCam.enabled = true;
@@ -158,6 +166,8 @@ public class CameraRoom : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D other) {
         if (player.IsDead()) return;
+
+        playerWithin = false;
 
         virtualCam.enabled = false;
 
