@@ -50,6 +50,8 @@ public class CameraRoom : MonoBehaviour {
         
         usesConfiner = virtualCam.GetComponent<CinemachineConfiner>() != null;
         respawnPoints = transform.GetComponentsInChildren<RespawnPoint>();
+
+        RepositionAmbientParticles();
     }
 
     private void RepositionAmbientParticles() {

@@ -56,7 +56,9 @@ MonoBehaviour:
   - {fileID: 798793778214055142}
   canRespawn: 1
   isSubRoom: 0
+  brightness: 0.5
   ambientParticles: {fileID: 130280680764060364}
+  particleDensity: 0.5
 --- !u!60 &6430863613549729845
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -530,6 +532,10 @@ PrefabInstance:
     - target: {fileID: 3988749920535142211, guid: 25efc32f7d3eebc4daf04b9dc4356ccb, type: 3}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3988749920535142211, guid: 25efc32f7d3eebc4daf04b9dc4356ccb, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6170802990288882112, guid: 25efc32f7d3eebc4daf04b9dc4356ccb, type: 3}
       propertyPath: m_LocalPosition.x
