@@ -10,7 +10,7 @@ public class InventoryMenu : Menu {
     public override void Show() {
         base.Show();
         PopulateInventoryItems();
-        SelectFirstItem();
+        SelectFirstItemNextFrame();
         Scroll.scrollDialogue = dialogue;
     }
 

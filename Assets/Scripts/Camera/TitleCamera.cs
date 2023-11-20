@@ -6,7 +6,7 @@ public class TitleCamera : MonoBehaviour {
     [SerializeField] private Transform relativeHorizontal, // controls where player's x position is, raycast down from here to get y pos
     scrollStart, scrollEnd, minecartStop;
 
-    private static bool startPressed;
+    private bool startPressed;
 
     private bool minecartStopPassed = false;
 
@@ -14,9 +14,11 @@ public class TitleCamera : MonoBehaviour {
 
     private static float cameraZOffset = -10f;
 
-    [SerializeField] private float scrollSpeed = 5f;
+    [SerializeField] private float scrollSpeed = 7.5f;
 
-    [SerializeField] private float stopDecel = 3f;
+    [SerializeField] private float stopDecel = -3f;
+
+    [SerializeField] private CameraRoom startingRoom;
 
     [SerializeField] private PlayerController player;
 
@@ -32,8 +34,10 @@ public class TitleCamera : MonoBehaviour {
         cinemachineBrain.enabled = false;
     }
 
-    public static void StartGame() {
+    public void StartGame() {
         startPressed = true;
+
+        startingRoom.VirtualCam.MoveToTopOfPrioritySubqueue();
     }
 
     private void Update() {
@@ -56,7 +60,7 @@ public class TitleCamera : MonoBehaviour {
         // Snap player to the ground under the relaative horizontal position transform which moves with the camera.
         var hit = Physics2D.Raycast(relativeHorizontal.position, Vector2.down, 24f, player.GetGroundLayerMask());
         if (hit) {
-            player.transform.position = hit.point;
+            player.transform.position = hit.point + Vector3.up * player.capsuleColliderSize*0.5f;
         }
 
         // Scroll forward, only if minecart hasn't reached the stopping point
@@ -73,7 +77,7 @@ public class TitleCamera : MonoBehaviour {
         // if game has started, allow camera to move the player into the first room (A1).
         // keep moving forawrd untl minecartStop transform is passed
         else {
-            float xDiff = transform.position.x - minecartStop.position.x;
+            float xDiff = player.transform.position.x - minecartStop.position.x;
             if (xDiff > 0) {
                 minecartStopPassed = true;
             }
@@ -85,7 +89,7 @@ public class TitleCamera : MonoBehaviour {
         Debug.Log("Title screen minecart exited");
         player.EnablePhysics();
         player.EnableControl();
-        gameObject.SetActive(false);
         cinemachineBrain.enabled = true;
+        enabled = false;
     }
 }

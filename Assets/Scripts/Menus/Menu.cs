@@ -15,15 +15,29 @@ public class Menu : MonoBehaviour {
     private static Menu currentMenu;
     public static Menu CurrentMenu {get{return currentMenu;}}
 
+    [SerializeField] private bool showOnStart = false;
+
+    // If this menu closes when cancel (C) is pressed.
+    [SerializeField] private bool cancellable = true;
+
+    // True if this should return control to the player when closed and there is no parent menu to return to
+    [SerializeField] private bool returnPlayerControl = true;
+
     public readonly static List<Menu> openMenus = new List<Menu>();
     static Menu() {
         openMenus = new List<Menu>();
     }
     
+    void Start() {
+        if (showOnStart) {
+            Show();
+        }
+
+    }
 
     private void Update() {
         if (focused) {
-            if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("CancelUI")) {
+            if (cancellable && (Input.GetButtonDown("Cancel") || Input.GetButtonDown("CancelUI"))) {
                 Close();
             }
         }
@@ -51,10 +65,10 @@ public class Menu : MonoBehaviour {
         if (!canvasGroup) canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
         Focus();
-        SelectFirstItem();
+        SelectFirstItemNextFrame();
     }
 
-    public void SelectFirstItem() {
+    public void SelectFirstItemNextFrame() {
         StartCoroutine(SelectNextUpdate());
     }
 
@@ -102,7 +116,7 @@ public class Menu : MonoBehaviour {
             parentMenu.gameObject.SetActive(true);
             parentMenu.StartCoroutine(FocusParentNextFrame());
         } else {
-            GameObject.Find("Player").GetComponent<PlayerController>().EnableControl();
+            if (returnPlayerControl) GameObject.Find("Player").GetComponent<PlayerController>().EnableControl();
         }
     }
 

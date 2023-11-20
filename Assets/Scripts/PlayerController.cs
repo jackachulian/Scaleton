@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 newVelocity;
     private Vector2 newForce;
-    private Vector2 capsuleColliderSize;
+    public Vector2 capsuleColliderSize {get; private set;}
 
     private Vector2 slopeNormalPerp;
 
@@ -464,12 +464,12 @@ public class PlayerController : MonoBehaviour
 
     public void EnablePhysics() {
         cc.enabled = true;
-        rb.WakeUp();
+        rb.bodyType = RigidbodyType2D.Dynamic; 
     }
 
     public void DisablePhysics() {
         cc.enabled = false;
-        rb.Sleep();
+        rb.bodyType = RigidbodyType2D.Static;
     }
 
     public void PickupFollowingItem(FollowingItem item) {

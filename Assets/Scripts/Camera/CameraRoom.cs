@@ -116,6 +116,10 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+       if (!playerWithin) EnterRoom();
+    }
+
+    public void EnterRoom() {
         if (player.IsDead()) return;
 
         playerWithin = true;
@@ -169,6 +173,10 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
+        ExitRoom();
+    }
+
+    public void ExitRoom() {
         if (player.IsDead()) return;
 
         playerWithin = false;
