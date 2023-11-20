@@ -462,6 +462,16 @@ public class PlayerController : MonoBehaviour
         interaction.RefreshNearestInteractable();
     }
 
+    public void EnablePhysics() {
+        cc.enabled = true;
+        rb.WakeUp();
+    }
+
+    public void DisablePhysics() {
+        cc.enabled = false;
+        rb.Sleep();
+    }
+
     public void PickupFollowingItem(FollowingItem item) {
         followingItems.Add(item);
         FollowingItemTrailUpdate();
@@ -499,6 +509,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer == hazardLayer) {
             Die();
         }
+    }
+
+    public LayerMask GetGroundLayerMask() {
+        return whatIsGround;
     }
 
     private void OnDrawGizmos()

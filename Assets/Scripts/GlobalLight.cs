@@ -10,6 +10,7 @@ public class GlobalLight : MonoBehaviour {
 
     private void Awake() {
         light2D = GetComponent<Light2D>();
+        targetBrightness = light2D.intensity;
     }
 
     public static void SetBrightness(float b) {
