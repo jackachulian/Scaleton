@@ -130,21 +130,23 @@ public class CameraRoom : MonoBehaviour {
         GlobalLight.SetBrightness(brightness);
 
         if(canRespawn){
-            // Respawn items and set them to their original position when re-entering this area from another room.
-            // Don't respawn if the room the player was in is a sub-room, meaning it's a sub-room of this room.
-            // Also, don't respawn if the player just exited this room very recently.
             CameraRoom previousRoom = player.GetCurrentRoom();
-            if ((!previousRoom || !previousRoom.isSubRoom) && exitTimer > minRespawnTime) RespawnItems();
+            if (!previousRoom || !previousRoom.isSubRoom) {
+                // Respawn items and set them to their original position when re-entering this area from another room.
+                // Don't respawn if the room the player was in is a sub-room, meaning it's a sub-room of this room.
+                // Also, don't respawn if the player just exited this room very recently.
+                if (exitTimer > minRespawnTime) RespawnItems();
 
-            // Find closest spawn point and set that to the respawn point upon entering
-            currentRespawnPoint = respawnPoints[0];
-            float distance = Vector2.Distance(currentRespawnPoint.transform.position, player.transform.position);
-            for (int i=1; i<respawnPoints.Length; i++) {
-                var respawnPoint = respawnPoints[i];
-                float newDistance = Vector2.Distance(respawnPoint.transform.position, player.transform.position);
-                if (newDistance < distance) {
-                    currentRespawnPoint = respawnPoint;
-                    distance = newDistance;
+                // Find closest spawn point and set that to the respawn point upon entering
+                currentRespawnPoint = respawnPoints[0];
+                float distance = Vector2.Distance(currentRespawnPoint.transform.position, player.transform.position);
+                for (int i=1; i<respawnPoints.Length; i++) {
+                    var respawnPoint = respawnPoints[i];
+                    float newDistance = Vector2.Distance(respawnPoint.transform.position, player.transform.position);
+                    if (newDistance < distance) {
+                        currentRespawnPoint = respawnPoint;
+                        distance = newDistance;
+                    }
                 }
             }
         }   
