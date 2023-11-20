@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class TitleCamera : MonoBehaviour {
@@ -11,6 +12,8 @@ public class TitleCamera : MonoBehaviour {
     private bool minecartStopPassed = false;
 
     private bool minecartStopped = false;
+
+    private bool introSkipped = false;
 
     private static float cameraZOffset = -10f;
 
@@ -42,8 +45,8 @@ public class TitleCamera : MonoBehaviour {
     }
 
     private void Update() {
-        // TEMPORARY
-        if (Input.GetKeyDown(KeyCode.S)) startPressed = true;
+        // Pause to skip the intro
+        if (startPressed && !introSkipped && Input.GetButtonDown("Pause")) SkipIntro();
 
         if (minecartStopped) return;
 
@@ -54,7 +57,7 @@ public class TitleCamera : MonoBehaviour {
         // out of the minecart, places them on the ground, and enable necessary gameplay components
         if (scrollSpeed == 0) {
             minecartStopped = true;
-            StartCoroutine(ExitMinecart());
+            StartCoroutine(ExitMinecartAfterDelay());
             return;
         }
 
@@ -86,13 +89,28 @@ public class TitleCamera : MonoBehaviour {
         }
     }
 
-    IEnumerator ExitMinecart() {
+    IEnumerator ExitMinecartAfterDelay() {
         yield return new WaitForSeconds(0.75f);
-        Debug.Log("Title screen minecart exited");
+        ExitMinecartAndEnablePlayer();
+    }
+
+    private void ExitMinecartAndEnablePlayer() {
         player.ExitMinecart();
         player.EnablePhysics();
         player.EnableControl();
         cinemachineBrain.enabled = true;
         enabled = false;
+    }
+
+
+    // skips the scrolling thing and places the player at the start - happens when pause is pressed during the intro
+    private void SkipIntro() {
+        TransitionManager.Transition(() => SpawnPlayerAtStart());
+    }
+
+    private void SpawnPlayerAtStart() {
+        minecartStopped = true;
+        ExitMinecartAndEnablePlayer();
+        player.transform.position = startingRoom.DefaultRespawnPoint().transform.position + Vector3.up*player.capsuleColliderSize.y*0.5f;
     }
 }

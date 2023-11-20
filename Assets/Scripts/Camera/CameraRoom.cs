@@ -87,6 +87,8 @@ public class CameraRoom : MonoBehaviour {
         }
 
         RepositionAmbientParticles();
+        ambientParticles.Stop();
+        ambientParticles.Clear();
 
         // Create a collider that will block boxes
         GameObject grabbableBlocker = new GameObject("GrabbableBlocker") { layer = LayerMask.NameToLayer("GrabbableBlocker") };
@@ -108,8 +110,8 @@ public class CameraRoom : MonoBehaviour {
         if (!playerWithin && exitTimer > 0) {
             exitTimer -= Time.deltaTime;
             if (exitTimer <= 0) {
-                Debug.Log("particles turned off for "+gameObject);
                 ambientParticles.Stop();
+                ambientParticles.Clear();
             }
         }
         
@@ -131,7 +133,7 @@ public class CameraRoom : MonoBehaviour {
         Debug.Log("particles turned on for "+gameObject);
         if (!ambientParticles.isPlaying) ambientParticles.Play();
 
-        GlobalLight.SetBrightness(brightness);
+        GlobalLight.SetBrightness(brightness, 0.75f);
 
         if(canRespawn){
             CameraRoom previousRoom = player.GetCurrentRoom();
@@ -194,6 +196,11 @@ public class CameraRoom : MonoBehaviour {
 
     public void SetRespawnPoint(RespawnPoint respawnPoint) {
         currentRespawnPoint = respawnPoint;
+    }
+
+    public RespawnPoint DefaultRespawnPoint() {
+        if (respawnPoints.Length == 0) return null;
+        return respawnPoints[0];
     }
 
     private static readonly Color roomBorderGizmoColor = new Color(0f, 0.5f, 1f, 0.5f);
