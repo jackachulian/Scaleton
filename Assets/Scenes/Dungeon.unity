@@ -6304,7 +6304,7 @@ Transform:
   m_GameObject: {fileID: 224761435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26, y: 0, z: 0}
+  m_LocalPosition: {x: 18.1875, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120723,7 +120723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7151478455769634877, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_GridSnapping
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.x

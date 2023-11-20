@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -50,9 +51,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Menu pauseMenu;
-
     [SerializeField] private GameObject minecartSpriteObject;
 
+    private CinemachineBrain cinemachineBrain;
     private CameraRoom currentRoom;
     private float xInput;
     private float slopeDownAngle;
@@ -107,6 +108,7 @@ public class PlayerController : MonoBehaviour
         hazardLayer = LayerMask.NameToLayer("Hazard");
         initialDrag = rb.drag;
         followingItems = new List<FollowingItem>();
+        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
     }
 
     private void Update()
@@ -159,7 +161,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Pause") && canInteractThisFrame) // P/esc
             {
-                OpenMenu();
+                OpenPauseMenu();
             }
 
             if (Input.GetButtonDown("Respawn") && canInteractThisFrame) // R
@@ -338,7 +340,7 @@ public class PlayerController : MonoBehaviour
         // if (!canceled) OpenMenu();
     }
 
-    private void OpenMenu() {
+    private void OpenPauseMenu() {
         DisableControl();
         pauseMenu.Show();
     }
@@ -448,7 +450,7 @@ public class PlayerController : MonoBehaviour
         ForceReleaseGrabbed();
         currentRoom.VirtualCam.Follow = transform;
         rb.velocity.Set(0.0f, 0.0f);
-        transform.position = currentRoom.currentRespawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
+        MoveToRespawnPoint(currentRoom.currentRespawnPoint);
         currentRoom.RespawnItems();
 
         rb.drag = initialDrag;
@@ -526,6 +528,10 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask GetGroundLayerMask() {
         return whatIsGround;
+    }
+
+    public void MoveToRespawnPoint(RespawnPoint respawnPoint) {
+        transform.position = respawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
     }
 
     public void EnterMinecart() {

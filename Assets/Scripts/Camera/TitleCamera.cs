@@ -111,6 +111,6 @@ public class TitleCamera : MonoBehaviour {
     private void SpawnPlayerAtStart() {
         minecartStopped = true;
         ExitMinecartAndEnablePlayer();
-        player.transform.position = startingRoom.DefaultRespawnPoint().transform.position + Vector3.up*player.capsuleColliderSize.y*0.5f;
+        player.MoveToRespawnPoint(startingRoom.currentRespawnPoint);
     }
 }
