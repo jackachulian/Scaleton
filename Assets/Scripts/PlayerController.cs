@@ -179,6 +179,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("walking", xInput != 0);
     }
 
+
+    private bool preventPropFly = false;
     private int unstableLayerMask;
     private void CheckGround()
     {
@@ -208,14 +210,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-            Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
-            if (grabbable && !grabbable.CanBeJumpedOff()) {
-                continue;
-            } else {
-                if (!groundedLastUpdate) {
-                    SoundManager.PlaySound(audioSource, "land");
+            if (preventPropFly) {
+                Grabbable grabbable = c.gameObject.GetComponent<Grabbable>();
+                if (grabbable && !grabbable.CanBeJumpedOff()) {
+                    continue;
+                } else {
+                    Ground(groundedLastUpdate);
+                    break;
                 }
-                isGrounded = true;
+            } else {
+                Ground(groundedLastUpdate);
                 break;
             }
         }
@@ -232,6 +236,13 @@ public class PlayerController : MonoBehaviour
         // else if (!isGrounded) {
         //     canJump = false;
         // }
+    }
+
+    private void Ground(bool groundedLastUpdate) {
+        if (!groundedLastUpdate) {
+            SoundManager.PlaySound(audioSource, "land");
+        }
+        isGrounded = true;
     }
 
     private void SlopeCheck()
@@ -323,8 +334,8 @@ public class PlayerController : MonoBehaviour
 
     private void Cancel(){
         bool canceled = interaction.CancelNearest();
-        // open pause menu if nothing else was canceled
-        if (!canceled) OpenMenu();
+        // open pause menu if nothing else was canceled (disabled)
+        // if (!canceled) OpenMenu();
     }
 
     private void OpenMenu() {
@@ -523,6 +534,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void ExitMinecart() {
+        SetMinecartRotation(Vector2.up);
         minecartSpriteObject.SetActive(false);
         animator.SetBool("minecart", false);
     }
