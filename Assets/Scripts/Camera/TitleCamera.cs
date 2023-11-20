@@ -28,10 +28,11 @@ public class TitleCamera : MonoBehaviour {
         startPressed = false;
         player.DisableControl();
         player.DisablePhysics();
-
-        transform.position = scrollStart.position + Vector3.forward * cameraZOffset;
+        player.EnterMinecart();
 
         cinemachineBrain.enabled = false;
+
+        transform.position = scrollStart.position + Vector3.forward * cameraZOffset;
     }
 
     public void StartGame() {
@@ -61,6 +62,7 @@ public class TitleCamera : MonoBehaviour {
         var hit = Physics2D.Raycast(relativeHorizontal.position, Vector2.down, 24f, player.GetGroundLayerMask());
         if (hit) {
             player.transform.position = hit.point + Vector3.up * player.capsuleColliderSize*0.5f;
+            player.SetMinecartRotation(hit.normal);
         }
 
         // Scroll forward, only if minecart hasn't reached the stopping point

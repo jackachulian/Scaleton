@@ -6215,7 +6215,7 @@ Transform:
   m_GameObject: {fileID: 224761435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 26, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120580,7 +120580,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2121703329236841106}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221800381}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -120606,8 +120606,8 @@ MonoBehaviour:
   scrollStart: {fileID: 1562558451}
   scrollEnd: {fileID: 1780793028}
   minecartStop: {fileID: 224761436}
-  scrollSpeed: 7.5
-  stopDecel: -3
+  scrollSpeed: 8
+  stopDecel: -4
   startingRoom: {fileID: 1467023616}
   player: {fileID: 1652088474}
   cinemachineBrain: {fileID: 1930054458332037516}
@@ -120625,7 +120625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173069942562897764, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2533667959816959583, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_Name
@@ -120637,11 +120637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.75
+      value: 119.031425
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -28.634945
+      value: -185.24362
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.z
@@ -121621,7 +121621,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 39788922888419809, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 130280680764060364, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: ShapeModule.m_Scale.x

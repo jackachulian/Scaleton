@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Menu pauseMenu;
 
+    [SerializeField] private GameObject minecartSpriteObject;
+
     private CameraRoom currentRoom;
     private float xInput;
     private float slopeDownAngle;
@@ -513,6 +515,22 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask GetGroundLayerMask() {
         return whatIsGround;
+    }
+
+    public void EnterMinecart() {
+        minecartSpriteObject.SetActive(true);
+        animator.SetBool("minecart", true);
+    }
+
+    public void ExitMinecart() {
+        minecartSpriteObject.SetActive(false);
+        animator.SetBool("minecart", false);
+    }
+
+    public void SetMinecartRotation(Vector2 lookRotation) {
+        minecartSpriteObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, lookRotation);
+        lookRotation.Set(lookRotation.x, lookRotation.y*2f);
+        spriteObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, lookRotation);
     }
 
     private void OnDrawGizmos()
