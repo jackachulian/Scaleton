@@ -103,7 +103,7 @@ public class CameraRoom : MonoBehaviour {
             edge.points = points;
         }
 
-        if (canRespawn) currentRespawnPoint = respawnPoints[0];
+        currentRespawnPoint = respawnPoints[0];
     }
 
     private void Update() {

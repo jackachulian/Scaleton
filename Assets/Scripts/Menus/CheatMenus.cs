@@ -30,13 +30,7 @@ public class CheatMenus : MonoBehaviour {
     private void TeleportToRoom(CameraRoom room) {
         TransitionManager.Transition(() => {
             dialog.player.MoveToRespawnPoint(room.currentRespawnPoint);
-            StartCoroutine(StopBlend());
+            // todo: find some way to prevent the blend between cameras, if possible
         });
-    }
-
-    IEnumerator StopBlend() {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        Camera.main.GetComponent<CinemachineBrain>().ActiveBlend = null;
     }
 }
