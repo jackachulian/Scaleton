@@ -89,6 +89,7 @@ public class TitleCamera : MonoBehaviour {
     IEnumerator ExitMinecart() {
         yield return new WaitForSeconds(0.75f);
         Debug.Log("Title screen minecart exited");
+        player.ExitMinecart();
         player.EnablePhysics();
         player.EnableControl();
         cinemachineBrain.enabled = true;

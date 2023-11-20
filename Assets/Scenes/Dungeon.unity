@@ -93417,7 +93417,7 @@ Tilemap:
       - {fileID: 1967678150, guid: 17bcbf6ce51f4384abb2358f015d978c, type: 3}
       - {fileID: -354765874, guid: 17bcbf6ce51f4384abb2358f015d978c, type: 3}
       - {fileID: 38868793, guid: 17bcbf6ce51f4384abb2358f015d978c, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -121860,14 +121860,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3794484879522714780, guid: 96d94ed984e391d49a3967fa685aa4a5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3794484879522714780, guid: 96d94ed984e391d49a3967fa685aa4a5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4097192702203388777, guid: 96d94ed984e391d49a3967fa685aa4a5, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -121954,10 +121946,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8726020837133206468, guid: 96d94ed984e391d49a3967fa685aa4a5, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[1].X
-      value: -1854105
+      value: -34899
       objectReference: {fileID: 0}
     - target: {fileID: 8726020837133206468, guid: 96d94ed984e391d49a3967fa685aa4a5, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[2].X
+      value: -34899
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726020837133206468, guid: 96d94ed984e391d49a3967fa685aa4a5, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[1].m_ColliderPaths.Array.data[0].Array.data[1].X
+      value: -1854105
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726020837133206468, guid: 96d94ed984e391d49a3967fa685aa4a5, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[1].m_ColliderPaths.Array.data[0].Array.data[2].X
       value: -1854105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
