@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;

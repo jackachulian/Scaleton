@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CheatMenus : MonoBehaviour {
     [SerializeField] private MenuManager dialog;

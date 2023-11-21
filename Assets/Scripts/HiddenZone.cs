@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class HiddenZone : MonoBehaviour {
     float alpha = 1f;
