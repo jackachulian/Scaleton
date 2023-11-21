@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -169,7 +170,7 @@ public class CameraRoom : MonoBehaviour {
             virtualCam.enabled = true;
             virtualCam.MoveToTopOfPrioritySubqueue();
             if(canRespawn){
-            GameObject.Find("Player").GetComponent<PlayerController>().SetCameraRoom(this);
+                GameObject.Find("Player").GetComponent<PlayerController>().SetCameraRoom(this);
             }
         }
     }
@@ -195,7 +196,7 @@ public class CameraRoom : MonoBehaviour {
     }
 
     public void SetRespawnPoint(RespawnPoint respawnPoint) {
-        currentRespawnPoint = respawnPoint;
+        if (respawnPoints.Contains(currentRespawnPoint)) currentRespawnPoint = respawnPoint;
     }
 
     public RespawnPoint DefaultRespawnPoint() {

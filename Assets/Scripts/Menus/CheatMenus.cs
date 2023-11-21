@@ -28,9 +28,14 @@ public class CheatMenus : MonoBehaviour {
     }
 
     private void TeleportToRoom(CameraRoom room) {
+        // if (dialog.player.GetCurrentRoom() == room) return;
+
         TransitionManager.Transition(() => {
             dialog.player.MoveToRespawnPoint(room.currentRespawnPoint);
-            // todo: find some way to prevent the blend between cameras, if possible
+            var brain = Camera.main.GetComponent<CinemachineBrain>();
+            room.VirtualCam.MoveToTopOfPrioritySubqueue();
+            brain.ManualUpdate();
+            brain.ActiveBlend = null;
         });
     }
 }
