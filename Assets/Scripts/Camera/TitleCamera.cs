@@ -1,6 +1,7 @@
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleCamera : MonoBehaviour {
     [SerializeField] private Transform relativeHorizontal, // controls where player's x position is, raycast down from here to get y pos
@@ -28,11 +29,20 @@ public class TitleCamera : MonoBehaviour {
     private CinemachineBrain cinemachineBrain;
 
     private void Awake() {
+        // load Dungeon scene if not loaded, which it won't be in the build
+        bool dungeonLoaded = false;
+        for (int i = 0; i < SceneManager.loadedSceneCount; i++) {
+            if (SceneManager.GetSceneAt(i).name == "Dungeon") dungeonLoaded = true;
+        }
+        if (!dungeonLoaded) SceneManager.LoadScene("Dungeon", LoadSceneMode.Additive);
+
         startPressed = false;
         player.DisableControl();
         player.DisablePhysics();
         player.EnterMinecart();
+    }
 
+    private void Start() {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         cinemachineBrain.enabled = false;
 
