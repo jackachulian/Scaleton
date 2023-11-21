@@ -25,7 +25,8 @@ public class TitleCamera : MonoBehaviour {
 
     [SerializeField] private PlayerController player;
 
-    [SerializeField] private CinemachineBrain cinemachineBrain; // to re-enable after the title scroll stops.
+    [SerializeField] private Transform cameraTransform;
+    private CinemachineBrain cinemachineBrain;
 
     private void Awake() {
         startPressed = false;
@@ -33,9 +34,11 @@ public class TitleCamera : MonoBehaviour {
         player.DisablePhysics();
         player.EnterMinecart();
 
+        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         cinemachineBrain.enabled = false;
 
-        transform.position = scrollStart.position + Vector3.forward * cameraZOffset;
+        cameraTransform = Camera.main.transform;
+        cameraTransform.position = scrollStart.position + Vector3.forward * cameraZOffset;
     }
 
     public void StartGame() {
@@ -68,14 +71,14 @@ public class TitleCamera : MonoBehaviour {
             player.SetMinecartRotation(hit.normal);
         }
 
-        // Scroll forward, only if minecart hasn't reached the stopping point
-        transform.position = transform.position + (Vector3.right * scrollSpeed * Time.deltaTime);
+        // Scroll forward
+        cameraTransform.position = cameraTransform.position + (Vector3.right * scrollSpeed * Time.deltaTime);
         
-        // If game hasn't started, loop back if past scrollEnd, maintaining a constant percieved speed
+        // If start button hasn't been pressed, loop back if past scrollEnd, maintaining a constant percieved speed
         if (!startPressed) {
-            float xDiff = transform.position.x - scrollEnd.position.x;
+            float xDiff = cameraTransform.position.x - scrollEnd.position.x;
             if (xDiff > 0) {
-                transform.position = scrollStart.position + (xDiff * Vector3.right) + (Vector3.forward * cameraZOffset);
+                cameraTransform.position = scrollStart.position + (xDiff * Vector3.right) + (Vector3.forward * cameraZOffset);
             }
         }
 

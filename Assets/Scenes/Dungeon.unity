@@ -87721,11 +87721,6 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 90.999985, y: -15.125, z: 0}
     m_Extent: {x: 0.8124199, y: 0.125, z: 0}
---- !u!1 &1221800381 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2533667959816959583, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
-  m_PrefabInstance: {fileID: 2121703329236841106}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1223364815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97395,7 +97390,7 @@ PrefabInstance:
     - target: {fileID: 6839181968084824951, guid: 332282d0b5536d744879b8494c836505, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1930054458332037521}
+      objectReference: {fileID: 1731182409}
     - target: {fileID: 6839181968084824951, guid: 332282d0b5536d744879b8494c836505, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -109966,6 +109961,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1731182408}
+  - component: {fileID: 1731182409}
   m_Layer: 5
   m_Name: TitleScreen
   m_TagString: Untagged
@@ -109994,6 +109990,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1731182409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731182407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bd018b9cd3930478d9a7014817dc97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  relativeHorizontal: {fileID: 1806719432}
+  scrollStart: {fileID: 1562558451}
+  scrollEnd: {fileID: 1780793028}
+  minecartStop: {fileID: 224761436}
+  scrollSpeed: 8
+  stopDecel: -4
+  startingRoom: {fileID: 1467023616}
+  player: {fileID: 1652088474}
+  cameraTransform: {fileID: 1930054458332037520}
 --- !u!4 &1732998553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4317848674497559432, guid: 1a3b7bc7f50f4fd458d37883dfb4cb8b, type: 3}
@@ -120884,7 +120901,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1173069942562897764, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
   m_PrefabInstance: {fileID: 2121703329236841106}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221800381}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
@@ -120895,27 +120912,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
   m_PrefabInstance: {fileID: 2121703329236841106}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1930054458332037521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221800381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39bd018b9cd3930478d9a7014817dc97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relativeHorizontal: {fileID: 1806719432}
-  scrollStart: {fileID: 1562558451}
-  scrollEnd: {fileID: 1780793028}
-  minecartStop: {fileID: 224761436}
-  scrollSpeed: 8
-  stopDecel: -4
-  startingRoom: {fileID: 1467023616}
-  player: {fileID: 1652088474}
-  cinemachineBrain: {fileID: 1930054458332037516}
 --- !u!1001 &2121703329236841106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120931,6 +120927,10 @@ PrefabInstance:
     - target: {fileID: 1173069942562897764, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173069942562897764, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
+      propertyPath: m_ShowDebugText
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2533667959816959583, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_Name
@@ -120987,10 +120987,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1806719432}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2533667959816959583, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 1930054458332037521}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
 --- !u!19719996 &2584343366027943172
 TilemapCollider2D:
