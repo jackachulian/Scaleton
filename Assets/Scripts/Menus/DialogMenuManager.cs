@@ -24,6 +24,7 @@ public class DialogMenuManager : MonoBehaviour {
         foreach (Transform child in menu.transform) {
             Destroy(child.gameObject);
         }
+        menu.Show();
         player.DisableControl();
         return menu;
     }

@@ -13,11 +13,11 @@ public class BreakableBlock : Respawnable
     void OnCollisionEnter2D(Collision2D c){
         if (!c.gameObject.GetComponent<Grabbable>()) return;
 
-        Debug.Log("relvel: "+c.relativeVelocity + " - "+c.relativeVelocity.magnitude);
+        // Debug.Log("relvel: "+c.relativeVelocity + " - "+c.relativeVelocity.magnitude);
         Vector2 force = c.relativeVelocity * c.rigidbody.mass;
-        Debug.Log("force: "+force+" (magnitude: "+force.magnitude+")");
+        // Debug.Log("force: "+force+" (magnitude: "+force.magnitude+")");
         float centerForce = Vector2.Dot(force, transform.position - c.transform.position);
-        Debug.Log("center force: "+centerForce);
+        // Debug.Log("center force: "+centerForce);
 
         if(centerForce > breakForce) {
             Break(force);

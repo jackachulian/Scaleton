@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour {
@@ -23,16 +24,38 @@ public class Menu : MonoBehaviour {
     // True if this should return control to the player when closed and there is no parent menu to return to
     [SerializeField] private bool returnPlayerControl = true;
 
+    private int rows;
+    private int topIndex; // Index of the first button shown that is not disabled due to scrolling
+
+    private MenuItem[] items;
+
     public readonly static List<Menu> openMenus = new List<Menu>();
     static Menu() {
         openMenus = new List<Menu>();
+    }
+
+    private void Awake() {
+        rows = Mathf.FloorToInt((GetComponent<RectTransform>().sizeDelta.y - 16) / 16);
+    }
+
+    void SetupIndices() {
+        items = transform.GetComponentsInChildren<MenuItem>();
+        Debug.Log(items);
+        for (int i = 0; i < items.Length; i++) {
+            Debug.Log(items[i]);
+            items[i].SetIndex(i);
+        }
+
+        // Hide items that initally exceed the row count, will be re-enabled when scrolling to it
+        for (int i = rows; i < items.Length; i++) {
+            items[i].gameObject.SetActive(false);
+        }
     }
     
     void Start() {
         if (showOnStart) {
             Show();
         }
-
     }
 
     private void Update() {
@@ -40,6 +63,33 @@ public class Menu : MonoBehaviour {
             if (cancellable && (Input.GetButtonDown("Cancel") || Input.GetButtonDown("CancelUI"))) {
                 Close();
             }
+        }
+    }
+
+    public void ScrollToShowItem(int index) {
+        if (index < 0 || index >= items.Length) {
+            // Debug.LogWarning(name+" Trying to scroll to index outside of range: "+index);
+            return;
+        }
+
+        bool cursorMoved = false;
+
+        while (topIndex+rows-1 < index) {
+            items[topIndex].gameObject.SetActive(false);
+            items[topIndex+rows].gameObject.SetActive(true);
+            topIndex++;
+            cursorMoved = true;
+        }
+
+        while (topIndex > index) {
+            topIndex--;
+            items[topIndex+rows].gameObject.SetActive(false);
+            items[topIndex].gameObject.SetActive(true);
+            cursorMoved = true;
+        }
+
+        if (cursorMoved) {
+            StartCoroutine(SelectNextUpdate(items[index].gameObject));
         }
     }
 
@@ -69,15 +119,21 @@ public class Menu : MonoBehaviour {
     }
 
     public void SelectFirstItemNextFrame() {
-        StartCoroutine(SelectNextUpdate());
+        StartCoroutine(SelectFirstNextUpdate());
     }
 
-    IEnumerator SelectNextUpdate() {
+    IEnumerator SelectFirstNextUpdate() {
         yield return new WaitForEndOfFrame();
         if (transform.childCount > 0) {
+            SetupIndices();
             var selectable = transform.GetComponentInChildren<Selectable>();
             if (selectable) selectable.Select();
         }
+    }
+
+    IEnumerator SelectNextUpdate(GameObject selectable) {
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(selectable);
     }
 
     // Hide menu without returning to parent.

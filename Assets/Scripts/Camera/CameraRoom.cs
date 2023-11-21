@@ -68,7 +68,7 @@ public class CameraRoom : MonoBehaviour {
         float area = bounds.size.x * bounds.size.y;
         emission.rateOverTime = particleDensity * area / duration;
 
-        Debug.Log(gameObject + " calculated rate: "+emission.rateOverTime.constant);
+        // Debug.Log(gameObject + " calculated rate: "+emission.rateOverTime.constant);
 
         // particleCount = duration * rateOverTime;
         // density = particleCount / area
