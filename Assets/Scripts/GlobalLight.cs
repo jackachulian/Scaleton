@@ -16,6 +16,7 @@ public class GlobalLight : MonoBehaviour {
     }
 
     public static void SetBrightness(float b, float time) {
+        vel = 0;
         targetBrightness = b;
         fadeTime = time;
     }
