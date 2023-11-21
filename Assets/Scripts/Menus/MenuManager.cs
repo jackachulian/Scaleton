@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class DialogMenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour {
 
     [SerializeField] private Menu emptyMenuPrefab;
 

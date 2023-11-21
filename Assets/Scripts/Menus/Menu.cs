@@ -29,7 +29,7 @@ public class Menu : MonoBehaviour {
 
     private MenuItem[] items;
 
-    public readonly static List<Menu> openMenus = new List<Menu>();
+    public static List<Menu> openMenus {get; private set;}
     static Menu() {
         openMenus = new List<Menu>();
     }
@@ -46,6 +46,12 @@ public class Menu : MonoBehaviour {
         // Hide items that initally exceed the row count, will be re-enabled when scrolling to it
         for (int i = rows; i < items.Length; i++) {
             items[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void Awake() {
+        if (Time.frameCount <= 0) {
+            openMenus = new List<Menu>();
         }
     }
     

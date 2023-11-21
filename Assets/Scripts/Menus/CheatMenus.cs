@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CheatMenus : MonoBehaviour {
-    [SerializeField] private DialogMenuManager dialog;
+    [SerializeField] private MenuManager dialog;
 
     private CameraRoom[] cameraRooms;
 
