@@ -88,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4.75
   groundCheckRadius: 0.23
-  jumpForce: 13.5
+  jumpForce: 14
   slopeCheckDistance: 1
   maxSlopeAngle: 50
   groundCheck: {fileID: 1389158471835670082}
@@ -96,7 +96,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1928
   noFriction: {fileID: 6200000, guid: 488611a2f723d3f48a7686a1b4a981c2, type: 2}
-  lowFriction: {fileID: 6200000, guid: e52112631e7f1b34fae85958c111820b, type: 2}
+  lowFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
   fullFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
   maxMovementForce: 30
   maxStoppingForce: 70
@@ -157,7 +157,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 488611a2f723d3f48a7686a1b4a981c2, type: 2}

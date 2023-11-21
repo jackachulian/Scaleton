@@ -1,6 +1,5 @@
 using System.Collections;
 using Cinemachine;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class TitleCamera : MonoBehaviour {
