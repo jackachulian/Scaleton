@@ -14,7 +14,7 @@ public class MacguffinGameObject : MonoBehaviour
             MenuManager.StartDialogue(m.collectionMessage);
         }
         else{
-            Debug.Log("NOT player entered macguffin! ============================================================================================================================");
+            Debug.Log("NOT player entered macguffin");
         }
     }
 

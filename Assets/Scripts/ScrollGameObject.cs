@@ -13,7 +13,7 @@ public class ScrollGameObject : MonoBehaviour
         Destroy(gameObject);
     }
     else{
-        Debug.Log("NOT player entered scroll! ============================================================================================================================");
+        Debug.Log("NOT player entered scroll!");
     }
    }
 

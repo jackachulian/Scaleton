@@ -29,11 +29,6 @@ public class Menu : MonoBehaviour {
 
     private MenuItem[] items;
 
-    public static List<Menu> openMenus {get; private set;}
-    static Menu() {
-        openMenus = new List<Menu>();
-    }
-
     void SetupIndices() {
         items = transform.GetComponentsInChildren<MenuItem>();
         for (int i = 0; i < items.Length; i++) {
@@ -49,11 +44,7 @@ public class Menu : MonoBehaviour {
         }
     }
 
-    private void Awake() {
-        if (Time.frameCount <= 0) {
-            openMenus = new List<Menu>();
-        }
-    }
+    
     
     void Start() {
         if (showOnStart) {
@@ -113,7 +104,7 @@ public class Menu : MonoBehaviour {
             return;
         }
         currentMenu = this;
-        if (!openMenus.Contains(currentMenu)) openMenus.Add(currentMenu);
+        if (!MenuManager.openMenus.Contains(currentMenu)) MenuManager.openMenus.Add(currentMenu);
         gameObject.SetActive(true);
         if (!canvasGroup) canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
@@ -170,7 +161,7 @@ public class Menu : MonoBehaviour {
     // Hide menu and return to parent if any; if not return control to player
     public void Close() {
         Hide();
-        openMenus.Remove(this);
+        MenuManager.openMenus.Remove(this);
         if (parentMenu) {
             parentMenu.gameObject.SetActive(true);
             parentMenu.StartCoroutine(FocusParentNextFrame());

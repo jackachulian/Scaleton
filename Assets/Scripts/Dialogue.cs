@@ -65,11 +65,9 @@ public class Dialogue : MonoBehaviour
     {
         gameObject.SetActive(false);
         foreach (var obj in disableDuringDialogue) obj.SetActive(true);
-        if (Menu.openMenus.Count > 0)
+        if (MenuManager.openMenus.Count > 0)
         {
-            for (int i = 0; i < Menu.openMenus.Count; i++) {
-                Menu.openMenus[i].Show();
-            }
+            MenuManager.ShowHiddenMenus();
         } else {
             player.EnableControl();
         }

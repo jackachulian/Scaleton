@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,9 +16,16 @@ public class MenuManager : MonoBehaviour {
 
     [SerializeField] private Dialogue dialogueBox;
 
+
+    public static List<Menu> openMenus {get; private set;}
+
+    private void Awake() {
+        openMenus = new List<Menu>();
+        globalDialogue = dialogueBox;
+    }
+
     private void Start() {
         player = FindObjectOfType<PlayerController>();
-        globalDialogue = dialogueBox;
     }
 
     public Menu CreateDialogMenu() {
@@ -47,6 +55,25 @@ public class MenuManager : MonoBehaviour {
     }
 
     public static void StartDialogue(string[] lines) {
+        HideOpenMenus();
         globalDialogue.StartDialogue(lines);
+    }
+
+    public static void HideOpenMenus() {
+        for (int i=0; i<openMenus.Count; i++) {
+            var menu = openMenus[i];
+            if (menu) {
+                menu.Hide();
+            } else {
+                Debug.LogWarning("Non-menu found in open menus");
+                openMenus.Remove(menu);
+            };
+        }
+    }
+
+    public static void ShowHiddenMenus() {
+        for (int i = 0; i < openMenus.Count; i++) {
+            openMenus[i].Show();
+        }
     }
 }
