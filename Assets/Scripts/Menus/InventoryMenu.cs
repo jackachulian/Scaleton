@@ -11,7 +11,6 @@ public class InventoryMenu : Menu {
         base.Show();
         PopulateInventoryItems();
         SelectFirstItemNextFrame();
-        Scroll.scrollDialogue = dialogue;
     }
 
     public void PopulateInventoryItems() {

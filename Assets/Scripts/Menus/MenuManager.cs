@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour {
@@ -12,8 +11,13 @@ public class MenuManager : MonoBehaviour {
 
     public PlayerController player {get; private set;}
 
+    public static Dialogue globalDialogue {get; private set;}
+
+    [SerializeField] private Dialogue dialogueBox;
+
     private void Start() {
         player = FindObjectOfType<PlayerController>();
+        globalDialogue = dialogueBox;
     }
 
     public Menu CreateDialogMenu() {
@@ -40,5 +44,9 @@ public class MenuManager : MonoBehaviour {
 
     public bool CanOpenDialog() {
         return player.HasControl();
+    }
+
+    public static void StartDialogue(string[] lines) {
+        globalDialogue.StartDialogue(lines);
     }
 }
