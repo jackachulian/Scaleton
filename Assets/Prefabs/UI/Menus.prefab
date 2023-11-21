@@ -241,6 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15737c90ff36e724da8206931c8c4cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showOnStart: 0
+  cancellable: 1
+  returnPlayerControl: 1
   mixer: {fileID: 24100000, guid: a54e89cabf6fe0741bd7749ea37f7ca2, type: 2}
   mixerParam: sfx
 --- !u!1 &1265237032584932236
@@ -2517,6 +2520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21877090da57fb146b12a675c125827f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showOnStart: 0
+  cancellable: 1
+  returnPlayerControl: 1
   inventoryItemPrefab: {fileID: 7336032079098638543, guid: 36bfe50f098c1194c8999f36e3c0694a, type: 3}
   dialogue: {fileID: 0}
 --- !u!224 &5800644001993175122 stripped

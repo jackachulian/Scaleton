@@ -34,15 +34,14 @@ public class Menu : MonoBehaviour {
         openMenus = new List<Menu>();
     }
 
-    private void Awake() {
-        rows = Mathf.FloorToInt((GetComponent<RectTransform>().sizeDelta.y - 16) / 16);
-    }
-
     void SetupIndices() {
         items = transform.GetComponentsInChildren<MenuItem>();
         for (int i = 0; i < items.Length; i++) {
             items[i].SetIndex(i);
         }
+
+        rows = Mathf.FloorToInt((GetComponent<RectTransform>().sizeDelta.y - 16) / 16);
+        if (rows < 0) rows = 0;
 
         // Hide items that initally exceed the row count, will be re-enabled when scrolling to it
         for (int i = rows; i < items.Length; i++) {
