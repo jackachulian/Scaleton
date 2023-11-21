@@ -10,7 +10,7 @@ public class MenuManager : MonoBehaviour {
 
     [SerializeField] private Button choiceButtonPrefab;
 
-    public PlayerController player {get; private set;}
+    public static PlayerController player {get; private set;}
 
     public static Dialogue globalDialogue {get; private set;}
 

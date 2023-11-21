@@ -20,7 +20,7 @@ public class TitleCamera : MonoBehaviour {
 
     [SerializeField] private float stopDecel = -3f;
 
-    [SerializeField] private CameraRoom startingRoom;
+    private CameraRoom startingRoom;
 
     [SerializeField] private PlayerController player;
 
@@ -37,6 +37,13 @@ public class TitleCamera : MonoBehaviour {
         cinemachineBrain.enabled = false;
 
         cameraTransform = Camera.main.transform;
+
+        startingRoom = GameObject.Find("A1").GetComponent<CameraRoom>();
+        Transform titleCameraTransforms = GameObject.Find("TitleCameraTransforms").transform; // should be located in z1
+        scrollStart = titleCameraTransforms.Find("ScrollStart");
+        scrollEnd = titleCameraTransforms.Find("ScrollEnd");
+        minecartStop = titleCameraTransforms.Find("MinecartStop");
+
         cameraTransform.position = scrollStart.position + Vector3.forward * cameraZOffset;
     }
 

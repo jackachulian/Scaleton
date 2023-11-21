@@ -29,7 +29,7 @@ public class CheatMenus : MonoBehaviour {
         // if (dialog.player.GetCurrentRoom() == room) return;
 
         TransitionManager.Transition(() => {
-            dialog.player.MoveToRespawnPoint(room.currentRespawnPoint);
+            MenuManager.player.MoveToRespawnPoint(room.currentRespawnPoint);
             var brain = Camera.main.GetComponent<CinemachineBrain>();
             room.VirtualCam.MoveToTopOfPrioritySubqueue();
             brain.ManualUpdate();

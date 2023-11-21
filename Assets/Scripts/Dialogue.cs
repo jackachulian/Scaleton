@@ -9,14 +9,10 @@ public class Dialogue : MonoBehaviour
     public float speed;
     private int index;
 
-    [SerializeField]
-    private PlayerController player;
-
-    [SerializeField]
     private GameObject[] disableDuringDialogue;
 
-    void Reset(){
-        if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
+    private void Start() {
+        if (disableDuringDialogue == null) disableDuringDialogue = GameObject.FindGameObjectsWithTag("DisableDuringDialogue");
     }
 
     void Update(){
@@ -34,10 +30,11 @@ public class Dialogue : MonoBehaviour
 
     public void StartDialogue(string[] l){
         gameObject.SetActive(true);
+        if (disableDuringDialogue == null) disableDuringDialogue = GameObject.FindGameObjectsWithTag("DisableDuringDialogue");
         foreach (var obj in disableDuringDialogue) obj.SetActive(false);
         lines = l;
         textComponent.text = string.Empty;
-        player.DisableControl();
+        MenuManager.player.DisableControl();
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -68,7 +65,7 @@ public class Dialogue : MonoBehaviour
         {
             MenuManager.ShowHiddenMenus();
         } else {
-            player.EnableControl();
+            MenuManager.player.EnableControl();
         }
     }
 }

@@ -6,18 +6,11 @@ public class DialogueInteractable : Interactable
     private GameObject notification;
     [SerializeField]
     private string[] dialogue;
-    [SerializeField]
-    private Dialogue dialogueBox;
 
-    private void Awake() {
-        if (!dialogueBox) {
-            dialogueBox = GameObject.Find("Canvas").transform.Find("Dialogue Box").GetComponent<Dialogue>();
-        }
-    }
 
     public override void Interact()
     {
-        dialogueBox.StartDialogue(dialogue);
+        MenuManager.globalDialogue.StartDialogue(dialogue);
     }
 
     public override void Hover() {
