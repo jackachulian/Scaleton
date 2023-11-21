@@ -8,7 +8,7 @@ public class CameraRoom : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera virtualCam;
     public CinemachineVirtualCamera VirtualCam {get{return virtualCam;}}
 
-    [SerializeField] private RespawnPoint[] respawnPoints;
+    private RespawnPoint[] respawnPoints;
 
     [SerializeField] private bool canRespawn = true;
     public bool CanRespawn {get{return canRespawn;}}
@@ -50,9 +50,12 @@ public class CameraRoom : MonoBehaviour {
         if (!objectsTransform) objectsTransform = transform.Find("Objects");
         
         usesConfiner = virtualCam.GetComponent<CinemachineConfiner>() != null;
-        respawnPoints = transform.GetComponentsInChildren<RespawnPoint>();
 
         RepositionAmbientParticles();
+    }
+
+    private void Awake() {
+        respawnPoints = transform.GetComponentsInChildren<RespawnPoint>();
     }
 
     private void RepositionAmbientParticles() {
@@ -131,7 +134,6 @@ public class CameraRoom : MonoBehaviour {
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
 
-        Debug.Log("particles turned on for "+gameObject);
         if (!ambientParticles.isPlaying) ambientParticles.Play();
 
         GlobalLight.SetBrightness(brightness, 0.75f);
@@ -196,7 +198,7 @@ public class CameraRoom : MonoBehaviour {
     }
 
     public void SetRespawnPoint(RespawnPoint respawnPoint) {
-        if (respawnPoints.Contains(currentRespawnPoint)) currentRespawnPoint = respawnPoint;
+        if (respawnPoints.Contains(respawnPoint)) currentRespawnPoint = respawnPoint;
     }
 
     public RespawnPoint DefaultRespawnPoint() {

@@ -40,9 +40,7 @@ public class Menu : MonoBehaviour {
 
     void SetupIndices() {
         items = transform.GetComponentsInChildren<MenuItem>();
-        Debug.Log(items);
         for (int i = 0; i < items.Length; i++) {
-            Debug.Log(items[i]);
             items[i].SetIndex(i);
         }
 
