@@ -97,15 +97,17 @@ public class CameraRoom : MonoBehaviour {
         GameObject grabbableBlocker = new GameObject("GrabbableBlocker") { layer = LayerMask.NameToLayer("GrabbableBlocker") };
         grabbableBlocker.transform.SetParent(transform, false);
     
-        for (int i = 0; i < polygonCollider.pathCount; i++) {
-            EdgeCollider2D edge = grabbableBlocker.AddComponent<EdgeCollider2D>();
-            edge.edgeRadius = 0.025f;
-            Vector2[] points = polygonCollider.GetPath(i);
-            Array.Resize(ref points, points.Length+1);
-            points[points.Length-1] = points[0];
-            edge.points = points;
+        if (polygonCollider) {
+            for (int i = 0; i < polygonCollider.pathCount; i++) {
+                EdgeCollider2D edge = grabbableBlocker.AddComponent<EdgeCollider2D>();
+                edge.edgeRadius = 0.025f;
+                Vector2[] points = polygonCollider.GetPath(i);
+                Array.Resize(ref points, points.Length+1);
+                points[points.Length-1] = points[0];
+                edge.points = points;
+            }
         }
-
+        
         currentRespawnPoint = respawnPoints[0];
     }
 
