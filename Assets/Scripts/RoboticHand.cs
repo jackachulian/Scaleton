@@ -13,7 +13,10 @@ public class RoboticHand : MonoBehaviour {
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (heldBox) heldBox.GetComponent<Rigidbody2D>().isKinematic = true;
+        if (heldBox) {
+            heldBox.GetComponent<Rigidbody2D>().isKinematic = true;
+            heldBox.transform.position = holdPosition.position;
+        }
     }
 
     private void Start() {
