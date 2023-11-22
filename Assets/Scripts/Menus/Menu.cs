@@ -23,7 +23,7 @@ public class Menu : MonoBehaviour {
     // True if this should return control to the player when closed and there is no parent menu to return to
     [SerializeField] private bool returnPlayerControl = true;
 
-    private int rows;
+    public int rows {get; private set;}
     private int topIndex; // Index of the first button shown that is not disabled due to scrolling
 
     private MenuItem[] items;
@@ -59,7 +59,7 @@ public class Menu : MonoBehaviour {
         }
     }
 
-    public void ScrollToShowItem(int index) {
+    public void ScrollToShowItem(int index, bool select = true) {
         if (index < 0 || index >= items.Length) {
             // Debug.LogWarning(name+" Trying to scroll to index outside of range: "+index);
             return;
@@ -81,9 +81,13 @@ public class Menu : MonoBehaviour {
             cursorMoved = true;
         }
 
-        if (cursorMoved) {
+        if (select && cursorMoved) {
             StartCoroutine(SelectNextUpdate(items[index].gameObject));
         }
+    }
+
+    public void SelectItem(int index) {
+        SelectNextUpdate(items[index].gameObject);
     }
 
     private void Reset() {

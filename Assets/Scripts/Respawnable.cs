@@ -13,7 +13,7 @@ public class Respawnable : MonoBehaviour
         rPos = transform.position;
         rRotation = transform.rotation;
         rb = GetComponent<Rigidbody2D>();
-        rbType = rb.bodyType;
+        if (rb) rbType = rb.bodyType;
     }
 
     public virtual void Respawn(){
