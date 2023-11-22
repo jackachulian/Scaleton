@@ -1503,7 +1503,6 @@ MonoBehaviour:
   minecartStop: {fileID: 0}
   scrollSpeed: 8
   stopDecel: -4
-  startingRoom: {fileID: 0}
   player: {fileID: 1652088474}
   cameraTransform: {fileID: 1930054458332037520}
 --- !u!1 &1806719431
@@ -1595,11 +1594,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 146
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -77.75
+      value: -15.75
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.z

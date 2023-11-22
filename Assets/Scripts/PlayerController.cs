@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     private Menu pauseMenu;
     [SerializeField] private GameObject minecartSpriteObject;
 
+    [SerializeField] public Headlight headlight;
+
     private CinemachineBrain cinemachineBrain;
     private CameraRoom currentRoom;
     private float xInput;

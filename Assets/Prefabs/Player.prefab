@@ -109,6 +109,7 @@ MonoBehaviour:
   carryJumpMultiplier: 0.25
   pauseMenu: {fileID: 0}
   minecartSpriteObject: {fileID: 318837442085993480}
+  headlight: {fileID: 9132292712053318274}
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -414,6 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1143030861577109939}
   - component: {fileID: 779902373965387640}
+  - component: {fileID: 9132292712053318274}
   m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
@@ -514,6 +516,19 @@ MonoBehaviour:
   - {x: 0.4157348, y: -0.27778515, z: 0}
   - {x: 0.46193978, y: -0.19134171, z: 0}
   - {x: 0.49039266, y: -0.09754512, z: 0}
+--- !u!114 &9132292712053318274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404004692499641453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040319c7a8959da49832b3875ec1b77b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light2D: {fileID: 779902373965387640}
 --- !u!1 &6648020864307047653
 GameObject:
   m_ObjectHideFlags: 0
