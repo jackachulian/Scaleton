@@ -2,9 +2,11 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
+    public Image dialogueBackground;
     public TextMeshProUGUI textComponent;
     private string[] lines;
     public float speed;
@@ -33,6 +35,11 @@ public class Dialogue : MonoBehaviour
     }
 
     public void StartDialogue(string[] l){
+        if (l.Length == 0) {
+            Debug.LogWarning("Empty dialogue was played");
+            return;
+        }
+
         gameObject.SetActive(true);
         if (disableDuringDialogue == null) disableDuringDialogue = GameObject.FindGameObjectsWithTag("DisableDuringDialogue");
         foreach (var obj in disableDuringDialogue) obj.SetActive(false);
@@ -57,7 +64,6 @@ public class Dialogue : MonoBehaviour
                 try {
                     float delay = float.Parse(args[1]);
                     StartCoroutine(NextLineAfterDelay(delay));
-                    return;
                 } catch (FormatException) {
                     Debug.LogError("Invalid wait delay: "+args[1]);
                     NextLine();
@@ -73,10 +79,13 @@ public class Dialogue : MonoBehaviour
             }
         } else {
             StartCoroutine(TypeLine());
-        } 
+        }
+
+        if (!typing && !waitingForInput) dialogueBackground.enabled = false;
     }
 
     IEnumerator TypeLine(){
+        dialogueBackground.enabled = true;
         typing = true;
         foreach (char c in lines[index].ToCharArray()){
             if (!typing) break;

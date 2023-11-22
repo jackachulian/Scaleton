@@ -6,7 +6,8 @@ using UnityEngine;
 public class Cutscene : MonoBehaviour {
     public static Cutscene current {get; private set;}
 
-    public string[] dialogue;
+    [TextArea]
+    public string dialogue;
 
     [SerializeField] private LargeMechanicalDoor door; 
 
@@ -20,7 +21,8 @@ public class Cutscene : MonoBehaviour {
             return;
         }
         current = this;
-        MenuManager.globalDialogue.StartDialogue(dialogue);
+        string[] lines = dialogue.Split("\n");
+        MenuManager.globalDialogue.StartDialogue(lines);
     }
 
     // Cutscnees will be on the RoomBorder layers so only players should be able to trigger
@@ -59,6 +61,12 @@ public class Cutscene : MonoBehaviour {
             } else {
                 virtualCameras[camIndex].MoveToTopOfPrioritySubqueue();
             }
+        }
+
+        else if (cmd == "camerablendtime") {
+            var brain = Camera.main.GetComponent<CinemachineBrain>();
+            float blendSpeed = float.Parse(args[1]);
+            brain.m_DefaultBlend.m_Time = blendSpeed;
         }
 
         else {
