@@ -28,6 +28,7 @@ public class GrabAndThrow : MonoBehaviour
 
     public void Grab(Grabbable grabbable){
         grabbedBox = grabbable;
+        grabbedBox.DetachFromRoboticHand();
         boxRb = grabbedBox.GetComponent<Rigidbody2D>();
         boxRb.isKinematic = true;
         grabbedBox.GetComponent<Collider2D>().enabled = false;

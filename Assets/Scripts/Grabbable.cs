@@ -6,6 +6,9 @@ public class Grabbable : Interactable
 
     private AudioSource audioSource;
 
+    // if not held by player, the hand that is grabbing this box
+    private RoboticHand roboticHand;
+
     private void Awake() {
         audioSource = gameObject.GetComponent<AudioSource>();
     }
@@ -17,6 +20,16 @@ public class Grabbable : Interactable
 
     public void Release() {
         timeReleased = Time.time;
+    }
+
+    public void AttachToRoboticHand(RoboticHand hand) {
+        roboticHand = hand;
+    }
+
+    public void DetachFromRoboticHand() {
+        if (!roboticHand) return;
+        roboticHand.ReleaseBox();
+        roboticHand = null;
     }
 
     public override void Interact()

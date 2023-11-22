@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
     [SerializeField]
+    private LayerMask hazardLayerMask;
+    [SerializeField]
     private PhysicsMaterial2D noFriction, lowFriction, fullFriction;
     [SerializeField]
     private float maxMovementForce = 30f;
@@ -107,7 +109,6 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         capsuleColliderSize = cc.size;
         unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
-        hazardLayer = LayerMask.NameToLayer("Hazard");
         initialDrag = rb.drag;
         followingItems = new List<FollowingItem>();
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
@@ -520,10 +521,16 @@ public class PlayerController : MonoBehaviour
         currentRoom = room;
     }
 
-    private int hazardLayer;
     private void OnCollisionEnter2D(Collision2D other) {
-        // When colliding with spikes/other hazards, respawn if on the hazard layer
-        if (other.gameObject.layer == hazardLayer) {
+        // If other object's layer is in hazards layermask, die
+        if (hazardLayerMask == (hazardLayerMask | (1 << other.gameObject.layer))) {
+            Die();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        // If other object's layer is in hazards layermask, die
+        if (hazardLayerMask == (hazardLayerMask | (1 << other.gameObject.layer))) {
             Die();
         }
     }

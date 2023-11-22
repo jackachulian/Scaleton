@@ -95,6 +95,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1928
+  hazardLayerMask:
+    serializedVersion: 2
+    m_Bits: 163840
   noFriction: {fileID: 6200000, guid: 488611a2f723d3f48a7686a1b4a981c2, type: 2}
   lowFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
   fullFriction: {fileID: 6200000, guid: 680a01c77e2f4144faf27d010d9bbbe0, type: 2}
@@ -5672,7 +5675,7 @@ MonoBehaviour:
   forwardThrowForce: {x: 6.5, y: 4}
   upwardThrowForce: {x: 0.5, y: 8}
   downwardThrowForce: {x: 0.5, y: -7.5}
-  throwingExtraForcePerMass: 0.5
+  throwingExtraForcePerMass: 1
   obstructionLayerMask:
     serializedVersion: 2
     m_Bits: 4616
