@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public Headlight headlight;
 
-    private CinemachineBrain cinemachineBrain;
     private CameraRoom currentRoom;
     private float xInput;
     private float slopeDownAngle;
@@ -92,6 +91,12 @@ public class PlayerController : MonoBehaviour
     private PlayerState playerState; 
 
 
+    private float timeSinceLastGrounded;
+
+    // Amount of time after walkng off a ledge that the player can jump.
+    [SerializeField] private float maxCoyoteTime = 0.5f;
+
+
     public List<FollowingItem> followingItems {get; private set;}
 
     // Set to false the moment the user regains control. Prevents double inputs. Also will prevent opening the menu.
@@ -111,7 +116,6 @@ public class PlayerController : MonoBehaviour
         unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
         initialDrag = rb.drag;
         followingItems = new List<FollowingItem>();
-        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
     }
 
     private void Update()
@@ -187,10 +191,9 @@ public class PlayerController : MonoBehaviour
 
     private bool preventPropFly = false;
     private int unstableLayerMask;
+
     private void CheckGround()
     {
-        
-
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, whatIsGround);
 
         // Check all collisions. For each grabbable, if it cannot be currently picked up (released recently),
@@ -238,9 +241,9 @@ public class PlayerController : MonoBehaviour
         {
             canJump = true;
         } 
-        // else if (!isGrounded) {
-        //     canJump = false;
-        // }
+        if (!isGrounded) {
+            timeSinceLastGrounded += Time.fixedDeltaTime;
+        }
     }
 
     private void Ground(bool groundedLastUpdate) {
@@ -248,6 +251,7 @@ public class PlayerController : MonoBehaviour
             SoundManager.PlaySound(audioSource, "land");
         }
         isGrounded = true;
+        timeSinceLastGrounded = 0;
     }
 
     private void SlopeCheck()
@@ -355,7 +359,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (canJump) {
+        if (canJump && timeSinceLastGrounded < maxCoyoteTime) {
             canJump = false;
             isJumping = true;
             newVelocity.Set(rb.velocity.x, 0.0f);
