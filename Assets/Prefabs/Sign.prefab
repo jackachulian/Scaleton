@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6129516649934414449}
   - component: {fileID: 6388129014886704215}
   m_Layer: 0
-  m_Name: Notification
+  m_Name: InputHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,14 +234,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d52b7f8cc2b30e43a7f7291bd4de368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputHint: {fileID: 3004252286305611060}
   spriteRenderer: {fileID: 9116429347721869189}
   isGrabbable: 0
-  notification: {fileID: 3004252286305611060}
   dialogue:
   - test dialogue
   - this is a dialogue test
   - yippie!
-  dialogueBox: {fileID: 0}
 --- !u!61 &8740022552195750087
 BoxCollider2D:
   m_ObjectHideFlags: 0

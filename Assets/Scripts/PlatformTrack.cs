@@ -28,4 +28,15 @@ public class PlatformTrack : MonoBehaviour {
             }
         }
     }
+
+    public void ReverseDirection() {
+        var temp = start;
+        start = end;
+        end = temp;
+        startToEndOffset = end.position - start.position;
+        foreach (var rb in platformRbs) {
+            rb.velocity = (Vector2)(end.position - start.position).normalized * speed;
+        }
+        Debug.Log("Reversed track direction");
+    }
 }
