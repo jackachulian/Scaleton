@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7046589268443979297
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 44613077177561114, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1568943182, guid: 11f5b5a084c750e4bafc28061cb19a98, type: 3}
+    - target: {fileID: 692529444739418743, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_Name
+      value: OrangePressurePlate Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5675796502214207017, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: pressedSprite
+      value: 
+      objectReference: {fileID: -1945948390, guid: 11f5b5a084c750e4bafc28061cb19a98, type: 3}
+    - target: {fileID: 5675796502214207017, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: unpressedSprite
+      value: 
+      objectReference: {fileID: -1568943182, guid: 11f5b5a084c750e4bafc28061cb19a98, type: 3}
+    - target: {fileID: 5675796502214207017, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: gates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}

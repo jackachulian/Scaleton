@@ -3,7 +3,7 @@ using UnityEngine;
 // Will latch onto grabbables. Player can grab the box out of this hand.
 
 public class RoboticHand : MonoBehaviour {
-    private Grabbable heldBox;
+    [SerializeField] private Grabbable heldBox;
 
     private SpriteRenderer spriteRenderer;
 
@@ -13,6 +13,11 @@ public class RoboticHand : MonoBehaviour {
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (heldBox) heldBox.GetComponent<Rigidbody2D>().isKinematic = true;
+    }
+
+    private void Start() {
+        if (heldBox) Grab(heldBox);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -20,6 +25,10 @@ public class RoboticHand : MonoBehaviour {
         Grabbable g = other.GetComponent<Grabbable>();
         if (!g) return;
 
+        Grab(g);
+    }
+
+    private void Grab(Grabbable g) {
         heldBox = g;
         g.AttachToRoboticHand(this);
         var rb = g.GetComponent<Rigidbody2D>();
