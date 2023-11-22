@@ -858,6 +858,7 @@ GameObject:
   - component: {fileID: 678450122}
   - component: {fileID: 678450121}
   - component: {fileID: 678450124}
+  - component: {fileID: 678450125}
   m_Layer: 3
   m_Name: Foreground
   m_TagString: Untagged
@@ -902,7 +903,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f2990b1defb9cc649a81afa67b80926c, type: 2}
+  - {fileID: -876546973899608171, guid: 4ace56915f617b346b7de8a03f63b97a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3630,6 +3631,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selfShadows: 1
+--- !u!114 &678450125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678450117}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ab1ba73b5b35146bd2cf0cdd3e19ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: -876546973899608171, guid: 2813362d790910246a40caf1be55abe7, type: 3}
 --- !u!1 &740096616
 GameObject:
   m_ObjectHideFlags: 0
@@ -4419,7 +4433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4287020480312805432, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 146
+      value: 161.5
       objectReference: {fileID: 0}
     - target: {fileID: 4287020480312805432, guid: 24c7509d3b90f50429b9567e110e64a2, type: 3}
       propertyPath: m_LocalPosition.y
