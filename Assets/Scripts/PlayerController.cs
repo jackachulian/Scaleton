@@ -89,7 +89,8 @@ public class PlayerController : MonoBehaviour
     private float initialDrag;
 
     private PlayerState playerState; 
-
+    // While controlmode is not Normal, can be used to control the player during cutscenes, etc.
+    public float autoXInput {get; private set;} = 0f;
 
     private float timeSinceLastGrounded;
 
@@ -177,7 +178,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else{
-            xInput = 0;
+            xInput = autoXInput;
         }
 
         canInteractThisFrame = true;
@@ -562,6 +563,10 @@ public class PlayerController : MonoBehaviour
         minecartSpriteObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, lookRotation);
         lookRotation.Set(lookRotation.x, lookRotation.y*2f);
         spriteObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, lookRotation);
+    }
+
+    public void SetAutoXInput(float input) {
+        autoXInput = input;
     }
 
     private void OnDrawGizmos()

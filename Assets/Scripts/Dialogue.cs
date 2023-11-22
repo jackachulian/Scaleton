@@ -10,6 +10,9 @@ public class Dialogue : MonoBehaviour
     public float speed;
     private int index;
 
+    bool typing;
+    bool waitingForInput;
+
     private GameObject[] disableDuringDialogue;
 
     private void Start() {
@@ -19,12 +22,12 @@ public class Dialogue : MonoBehaviour
     void Update(){
         if (Input.GetButtonDown("Interact") || Input.GetButtonDown("Cancel"))
         {
-            if(textComponent.text == lines[index]){
-                NextLine();
-            }
-            else{
-                StopAllCoroutines();
+            if (typing) {
+                typing = false;
+                waitingForInput = true;
                 textComponent.text = lines[index];
+            } else if (waitingForInput) {
+                NextLine();
             }
         }
     }
@@ -60,8 +63,13 @@ public class Dialogue : MonoBehaviour
                     NextLine();
                 }
             } else {
-                if (Cutscene.current != null) Cutscene.current.ParseCommand(cmd);
-                NextLine();
+                if (Cutscene.current != null) {
+                    bool readyForNextLine = Cutscene.current.ParseCommand(cmd, args);
+                    if (readyForNextLine) NextLine();
+                } else {
+                    Debug.LogError("Unknown dialogue cmd: \""+cmd+"\"");
+                    NextLine();
+                } 
             }
         } else {
             StartCoroutine(TypeLine());
@@ -69,18 +77,31 @@ public class Dialogue : MonoBehaviour
     }
 
     IEnumerator TypeLine(){
+        typing = true;
         foreach (char c in lines[index].ToCharArray()){
+            if (!typing) break;
             textComponent.text += c;
             yield return new WaitForSeconds(speed);
         }
+        typing = false;
+        waitingForInput = true;
     }
 
-    IEnumerator NextLineAfterDelay(float delay) {
+    public IEnumerator NextLineAfterDelay(float delay) {
         yield return new WaitForSeconds(delay);
         NextLine();
     }
 
-    void NextLine(){
+    public IEnumerator NextLineOnceTrue(Func<bool> func) {
+        while (func.Invoke() == false) {
+            yield return null;
+        }
+        NextLine();
+    }
+
+    public void NextLine(){
+        if (typing) return;
+        waitingForInput = false;
         if(index < lines.Length - 1){
             index++;
             textComponent.text = string.Empty;
