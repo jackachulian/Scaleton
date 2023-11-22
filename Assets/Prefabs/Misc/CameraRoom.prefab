@@ -53,6 +53,7 @@ MonoBehaviour:
   virtualCam: {fileID: 39788922888419809}
   canRespawn: 1
   isSubRoom: 0
+  blockGrabbables: 1
   brightness: 0.5
   ambientParticles: {fileID: 130280680764060364}
   particleDensity: 0.5

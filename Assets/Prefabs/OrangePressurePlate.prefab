@@ -14,7 +14,11 @@ PrefabInstance:
       objectReference: {fileID: -1568943182, guid: 11f5b5a084c750e4bafc28061cb19a98, type: 3}
     - target: {fileID: 692529444739418743, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
       propertyPath: m_Name
-      value: OrangePressurePlate Variant
+      value: OrangePressurePlate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5675796502214207017, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
+      propertyPath: stepoffDelay
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5675796502214207017, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
       propertyPath: pressedSprite
@@ -24,10 +28,6 @@ PrefabInstance:
       propertyPath: unpressedSprite
       value: 
       objectReference: {fileID: -1568943182, guid: 11f5b5a084c750e4bafc28061cb19a98, type: 3}
-    - target: {fileID: 5675796502214207017, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
-      propertyPath: gates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6073838591039411580, guid: 56f06d6a97f65d64ba52ada3807c4e86, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3

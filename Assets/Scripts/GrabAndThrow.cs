@@ -67,7 +67,7 @@ public class GrabAndThrow : MonoBehaviour
 
             playerRb.mass -= boxRb.mass;
 
-            grabbedBox.transform.parent = null;
+            grabbedBox.transform.parent = playerController.GetCurrentRoom().objectsTransform;
             grabbedBox.transform.rotation = Quaternion.identity;
 
             boxRb.velocity = Vector2.zero;

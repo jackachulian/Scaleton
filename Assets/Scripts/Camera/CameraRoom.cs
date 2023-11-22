@@ -20,6 +20,9 @@ public class CameraRoom : MonoBehaviour {
     /// </summary>
     [SerializeField] private bool isSubRoom = false;
 
+    // Block grabbables from etnering and exiting this room.
+    [SerializeField] private bool blockGrabbables = true;
+
     [SerializeField] private float brightness = 0.5f;
 
     [SerializeField] private ParticleSystem ambientParticles;
@@ -27,7 +30,7 @@ public class CameraRoom : MonoBehaviour {
     // controls the density of the ambient dust particles, average particles per tile (particles/unit^2)
     [SerializeField] private float particleDensity = 1f; 
 
-    private Transform objectsTransform;
+    public Transform objectsTransform {get; private set;}
 
     private PolygonCollider2D polygonCollider;
 
@@ -41,12 +44,11 @@ public class CameraRoom : MonoBehaviour {
     private PlayerController player;
 
     // Minimum time a player mst not be in this room in order to respawn its items when re-entering
-    private float minRespawnTime = 0.75f;
+    private static float minRespawnTime = 0.75f;
     private float exitTimer = 0f;
 
     private void OnValidate() {
         if (!polygonCollider) polygonCollider = GetComponent<PolygonCollider2D>();
-        if (!objectsTransform) objectsTransform = transform.Find("Objects");
         
         usesConfiner = virtualCam.GetComponent<CinemachineConfiner>() != null;
 
@@ -81,7 +83,7 @@ public class CameraRoom : MonoBehaviour {
 
     private void Start() {
         if (!objectsTransform) objectsTransform = transform.Find("Objects");
-        if (respawnables == null) respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
+        respawnables = objectsTransform.GetComponentsInChildren<Respawnable>();
 
         if (!player) player = GameObject.Find("Player").GetComponent<PlayerController>();
 
@@ -93,18 +95,20 @@ public class CameraRoom : MonoBehaviour {
         ambientParticles.Stop();
         ambientParticles.Clear();
 
-        // Create a collider that will block boxes
-        GameObject grabbableBlocker = new GameObject("GrabbableBlocker") { layer = LayerMask.NameToLayer("GrabbableBlocker") };
-        grabbableBlocker.transform.SetParent(transform, false);
-    
-        if (polygonCollider) {
-            for (int i = 0; i < polygonCollider.pathCount; i++) {
-                EdgeCollider2D edge = grabbableBlocker.AddComponent<EdgeCollider2D>();
-                edge.edgeRadius = 0.025f;
-                Vector2[] points = polygonCollider.GetPath(i);
-                Array.Resize(ref points, points.Length+1);
-                points[points.Length-1] = points[0];
-                edge.points = points;
+        if (blockGrabbables) {
+            // Create a collider that will block boxes
+            GameObject grabbableBlocker = new GameObject("GrabbableBlocker") { layer = LayerMask.NameToLayer("GrabbableBlocker") };
+            grabbableBlocker.transform.SetParent(transform, false);
+        
+            if (polygonCollider) {
+                for (int i = 0; i < polygonCollider.pathCount; i++) {
+                    EdgeCollider2D edge = grabbableBlocker.AddComponent<EdgeCollider2D>();
+                    edge.edgeRadius = 0.025f;
+                    Vector2[] points = polygonCollider.GetPath(i);
+                    Array.Resize(ref points, points.Length+1);
+                    points[points.Length-1] = points[0];
+                    edge.points = points;
+                }
             }
         }
         
@@ -115,6 +119,7 @@ public class CameraRoom : MonoBehaviour {
         if (!playerWithin && exitTimer > 0) {
             exitTimer -= Time.deltaTime;
             if (exitTimer <= 0) {
+                exitTimer = 0f;
                 ambientParticles.Stop();
                 ambientParticles.Clear();
             }
@@ -129,8 +134,9 @@ public class CameraRoom : MonoBehaviour {
     public void EnterRoom() {
         if (player.IsDead()) return;
 
+        Debug.Log(name + "entered");
+
         playerWithin = true;
-        exitTimer = 0f;
 
         virtualCam.enabled = true;
         virtualCam.MoveToTopOfPrioritySubqueue();
@@ -141,11 +147,13 @@ public class CameraRoom : MonoBehaviour {
 
         if(canRespawn){
             CameraRoom previousRoom = player.GetCurrentRoom();
+            if (previousRoom) Debug.Log(previousRoom.name + " before "+name);
             if (!previousRoom || !previousRoom.isSubRoom) {
                 // Respawn items and set them to their original position when re-entering this area from another room.
                 // Don't respawn if the room the player was in is a sub-room, meaning it's a sub-room of this room.
                 // Also, don't respawn if the player just exited this room very recently.
-                if (exitTimer > minRespawnTime) RespawnItems();
+                Debug.Log(name + "exittimer on enter: "+exitTimer);
+                if (exitTimer <= 0f) RespawnItems();
 
                 // Find closest spawn point and set that to the respawn point upon entering
                 currentRespawnPoint = respawnPoints[0];
@@ -162,21 +170,22 @@ public class CameraRoom : MonoBehaviour {
         }   
 
         player.SetCameraRoom(this);
+        exitTimer = 0f;
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if (player.IsDead()) return;
+    // private void OnTriggerStay2D(Collider2D other) {
+    //     if (player.IsDead()) return;
 
-        playerWithin = true;
+    //     playerWithin = true;
         
-        if(virtualCam.enabled == false){
-            virtualCam.enabled = true;
-            virtualCam.MoveToTopOfPrioritySubqueue();
-            if(canRespawn){
-                GameObject.Find("Player").GetComponent<PlayerController>().SetCameraRoom(this);
-            }
-        }
-    }
+    //     if(virtualCam.enabled == false){
+    //         virtualCam.enabled = true;
+    //         virtualCam.MoveToTopOfPrioritySubqueue();
+    //         if(canRespawn){
+    //             GameObject.Find("Player").GetComponent<PlayerController>().SetCameraRoom(this);
+    //         }
+    //     }
+    // }
 
     private void OnTriggerExit2D(Collider2D other) {
         ExitRoom();
@@ -185,17 +194,18 @@ public class CameraRoom : MonoBehaviour {
     public void ExitRoom() {
         if (player.IsDead()) return;
 
+        exitTimer = minRespawnTime;
         playerWithin = false;
 
         virtualCam.enabled = false;
 
-        exitTimer = minRespawnTime;
     }
 
     public void RespawnItems(){
         foreach(Respawnable r in respawnables){
             r.Respawn();
         }
+        Debug.Log(name + " Items respawned - count: "+respawnables.Length);
     }
 
     public void SetRespawnPoint(RespawnPoint respawnPoint) {

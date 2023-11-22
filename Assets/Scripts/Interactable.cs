@@ -11,7 +11,6 @@ public abstract class Interactable : MonoBehaviour {
     [SerializeField] private bool isGrabbable = false;
     public bool IsGrabbable {get{return isGrabbable;}}
     
-
     // When X is pressed
     public abstract void Interact();
 
