@@ -9,6 +9,9 @@ public class PresidentBoss : MonoBehaviour {
     [SerializeField] private Transform[] jumpTargets;
 
     [SerializeField] private AnimationCurve jumpHeightCurve;
+
+    /// <summary> Colliders that are ignored during the jump phase, but not the jumpfall phase </summary>
+    [SerializeField] private Collider2D[] ignoreCollidersDuringJump;
     
     // frame data
     [SerializeField] private FrameData frameData;
@@ -29,6 +32,7 @@ public class PresidentBoss : MonoBehaviour {
     // cached references
     private Animator animator;
     private Rigidbody2D rb;
+    private CapsuleCollider2D cc;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     // internal animation/timing related vars
@@ -46,6 +50,7 @@ public class PresidentBoss : MonoBehaviour {
 
     private void Awake() {
         animator = GetComponent<Animator>();
+        cc = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         facing = -1;
     }
@@ -120,6 +125,10 @@ public class PresidentBoss : MonoBehaviour {
         Debug.Log("Jump phase entered ===================================");
         phase = BossPhase.Jump;
 
+        foreach (var c in ignoreCollidersDuringJump) {
+            Physics2D.IgnoreCollision(cc, c, true);
+        }
+
         jumpingFrom = rb.position;
         float xOffset = jumpingTo.x - jumpingFrom.x;
         float aerialTime = frameData.jumpAerialTime + Math.Abs(xOffset * frameData.jumpHorizontalExtraAerialTime);
@@ -149,6 +158,10 @@ public class PresidentBoss : MonoBehaviour {
         Debug.Log("Jump fall phase entered ===================================");
         phase = BossPhase.JumpFall;
         animator.CrossFade("presidentboss_jumpfall", 0f);
+
+        foreach (var c in ignoreCollidersDuringJump) {
+            Physics2D.IgnoreCollision(cc, c, false);
+        }
 
         float fallDistance = jumpingTo.y - rb.position.y;
 
