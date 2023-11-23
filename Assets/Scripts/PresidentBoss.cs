@@ -16,7 +16,12 @@ public class PresidentBoss : MonoBehaviour {
     [Serializable] public class FrameData {
         public float idleTimeMin = 3f;
         public float idleTimeMax = 7f;
-        public float jumpAerialTime = 1.5f;
+        /// <summary> Aerial hang time before fall begins </summary>
+        public float jumpAerialTime = 0.9f;
+        /// <summary> Amount of time between fall start and hitting the ground </summary>
+        public float jumpFallTime = 0.6f;
+        /// <summary> Target Y velocity of instant force applied when falling </summary>
+        public float jumpFallInstantVel = -1f;
     }
 
     // cached references
@@ -52,6 +57,7 @@ public class PresidentBoss : MonoBehaviour {
             case BossPhase.Idle: IdleUpdate(); break;
             case BossPhase.JumpPrepare: UpdateJumpPrepare(); break;
             case BossPhase.Jump: UpdateJump(); break;
+            case BossPhase.JumpFall: UpdateJumpFall(); break;
             case BossPhase.JumpLand: UpdateJumpLand(); break;
             case BossPhase.BladeSlashPrepare: break;
             case BossPhase.BladeSlash: break;
@@ -76,20 +82,13 @@ public class PresidentBoss : MonoBehaviour {
     }
 
     public void UpdateJump() {
-        float xDelta = rb.velocity.x*Time.fixedDeltaTime;
-        float nextDistancePercent = facing * (rb.position.x + xDelta - jumpingFrom.x) / (jumpingTo.x - jumpingFrom.x);
-
-        if (facing * nextDistancePercent < 1f) {
-            float jumpHeightPercent = jumpHeightCurve.Evaluate(nextDistancePercent);
-            float nextUpdateY = Mathf.LerpUnclamped(jumpingFrom.y, jumpHeightTransform.position.y, jumpHeightPercent);
-            float yDelta = nextUpdateY - rb.position.y;
-            rb.AddForce(yDelta * rb.mass * Vector2.up, ForceMode2D.Impulse);
-
-            Vector2 targetPosition = new Vector2(rb.position.x + xDelta, nextUpdateY);
-            Debug.DrawLine(rb.position, targetPosition);
+        if ((rb.position.x - jumpingFrom.x)/(jumpingTo.x - jumpingFrom.x) >= 1f || rb.velocity.y < 0f) {
+            JumpFall();
         }
-        // don't apply any addition forces if past target x, gravity and existing momentum will bring boss to ground,
-        // jumpLand phase will start when OnCollisionEnter2D is triggered by colliding with ground/player
+    }
+
+    public void UpdateJumpFall() {
+        // no behaviour here - JumpLand will occurr in OnCollisionEnter2D when colliding with something
     }
 
     public void UpdateJumpLand() {
@@ -115,11 +114,52 @@ public class PresidentBoss : MonoBehaviour {
     public void Jump() {
         Debug.Log("Jump phase entered ===================================");
         phase = BossPhase.Jump;
+
+        float jumpHeight = jumpHeightTransform.position.y - rb.position.y;
+        // physics time:
+        // final velocity of 0 needed
+        // know: t, v, s
+        // need: u, a
+        // s = 1/2(v + u)t
+        // jumpHeight = 0.5f * (0 + initialVelocity) * frameData.jumpAerialTime
+        var initialYVelocity = jumpHeight * 2f / frameData.jumpAerialTime;
+
+        // v = u + at
+        // 0 = initialVelocity + gravity * frameData.jumpFallTime
+        float gravity = -initialYVelocity / frameData.jumpAerialTime;
+        rb.gravityScale = gravity/Physics2D.gravity.y;
+
+        rb.AddForce(initialYVelocity * Vector2.up * rb.mass, ForceMode2D.Impulse);
+
+        // Apply a horizontal force that will make the boss arrive at the target position after jumpAerialTime seconds
         jumpingFrom = rb.position;
         float xOffset = jumpingTo.x - jumpingFrom.x;
         float targetXVelocity = xOffset / frameData.jumpAerialTime;
         float xVelocityDelta = targetXVelocity - rb.velocity.x;
         rb.AddForce(xVelocityDelta * Vector2.right * rb.mass, ForceMode2D.Impulse);
+    }
+
+    public void JumpFall() {
+        Debug.Log("Jump fall phase entered ===================================");
+        phase = BossPhase.JumpFall;
+        animator.CrossFade("presidentboss_jumpfall", 0f);
+
+        float fallDistance = jumpingTo.y - rb.position.y;
+
+        Vector2 targetVelocity = new Vector2(0, frameData.jumpFallInstantVel);
+        rb.AddForce((targetVelocity - rb.velocity) * rb.mass, ForceMode2D.Impulse);
+
+        // physics time!
+        // know: s, u, t
+        // need: v, a
+        // s = 1/2(v + u)t
+        // fallDistance = 0.5f * (finalVelocity + rb.velocity.y) * frameData.jumpFallTime
+        var finalVelocity = fallDistance / (frameData.jumpFallTime * 0.5f) - rb.velocity.y;
+
+        // v = u + at
+        // finalVelocity = rb.velocity.y + gravity * frameData.jumpFallTime
+        float gravity = (finalVelocity - rb.velocity.y) / frameData.jumpFallTime;
+        rb.gravityScale = gravity/Physics2D.gravity.y;
     }
 
     public void JumpLand() {
@@ -136,7 +176,7 @@ public class PresidentBoss : MonoBehaviour {
 
     // collision - ussed for jump -> jumpLand
     private void OnCollisionEnter2D(Collision2D other) {
-        if (phase == BossPhase.Jump) {
+        if (phase == BossPhase.JumpFall) {
             JumpLand();
         }
     }
@@ -156,6 +196,7 @@ public enum BossPhase {
     Idle,
     JumpPrepare,
     Jump,
+    JumpFall,
     JumpLand,
     BladeSlashPrepare,
     BladeSlash,
