@@ -125,6 +125,7 @@ public class Dialogue : MonoBehaviour
     {
         gameObject.SetActive(false);
         foreach (var obj in disableDuringDialogue) obj.SetActive(true);
+        if (Cutscene.current != null) Cutscene.current.CutsceneEnded();
         if (MenuManager.openMenus.Count > 0)
         {
             MenuManager.ShowHiddenMenus();
