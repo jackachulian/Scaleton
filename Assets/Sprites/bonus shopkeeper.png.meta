@@ -139,10 +139,10 @@ TextureImporter:
       name: bonus shopkeeper_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 34
-        width: 19
-        height: 26
+        x: 0
+        y: 32
+        width: 23
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: bonus shopkeeper_1
       rect:
         serializedVersion: 2
-        x: 27
-        y: 34
-        width: 18
-        height: 26
+        x: 23
+        y: 32
+        width: 23
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: bonus shopkeeper_2
       rect:
         serializedVersion: 2
-        x: 4
-        y: 2
-        width: 18
-        height: 26
+        x: 0
+        y: 0
+        width: 23
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 027499ba85cd4554da7d59d22f2f8a0c
-      internalID: 1776934851
+      spriteID: 35de73d573bc57e42a76bb6a66ca74d5
+      internalID: -2010422308
       vertices: []
       indices: 
       edges: []
@@ -202,10 +202,10 @@ TextureImporter:
       name: bonus shopkeeper_3
       rect:
         serializedVersion: 2
-        x: 27
-        y: 2
-        width: 18
-        height: 26
+        x: 23
+        y: 0
+        width: 23
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,8 +213,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7257540dbdadf246b3fbf90e775724c
-      internalID: 795764239
+      spriteID: 779cf21a9a9f73c4c850fc465b138349
+      internalID: -2046599925
       vertices: []
       indices: 
       edges: []
@@ -232,8 +232,8 @@ TextureImporter:
     nameFileIdTable:
       bonus shopkeeper_0: 634398044
       bonus shopkeeper_1: 1873757006
-      bonus shopkeeper_2: 1776934851
-      bonus shopkeeper_3: 795764239
+      bonus shopkeeper_2: -2010422308
+      bonus shopkeeper_3: -2046599925
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
