@@ -25,6 +25,7 @@ public class Cutscene : MonoBehaviour {
         }
         current = this;
         string[] lines = dialogue.Split("\n");
+
         MenuManager.globalDialogue.StartDialogue(lines);
     }
 
@@ -62,6 +63,7 @@ public class Cutscene : MonoBehaviour {
             if (camIndex == -1) {
                 MenuManager.player.GetCurrentRoom().VirtualCam.MoveToTopOfPrioritySubqueue();
             } else {
+                virtualCameras[camIndex].m_Follow = MenuManager.player.transform;
                 virtualCameras[camIndex].MoveToTopOfPrioritySubqueue();
             }
         }
