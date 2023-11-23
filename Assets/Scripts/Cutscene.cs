@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Cutscene : MonoBehaviour {
     public static Cutscene current {get; private set;}
@@ -14,6 +15,8 @@ public class Cutscene : MonoBehaviour {
     [SerializeField] private Transform[] waypoints;
 
     [SerializeField] private CinemachineVirtualCamera[] virtualCameras;
+
+    [SerializeField] private UnityEvent invokeAfterCutscene;
 
     public void StartCutscene() {
         if (current != null) {
@@ -83,5 +86,10 @@ public class Cutscene : MonoBehaviour {
         }
         MenuManager.player.SetAutoXInput(0);
         if (nextLineAfter) MenuManager.globalDialogue.NextLine();
+    }
+
+    // To be called from dialogue after last line
+    public void CutsceneEnded() {
+        invokeAfterCutscene.Invoke();
     }
 }
