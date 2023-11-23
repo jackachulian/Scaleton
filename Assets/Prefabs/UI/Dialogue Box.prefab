@@ -65,7 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dialogue
+  m_text: Dialogue Dialogue Dialogue Dialogue Dialogue Dialogue Dialogue Dialogue
+    Dialogue Dialogue Dialogue Dialogue Dialogue Dialogue Dialogue Dialogue Dialogue
+    Dialogue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 74cae110a6fe9a8468481f05c93af4f9, type: 2}
   m_sharedMaterial: {fileID: -1644785697699519000, guid: 74cae110a6fe9a8468481f05c93af4f9, type: 2}
@@ -193,9 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9a8af7efc45f648808b296a28236dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBackground: {fileID: 3701227548045474992}
   textComponent: {fileID: 6145297844739550222}
   speed: 0.05
-  player: {fileID: 0}
 --- !u!114 &3701227548045474992
 MonoBehaviour:
   m_ObjectHideFlags: 0

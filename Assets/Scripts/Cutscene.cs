@@ -1,11 +1,19 @@
+using System;
+using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class Cutscene : MonoBehaviour {
     public static Cutscene current {get; private set;}
 
-    public string[] dialogue;
+    [TextArea]
+    public string dialogue;
 
     [SerializeField] private LargeMechanicalDoor door; 
+
+    [SerializeField] private Transform[] waypoints;
+
+    [SerializeField] private CinemachineVirtualCamera[] virtualCameras;
 
     public void StartCutscene() {
         if (current != null) {
@@ -13,7 +21,8 @@ public class Cutscene : MonoBehaviour {
             return;
         }
         current = this;
-        MenuManager.globalDialogue.StartDialogue(dialogue);
+        string[] lines = dialogue.Split("\n");
+        MenuManager.globalDialogue.StartDialogue(lines);
     }
 
     // Cutscnees will be on the RoomBorder layers so only players should be able to trigger
@@ -23,7 +32,9 @@ public class Cutscene : MonoBehaviour {
         StartCutscene();
     }
 
-    public void ParseCommand(string cmd) {
+    // Return true if the dialogue calling this function is ready to display the next line,
+    // or false if it should wait for another coroutine to start the next line.
+    public bool ParseCommand(string cmd, string[] args) {
         // used by pre-boss cutscene
         if (cmd == "closedoor") {
             door.Close();
@@ -34,8 +45,43 @@ public class Cutscene : MonoBehaviour {
             door.Open();
         }
 
+        else if (cmd == "moveplayertowaypoint") {
+            bool waitForPlayer = args.Length <= 2 || args[2] == "waitforplayer"; // default: true
+
+            var waypoint = waypoints[int.Parse(args[1])];
+            MenuManager.globalDialogue.StartCoroutine(MovePlayerToXPosition(waypoint.position.x, waitForPlayer));
+            return !waitForPlayer;
+        }
+
+        // index -1 will be the current room's default camera
+        else if (cmd == "changevirtualcamera") {
+            int camIndex = int.Parse(args[1]);
+            if (camIndex == -1) {
+                MenuManager.player.GetCurrentRoom().VirtualCam.MoveToTopOfPrioritySubqueue();
+            } else {
+                virtualCameras[camIndex].MoveToTopOfPrioritySubqueue();
+            }
+        }
+
+        else if (cmd == "camerablendtime") {
+            var brain = Camera.main.GetComponent<CinemachineBrain>();
+            float blendSpeed = float.Parse(args[1]);
+            brain.m_DefaultBlend.m_Time = blendSpeed;
+        }
+
         else {
             Debug.LogError("Unknown cutscene cmd: \""+cmd+"\"");
         }
+
+        return true;
+    }
+
+    IEnumerator MovePlayerToXPosition(float targetX, bool nextLineAfter) {
+        MenuManager.player.SetAutoXInput(Mathf.Sign(targetX - MenuManager.player.transform.position.x));
+        while (Math.Abs(MenuManager.player.transform.position.x - targetX) > 0.2f) {
+            yield return null;
+        }
+        MenuManager.player.SetAutoXInput(0);
+        if (nextLineAfter) MenuManager.globalDialogue.NextLine();
     }
 }

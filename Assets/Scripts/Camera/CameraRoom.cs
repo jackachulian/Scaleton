@@ -134,8 +134,6 @@ public class CameraRoom : MonoBehaviour {
     public void EnterRoom() {
         if (player.IsDead()) return;
 
-        Debug.Log(name + "entered");
-
         playerWithin = true;
 
         virtualCam.enabled = true;
@@ -147,12 +145,11 @@ public class CameraRoom : MonoBehaviour {
 
         if(canRespawn){
             CameraRoom previousRoom = player.GetCurrentRoom();
-            if (previousRoom) Debug.Log(previousRoom.name + " before "+name);
+            if (previousRoom)
             if (!previousRoom || !previousRoom.isSubRoom) {
                 // Respawn items and set them to their original position when re-entering this area from another room.
                 // Don't respawn if the room the player was in is a sub-room, meaning it's a sub-room of this room.
                 // Also, don't respawn if the player just exited this room very recently.
-                Debug.Log(name + "exittimer on enter: "+exitTimer);
                 if (exitTimer <= 0f) RespawnItems();
 
                 // Find closest spawn point and set that to the respawn point upon entering
@@ -205,7 +202,6 @@ public class CameraRoom : MonoBehaviour {
         foreach(Respawnable r in respawnables){
             r.Respawn();
         }
-        Debug.Log(name + " Items respawned - count: "+respawnables.Length);
     }
 
     public void SetRespawnPoint(RespawnPoint respawnPoint) {
