@@ -229,7 +229,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 249930
+  m_InstanceId: 547402
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -496,7 +496,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -782085140, guid: 1b7bbe7d08e876343bde9efee83cf0d6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -745,7 +745,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 249878
+  m_InstanceId: 547348
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -1261,7 +1261,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8997093447866896829}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: f5ad1e5ee0693dc4fad34c72a765ae0c, type: 2}
   m_IncludeLayers:
@@ -1315,7 +1315,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 63.9, y: -19.702095}
+  m_ConnectedAnchor: {x: 268.25, y: -92.25}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   - {x: 3.50074, y: -0.19127637, z: 0}
   m_ShapePathHash: 952756541
   m_Mesh: {fileID: 0}
-  m_InstanceId: 249942
+  m_InstanceId: 547414
   m_LocalBounds:
     m_Center: {x: -0.00001335144, y: -0.0015386045, z: 0}
     m_Extent: {x: 3.501173, y: 0.18973777, z: 0}
