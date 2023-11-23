@@ -40,7 +40,7 @@ public class PresidentBoss : MonoBehaviour {
     private void Awake() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        facing = 1;
+        facing = -1;
     }
 
     private void Start() {
@@ -84,6 +84,9 @@ public class PresidentBoss : MonoBehaviour {
             float nextUpdateY = Mathf.LerpUnclamped(jumpingFrom.y, jumpHeightTransform.position.y, jumpHeightPercent);
             float yDelta = nextUpdateY - rb.position.y;
             rb.AddForce(yDelta * rb.mass * Vector2.up, ForceMode2D.Impulse);
+
+            Vector2 targetPosition = new Vector2(rb.position.x + xDelta, nextUpdateY);
+            Debug.DrawLine(rb.position, targetPosition);
         }
         // don't apply any addition forces if past target x, gravity and existing momentum will bring boss to ground,
         // jumpLand phase will start when OnCollisionEnter2D is triggered by colliding with ground/player
@@ -104,7 +107,7 @@ public class PresidentBoss : MonoBehaviour {
         while (jumpingTo.x == rb.position.x) {
             jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
         }
-        if (Mathf.Sign(jumpingTo.x - transform.position.x) != facing) {
+        if (Mathf.Sign(jumpingTo.x - rb.position.x) != facing) {
             Flip();
         }
     }
@@ -112,7 +115,7 @@ public class PresidentBoss : MonoBehaviour {
     public void Jump() {
         Debug.Log("Jump phase entered ===================================");
         phase = BossPhase.Jump;
-        jumpingFrom = transform.position;
+        jumpingFrom = rb.position;
         float xOffset = jumpingTo.x - jumpingFrom.x;
         float targetXVelocity = xOffset / frameData.jumpAerialTime;
         float xVelocityDelta = targetXVelocity - rb.velocity.x;
