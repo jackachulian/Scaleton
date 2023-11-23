@@ -3197,8 +3197,8 @@ TextureImporter:
       name: techplateblue
       rect:
         serializedVersion: 2
-        x: 112
-        y: 16
+        x: 192
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -3218,8 +3218,8 @@ TextureImporter:
       name: techplatewideblue0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 16
+        x: 208
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -3239,8 +3239,8 @@ TextureImporter:
       name: techplatewideblue1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 16
+        x: 224
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -3260,8 +3260,8 @@ TextureImporter:
       name: techplatebluepressed
       rect:
         serializedVersion: 2
-        x: 112
-        y: 0
+        x: 192
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -3281,8 +3281,8 @@ TextureImporter:
       name: techplatewidebluepressed0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
+        x: 208
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -3302,8 +3302,8 @@ TextureImporter:
       name: techplatewidebluepressed1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 0
+        x: 224
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -3509,15 +3509,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: techlongbeam
+      name: techverylongbeam
       rect:
         serializedVersion: 2
         x: 0
         y: 27
-        width: 112
+        width: 144
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3525,6 +3525,27 @@ TextureImporter:
       bones: []
       spriteID: 6f65e2e90dc627b43b46a13018fbe49e
       internalID: 1386387232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: techlongbeam
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11
+        width: 64
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ef93a9723b7ffa44bc5bc541216041e
+      internalID: 764601442
       vertices: []
       indices: 
       edges: []
@@ -3642,7 +3663,7 @@ TextureImporter:
       techinsettoporange: -1149954217
       techleft: 1653484584
       techleftorange: -276329118
-      techlongbeam: 1386387232
+      techlongbeam: 764601442
       techplateblue: -1614816452
       techplatebluepressed: -122140112
       techplateorange: -1568943182
@@ -3704,6 +3725,7 @@ TextureImporter:
       techvert: -1684327486
       techvertbottom: -1062277227
       techverttop: 2010065046
+      techverylongbeam: 1386387232
       tracks0: 241799340
       tracks1: 596206867
       tracks2: -1995577993

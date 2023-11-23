@@ -17,7 +17,9 @@ public class PresidentBoss : MonoBehaviour {
         public float idleTimeMin = 3f;
         public float idleTimeMax = 7f;
         /// <summary> Aerial hang time before fall begins </summary>
-        public float jumpAerialTime = 0.9f;
+        public float jumpAerialTime = 0.5f;
+        /// <summary> Extra aerial hang time per game unit of X travel distance </summary>
+        public float jumpHorizontalExtraAerialTime = 0.05f;
         /// <summary> Amount of time between fall start and hitting the ground </summary>
         public float jumpFallTime = 0.6f;
         /// <summary> Target Y velocity of instant force applied when falling </summary>
@@ -103,8 +105,11 @@ public class PresidentBoss : MonoBehaviour {
         phase = BossPhase.JumpPrepare;
         animator.CrossFade("presidentboss_jumpprepare", 0f);
         jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
-        while (jumpingTo.x == rb.position.x) {
+        int iter = 0;
+        Vector2 jumpingFrom = jumpingTo;
+        while (jumpingTo == jumpingFrom && iter < 100) {
             jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
+            iter++;
         }
         if (Mathf.Sign(jumpingTo.x - rb.position.x) != facing) {
             Flip();
@@ -115,26 +120,27 @@ public class PresidentBoss : MonoBehaviour {
         Debug.Log("Jump phase entered ===================================");
         phase = BossPhase.Jump;
 
+        jumpingFrom = rb.position;
+        float xOffset = jumpingTo.x - jumpingFrom.x;
+        float aerialTime = frameData.jumpAerialTime + Math.Abs(xOffset * frameData.jumpHorizontalExtraAerialTime);
         float jumpHeight = jumpHeightTransform.position.y - rb.position.y;
         // physics time:
         // final velocity of 0 needed
         // know: t, v, s
         // need: u, a
         // s = 1/2(v + u)t
-        // jumpHeight = 0.5f * (0 + initialVelocity) * frameData.jumpAerialTime
-        var initialYVelocity = jumpHeight * 2f / frameData.jumpAerialTime;
+        // jumpHeight = 0.5f * (0 + initialVelocity) * aerialTime
+        var initialYVelocity = jumpHeight * 2f / aerialTime;
 
         // v = u + at
         // 0 = initialVelocity + gravity * frameData.jumpFallTime
-        float gravity = -initialYVelocity / frameData.jumpAerialTime;
+        float gravity = -initialYVelocity / aerialTime;
         rb.gravityScale = gravity/Physics2D.gravity.y;
 
         rb.AddForce(initialYVelocity * Vector2.up * rb.mass, ForceMode2D.Impulse);
 
-        // Apply a horizontal force that will make the boss arrive at the target position after jumpAerialTime seconds
-        jumpingFrom = rb.position;
-        float xOffset = jumpingTo.x - jumpingFrom.x;
-        float targetXVelocity = xOffset / frameData.jumpAerialTime;
+        // Apply a horizontal force that will make the boss arrive at the target position after aerialTime seconds
+        float targetXVelocity = xOffset / aerialTime;
         float xVelocityDelta = targetXVelocity - rb.velocity.x;
         rb.AddForce(xVelocityDelta * Vector2.right * rb.mass, ForceMode2D.Impulse);
     }
@@ -185,7 +191,7 @@ public class PresidentBoss : MonoBehaviour {
     public void Flip() {
         facing *= -1;
         spriteRenderer.transform.Rotate(0.0f, 180.0f, 0.0f);
-        spriteRenderer.transform.localPosition.Set(
+        spriteRenderer.transform.localPosition =  new Vector3(
             -spriteRenderer.transform.localPosition.x, 
             spriteRenderer.transform.localPosition.y,
             spriteRenderer.transform.localPosition.z);
