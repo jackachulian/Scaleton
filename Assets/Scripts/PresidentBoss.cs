@@ -33,6 +33,7 @@ public class PresidentBoss : MonoBehaviour {
     private Animator animator;
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
+    private PlayerController player;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     // internal animation/timing related vars
@@ -56,6 +57,8 @@ public class PresidentBoss : MonoBehaviour {
     }
 
     private void Start() {
+        player = MenuManager.player;
+
         Idle();
     }
 
@@ -73,14 +76,17 @@ public class PresidentBoss : MonoBehaviour {
         }
     }
 
+    // per update handlers for each phase
     public void IdleUpdate() {
+        FaceTowards(player.transform.position);
+
         idleTimeRemaining -= Time.fixedDeltaTime;
         if (idleTimeRemaining < 0) {
             JumpPrepare();
         }
+
     }
 
-    // per update handlers for each phase
     public void UpdateJumpPrepare() {
         // once animator has left jumpPrepare anim reached jump anim, initiate jump
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_jump")) {
@@ -104,11 +110,19 @@ public class PresidentBoss : MonoBehaviour {
         }
     }
 
-    // functions to initate a new phase
+    // functions to initate a new phase change
+
+    public void Idle() {
+        Debug.Log("Idle phase entered ===================================");
+        phase = BossPhase.Idle;
+        idleTimeRemaining = UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+    }
+
     public void JumpPrepare() {
         Debug.Log("Jump prepare phase entered ===================================");
         phase = BossPhase.JumpPrepare;
         animator.CrossFade("presidentboss_jumpprepare", 0f);
+        
         jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
         int iter = 0;
         Vector2 jumpingFrom = jumpingTo;
@@ -116,9 +130,7 @@ public class PresidentBoss : MonoBehaviour {
             jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
             iter++;
         }
-        if (Mathf.Sign(jumpingTo.x - rb.position.x) != facing) {
-            Flip();
-        }
+        FaceTowards(jumpingTo);
     }
 
     public void Jump() {
@@ -187,17 +199,29 @@ public class PresidentBoss : MonoBehaviour {
         animator.CrossFade("presidentboss_jumpland", 0f);
     }
 
-    public void Idle() {
-        Debug.Log("Idle phase entered ===================================");
-        phase = BossPhase.Idle;
-        idleTimeRemaining = UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
-    }
-
     // collision - ussed for jump -> jumpLand
     private void OnCollisionEnter2D(Collision2D other) {
         if (phase == BossPhase.JumpFall) {
             JumpLand();
         }
+
+        CheckDamage(other);
+    }
+
+    public void CheckDamage(Collision2D other) {
+        // Take damage only from grabbables (for now) (TODO other damage types, maybe not in this function)
+        Grabbable grabbable = other.gameObject.GetComponent<Grabbable>();
+        if (!grabbable) return;
+
+        // Relative velocity magnitude must be high enough
+        if (other.relativeVelocity.magnitude < 1.5f) return;
+
+        // Don't take damage if normal points down at all and box's velocity is not positive, meaning box was stepped on
+        if (other.GetContact(0).normal.y < 0f && grabbable.GetComponent<Rigidbody2D>().velocity.y < 0.25f) return;
+
+        // If all steps pass, this box will deal damage
+        // TODO: implement damage
+        Debug.Log("Damage dealt");
     }
 
     // misc
@@ -208,6 +232,12 @@ public class PresidentBoss : MonoBehaviour {
             -spriteRenderer.transform.localPosition.x, 
             spriteRenderer.transform.localPosition.y,
             spriteRenderer.transform.localPosition.z);
+    }
+
+    public void FaceTowards(Vector2 point) {
+        if (Mathf.Sign(point.x - rb.position.x) != facing) {
+            Flip();
+        }
     }
 }
 
