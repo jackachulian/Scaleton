@@ -3,7 +3,7 @@ using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PresidentBoss : MonoBehaviour {
+public class PresidentBoss : DamageableEntity {
     // inputs
     [SerializeField] private Transform jumpHeightTransform;
 
@@ -65,7 +65,8 @@ public class PresidentBoss : MonoBehaviour {
 
     private void FixedUpdate() {
         switch (phase) {
-            case BossPhase.Idle: IdleUpdate(); break;
+            case BossPhase.Idle: UpdateIdle(); break;
+            case BossPhase.Hit: UpdateHit(); break;
             case BossPhase.JumpPrepare: UpdateJumpPrepare(); break;
             case BossPhase.Jump: UpdateJump(); break;
             case BossPhase.JumpFall: UpdateJumpFall(); break;
@@ -78,7 +79,7 @@ public class PresidentBoss : MonoBehaviour {
     }
 
     // per update handlers for each phase
-    public void IdleUpdate() {
+    public void UpdateIdle() {
         FaceTowards(player.transform.position);
 
         idleTimeRemaining -= Time.fixedDeltaTime;
@@ -86,6 +87,13 @@ public class PresidentBoss : MonoBehaviour {
             JumpPrepare();
         }
 
+    }
+
+    public void UpdateHit() {
+        idleTimeRemaining -= Time.fixedDeltaTime;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
+            Idle();
+        }
     }
 
     public void UpdateJumpPrepare() {
@@ -117,6 +125,16 @@ public class PresidentBoss : MonoBehaviour {
         Debug.Log("Idle phase entered ===================================");
         phase = BossPhase.Idle;
         idleTimeRemaining = UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+    }
+
+    public void Hit() {
+        if (phase == BossPhase.Jump || phase == BossPhase.JumpFall) {
+            rb.velocity = new Vector2(rb.velocity.x * 0.3f, rb.velocity.y);
+        }
+
+        Debug.Log("Hit phase entered ===================================");
+        phase = BossPhase.Hit;
+        animator.CrossFade("presidentboss_hit", 0f);
     }
 
     public void JumpPrepare() {
@@ -252,10 +270,29 @@ public class PresidentBoss : MonoBehaviour {
             Flip();
         }
     }
+
+    public override void OnHit(int dmg, DamageHurtbox hurtbox)
+    {
+        // TODO: extra damage on head hit logic
+        hp -= dmg;
+        if (hp < 0) {
+            Die();
+        }
+        else {
+            Hit();
+        }
+    }
+
+    public override void Die()
+    {
+        // TODO: implement death
+        Debug.LogWarning("Boss was killed");
+    }
 }
 
 public enum BossPhase {
     Idle,
+    Hit,
     JumpPrepare,
     Jump,
     JumpFall,

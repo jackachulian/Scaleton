@@ -12,6 +12,10 @@ public class BossCrate : Grabbable {
 
     [SerializeField] private GameObject rechargeRing;
 
+    [SerializeField] private float maxBoostTime = 0.75f;
+    [SerializeField] private GameObject boostHitEffect;
+
+
 
     private Material ringRadialMaterial;
 
@@ -68,6 +72,7 @@ public class BossCrate : Grabbable {
         boostParticles.Play();
         boosting = true;
         SetGrabbable(false);
+        StartCoroutine(UnboostAfterDelay());
     }
 
     // Called when colliding with something while boosted. Removes boost particles and begins charge
@@ -80,8 +85,17 @@ public class BossCrate : Grabbable {
         rechargeCoroutine = StartCoroutine(Recharge());
     }
 
+    // This will clear boost if the crate flies in the air too long while boosting.
+    IEnumerator UnboostAfterDelay() {
+        yield return new WaitForSeconds(maxBoostTime);
+        if (boosting) Unboost();
+    }
+
     protected override void OnCollisionEnter2D(Collision2D other) {
         base.OnCollisionEnter2D(other);
-        if (boosting) Unboost();
+        if (boosting) {
+            Instantiate(boostHitEffect, transform.position, transform.rotation);
+            Unboost();
+        }
     }
 }
