@@ -37,6 +37,5 @@ public class PlatformTrack : MonoBehaviour {
         foreach (var rb in platformRbs) {
             rb.velocity = (Vector2)(end.position - start.position).normalized * speed;
         }
-        Debug.Log("Reversed track direction");
     }
 }

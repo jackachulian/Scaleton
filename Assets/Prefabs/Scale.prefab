@@ -147,7 +147,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: f5ad1e5ee0693dc4fad34c72a765ae0c, type: 2}
+  m_Material: {fileID: 6200000, guid: 8a294f03162458044ab173f73ac6b7c8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 37120
+  m_InstanceId: 299584
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -663,7 +663,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: f5ad1e5ee0693dc4fad34c72a765ae0c, type: 2}
+  m_Material: {fileID: 6200000, guid: 8a294f03162458044ab173f73ac6b7c8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -745,7 +745,7 @@ MonoBehaviour:
   - {x: 1.5059223, y: -0.20130038, z: 0}
   m_ShapePathHash: 794094837
   m_Mesh: {fileID: 0}
-  m_InstanceId: 37066
+  m_InstanceId: 299530
   m_LocalBounds:
     m_Center: {x: -0.0052347183, y: -0.0066765547, z: 0}
     m_Extent: {x: 1.511157, y: 0.19462383, z: 0}
@@ -1315,7 +1315,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 44.5, y: 2.25}
+  m_ConnectedAnchor: {x: 277.5, y: -91.25}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 5
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   - {x: 3.50074, y: -0.19127637, z: 0}
   m_ShapePathHash: 952756541
   m_Mesh: {fileID: 0}
-  m_InstanceId: 37132
+  m_InstanceId: 299596
   m_LocalBounds:
     m_Center: {x: -0.00001335144, y: -0.0015386045, z: 0}
     m_Extent: {x: 3.501173, y: 0.18973777, z: 0}

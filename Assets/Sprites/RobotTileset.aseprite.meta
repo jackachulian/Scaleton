@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: RobotTileset
     originalName: 
-    pivot: {x: 0.53556484, y: -0.04489796}
+    pivot: {x: 0.53556484, y: -0.01992032}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -129,7 +129,7 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 239
-      height: 245
+      height: 251
     spriteID: 0960bfca3fb1bd24289c1a87fdeac53c
     spriteBone: []
     spriteOutline: []
@@ -152,9 +152,9 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 0
-        y: 11
+        y: 5
         width: 239
-        height: 245
+        height: 251
       spriteId: 0960bfca3fb1bd24289c1a87fdeac53c
     linkedCells: []
     parentIndex: -1

@@ -67,14 +67,17 @@ MonoBehaviour:
     /camerablendtime
     0.75
 
-    /changevirtualcamera -1
+    /changevirtualcamera 1
 
-    Camera should be back to normal'
+    Camera should be bossfight camera'
   door: {fileID: 0}
   waypoints:
   - {fileID: 7009072257115377187}
   virtualCameras:
   - {fileID: 0}
+  invokeAfterCutscene:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &8755536843568004640
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -118,7 +121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 4, y: 5}
   m_EdgeRadius: 0
 --- !u!1 &5672942778764550589
 GameObject:

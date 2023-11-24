@@ -3550,6 +3550,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bosscratering
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b0606f8b985df54a991ba9b3821b135
+      internalID: -1196536772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3566,6 +3587,8 @@ TextureImporter:
       name: _Sheen
     - texture: {fileID: 2800000, guid: 8561464105a278b4db6f84ad891fb558, type: 3}
       name: _Outline
+    - texture: {fileID: 2800000, guid: 939bc1aeaca254a4c812e867ff1de129, type: 3}
+      name: _Emission
     nameFileIdTable:
       RobotTileset_0: -1223829734
       RobotTileset_1: -370711037
@@ -3595,6 +3618,7 @@ TextureImporter:
       bigoutline1: 1630579565
       bigoutline2: 812736399
       bigoutline3: 894842765
+      bosscratering: -1196536772
       claw: 1989654866
       claw_closed: -287725873
       crateoutline0: -862915418

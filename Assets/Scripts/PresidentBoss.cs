@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -123,7 +124,16 @@ public class PresidentBoss : MonoBehaviour {
         phase = BossPhase.JumpPrepare;
         animator.CrossFade("presidentboss_jumpprepare", 0f);
         
-        jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
+        // 75% chance to target closest target to player
+        if (UnityEngine.Random.value < 0.75f) {
+            jumpingTo = jumpTargets.OrderBy(target => Vector2.Distance(target.position, player.transform.position)).FirstOrDefault().position;
+        } 
+        // 25% chance to choose one at random
+        else {
+            jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
+        }
+
+
         int iter = 0;
         Vector2 jumpingFrom = jumpingTo;
         while (jumpingTo == jumpingFrom && iter < 100) {
@@ -209,18 +219,22 @@ public class PresidentBoss : MonoBehaviour {
     }
 
     public void CheckDamage(Collision2D other) {
-        // Take damage only from grabbables (for now) (TODO other damage types, maybe not in this function)
-        Grabbable grabbable = other.gameObject.GetComponent<Grabbable>();
-        if (!grabbable) return;
+        // Take damage only from boss crates (for now) (TODO other damage types, maybe not in this function)
+        BossCrate crate = other.gameObject.GetComponent<BossCrate>();
+        if (!crate) return;
+
+        // boss crate must be charged
+        if (!crate.charged) return;
 
         // Relative velocity magnitude must be high enough
         if (other.relativeVelocity.magnitude < 1.5f) return;
 
         // Don't take damage if normal points down at all and box's velocity is not positive, meaning box was stepped on
-        if (other.GetContact(0).normal.y < 0f && grabbable.GetComponent<Rigidbody2D>().velocity.y < 0.25f) return;
+        if (other.GetContact(0).normal.y < 0f && crate.GetComponent<Rigidbody2D>().velocity.y < 0.25f) return;
 
         // If all steps pass, this box will deal damage
         // TODO: implement damage
+        crate.DealDamage();
         Debug.Log("Damage dealt");
     }
 

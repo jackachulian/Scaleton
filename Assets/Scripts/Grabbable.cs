@@ -9,7 +9,7 @@ public class Grabbable : Interactable
     // if not held by player, the hand that is grabbing this box
     private RoboticHand roboticHand;
 
-    private void Awake() {
+    protected void Awake() {
         audioSource = gameObject.GetComponent<AudioSource>();
     }
 
