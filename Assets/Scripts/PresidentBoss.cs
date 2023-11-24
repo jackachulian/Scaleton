@@ -179,7 +179,7 @@ public class PresidentBoss : MonoBehaviour {
     public void JumpFall() {
         Debug.Log("Jump fall phase entered ===================================");
         phase = BossPhase.JumpFall;
-        animator.CrossFade("presidentboss_jumpfall", 0f);
+        // animator.CrossFade("presidentboss_jumpfall", 0f);
 
         foreach (var c in ignoreCollidersDuringJump) {
             Physics2D.IgnoreCollision(cc, c, false);
@@ -234,7 +234,6 @@ public class PresidentBoss : MonoBehaviour {
 
         // If all steps pass, this box will deal damage
         // TODO: implement damage
-        crate.DealDamage();
         Debug.Log("Damage dealt");
     }
 

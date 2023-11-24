@@ -24,4 +24,8 @@ public abstract class Interactable : MonoBehaviour {
     public virtual void Unhover() {
         if (inputHint) inputHint.SetActive(false);
     }
+
+    public void SetGrabbable (bool grabbable) {
+        isGrabbable = grabbable;
+    }
 }

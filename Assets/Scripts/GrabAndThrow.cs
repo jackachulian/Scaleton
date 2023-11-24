@@ -18,6 +18,9 @@ public class GrabAndThrow : MonoBehaviour
     [SerializeField] private Vector2 upwardThrowForce = new Vector2(0.5f, 7f);
     [SerializeField] private Vector2 downwardThrowForce = new Vector2(0.25f, -7.1f);
 
+    // Boost throw force multiplier when throwing a charged boss crate
+    [SerializeField] private float bossCrateBoostMult = 2.5f;
+
     [SerializeField] private float throwingExtraForcePerMass = 3f;
 
     [SerializeField] private LayerMask obstructionLayerMask;
@@ -84,6 +87,17 @@ public class GrabAndThrow : MonoBehaviour
                 }
 
                 Vector2 throwForce = new Vector2(force.x*playerController.FacingDirection, force.y);
+
+                // If held box is a charged boss-room box, multiply force and call Boost method on the box
+                BossCrate bossCrate = grabbedBox.GetComponent<BossCrate>();
+                if (bossCrate && bossCrate.charged) {
+                    throwForce *= bossCrateBoostMult;
+                    // lower the upward force of charged throws a bit 
+                    throwForce += Vector2.up * -0.5f;
+                    // upward throws should go further horizontally
+                    if (yInput > 0.7f) throwForce += (Vector2)transform.right * 2.5f;
+                    bossCrate.Boost();
+                }
 
                 float forceMagnitude = throwForce.magnitude;
                 // add extra force - use 1 as the default throw and extra is beyond 1 mass

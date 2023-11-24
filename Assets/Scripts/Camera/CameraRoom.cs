@@ -23,6 +23,8 @@ public class CameraRoom : MonoBehaviour {
     // Block grabbables from etnering and exiting this room.
     [SerializeField] private bool blockGrabbables = true;
 
+    [SerializeField] private bool respawnObjectsOnDeath = true;
+
     [SerializeField] private float brightness = 0.5f;
 
     [SerializeField] private ParticleSystem ambientParticles;
@@ -202,6 +204,10 @@ public class CameraRoom : MonoBehaviour {
         foreach(Respawnable r in respawnables){
             r.Respawn();
         }
+    }
+
+    public void RespawnItemsAfterDeath() {
+        if (respawnObjectsOnDeath) RespawnItems();
     }
 
     public void SetRespawnPoint(RespawnPoint respawnPoint) {

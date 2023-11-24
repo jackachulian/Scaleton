@@ -6,7 +6,9 @@ public class BossCrate : Grabbable {
 
     [SerializeField] private Sprite chargedSprite, rechargingSprite;
 
-    [SerializeField] private GameObject disableWhileRecharging, enableWhileRecharging;
+    [SerializeField] private GameObject enableWhileRecharging, enableWhileCharged;
+
+    [SerializeField] private ParticleSystem boostParticles;
 
     [SerializeField] private GameObject rechargeRing;
 
@@ -14,7 +16,8 @@ public class BossCrate : Grabbable {
     private Material ringRadialMaterial;
 
 
-    public bool charged {get; private set;} = true;
+    public bool charged {get; private set;}
+    public bool boosting {get; private set;}
     private SpriteRenderer sr;
     private Coroutine rechargeCoroutine;
 
@@ -25,17 +28,16 @@ public class BossCrate : Grabbable {
     }
 
     private void Start() {
+        boostParticles.Stop();
         Charge();
     }
 
     // Called by PresidentBoss after it takes damage from this crate.
-    public void DealDamage() {
-        sr.sprite = rechargingSprite;
-        disableWhileRecharging.SetActive(false);
-        enableWhileRecharging.SetActive(true);
+    public void Uncharge() {
         charged = false;
-
-        rechargeCoroutine = StartCoroutine(Recharge());
+        sr.sprite = rechargingSprite;
+        enableWhileCharged.SetActive(false);
+        enableWhileRecharging.SetActive(true);
     }
 
     IEnumerator Recharge() {
@@ -55,8 +57,31 @@ public class BossCrate : Grabbable {
         if (rechargeCoroutine != null) StopCoroutine(rechargeCoroutine);
 
         sr.sprite = chargedSprite;
-        disableWhileRecharging.SetActive(true);
+        enableWhileCharged.SetActive(true);
         enableWhileRecharging.SetActive(false);
         charged = true;
+    }
+
+    // Called by BossCrate
+    public void Boost() {
+        Physics2D.IgnoreCollision(MenuManager.player.capsuleCollider, GetComponent<Collider2D>(), true);
+        boostParticles.Play();
+        boosting = true;
+        SetGrabbable(false);
+    }
+
+    // Called when colliding with something while boosted. Removes boost particles and begins charge
+    public void Unboost() {
+        Uncharge();
+        boostParticles.Stop();
+        boosting = false;
+        Physics2D.IgnoreCollision(MenuManager.player.capsuleCollider, GetComponent<Collider2D>(), false);
+        SetGrabbable(true);
+        rechargeCoroutine = StartCoroutine(Recharge());
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D other) {
+        base.OnCollisionEnter2D(other);
+        if (boosting) Unboost();
     }
 }

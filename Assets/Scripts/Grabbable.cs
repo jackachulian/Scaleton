@@ -14,11 +14,12 @@ public class Grabbable : Interactable
     }
 
     // If thrown/dropped less than 0.5s ago, cannot be jumped off of (prevents flying glitch)
+    // Will only be used if preventPropFly bool is set to true in PlayerController
     public bool CanBeJumpedOff() {
         return timeReleased+0.25f < Time.time;
     }
 
-    public void Release() {
+    public virtual void Release() {
         timeReleased = Time.time;
     }
 
@@ -37,7 +38,7 @@ public class Grabbable : Interactable
         // this will not be called, custom handling for grabbables in Interaction script on player.)
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    protected virtual void OnCollisionEnter2D(Collision2D other) {
         // don't play sounds within the first ~1s - this is when blocks are first falling nto the level
         if (Time.time < 1.5f) return;
 

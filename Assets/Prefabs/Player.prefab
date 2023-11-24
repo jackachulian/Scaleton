@@ -113,6 +113,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   minecartSpriteObject: {fileID: 318837442085993480}
   headlight: {fileID: 9132292712053318274}
+  maxCoyoteTime: 0.5
 --- !u!70 &2670604293160675288
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5675,6 +5676,7 @@ MonoBehaviour:
   forwardThrowForce: {x: 6.5, y: 4}
   upwardThrowForce: {x: 0.5, y: 8}
   downwardThrowForce: {x: 0.5, y: -7.5}
+  bossCrateBoostMult: 1.5
   throwingExtraForcePerMass: 1
   obstructionLayerMask:
     serializedVersion: 2

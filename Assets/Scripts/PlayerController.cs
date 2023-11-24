@@ -459,7 +459,7 @@ public class PlayerController : MonoBehaviour
         currentRoom.VirtualCam.Follow = transform;
         rb.velocity.Set(0.0f, 0.0f);
         MoveToRespawnPoint(currentRoom.currentRespawnPoint);
-        currentRoom.RespawnItems();
+        currentRoom.RespawnItemsAfterDeath();
 
         rb.drag = initialDrag;
         rb.gravityScale = 1f;
