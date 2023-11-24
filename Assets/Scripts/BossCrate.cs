@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class BossCrate : Grabbable {
@@ -14,8 +15,7 @@ public class BossCrate : Grabbable {
 
     [SerializeField] private float maxBoostTime = 0.75f;
     [SerializeField] private GameObject boostHitEffect;
-
-
+    [SerializeField] private CinemachineImpulseSource boostHitImpulseSource;
 
     private Material ringRadialMaterial;
 
@@ -95,6 +95,7 @@ public class BossCrate : Grabbable {
         base.OnCollisionEnter2D(other);
         if (boosting) {
             Instantiate(boostHitEffect, transform.position, transform.rotation);
+            boostHitImpulseSource.GenerateImpulseAt(transform.position, (other.relativeVelocity + Vector2.up*0.5f).normalized * 0.15f);
             Unboost();
         }
     }
