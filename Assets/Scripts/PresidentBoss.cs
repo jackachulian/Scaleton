@@ -271,11 +271,7 @@ public class PresidentBoss : DamageableEntity {
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
         if (player) {
             if (phase == BossPhase.Jump || phase == BossPhase.JumpFall) {
-                // Don't kill if player is above the boss and player jumped up into them
-                if (other.GetContact(0).normal.y < 0.5f) {
-                    
-                    player.Die();
-                }
+                player.Die();
             }
         }
 

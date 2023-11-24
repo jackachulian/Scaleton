@@ -8,6 +8,8 @@ public class Dialogue : MonoBehaviour
 {
     public Image dialogueBackground;
     public TextMeshProUGUI textComponent;
+    public GameObject nameBox;
+    public TMP_Text nameLabel;
     private string[] lines;
     public float speed;
     private int index;
@@ -77,7 +79,18 @@ public class Dialogue : MonoBehaviour
                     NextLine();
                 } 
             }
-        } else {
+        } 
+        
+        else if (line[0] == '[') {
+            int closeBracketIndex = line.IndexOf(']');
+            string name = line.Substring(1,closeBracketIndex);
+            lines[index] = line.Substring(closeBracketIndex+1);
+            nameBox.SetActive(true);
+            nameLabel.text = name;
+        }
+
+        else {
+            nameBox.SetActive(false);
             StartCoroutine(TypeLine());
         }
 
