@@ -99,7 +99,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   textComponent: {fileID: 6145297844739550222}
   nameBox: {fileID: 5223553103440815684}
   nameLabel: {fileID: 4276073825812660657}
-  speed: 0.05
+  speed: 0.04
 --- !u!114 &3701227548045474992
 MonoBehaviour:
   m_ObjectHideFlags: 0

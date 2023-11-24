@@ -70,7 +70,13 @@ public class Dialogue : MonoBehaviour
                     Debug.LogError("Invalid wait delay: "+args[1]);
                     NextLine();
                 }
-            } else {
+            } 
+            
+            else if (cmd == "setbrightness") {
+                MenuManager.player.GetCurrentRoom().SetBrightness(float.Parse(args[1]));
+            }
+
+            else {
                 if (Cutscene.current != null) {
                     bool readyForNextLine = Cutscene.current.ParseCommand(cmd, args);
                     if (readyForNextLine) NextLine();
@@ -83,10 +89,11 @@ public class Dialogue : MonoBehaviour
         
         else if (line[0] == '[') {
             int closeBracketIndex = line.IndexOf(']');
-            string name = line.Substring(1,closeBracketIndex);
-            lines[index] = line.Substring(closeBracketIndex+1);
+            string name = line.Substring(1,closeBracketIndex-1);
+            lines[index] = line.Substring(closeBracketIndex+2);
             nameBox.SetActive(true);
             nameLabel.text = name;
+            StartCoroutine(TypeLine());
         }
 
         else {
@@ -94,7 +101,10 @@ public class Dialogue : MonoBehaviour
             StartCoroutine(TypeLine());
         }
 
-        if (!typing && !waitingForInput) dialogueBackground.enabled = false;
+        if (!typing && !waitingForInput) {
+            dialogueBackground.enabled = false;
+            nameBox.SetActive(false);
+        }
     }
 
     IEnumerator TypeLine(){

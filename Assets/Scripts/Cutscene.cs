@@ -7,10 +7,12 @@ using UnityEngine.Events;
 public class Cutscene : MonoBehaviour {
     public static Cutscene current {get; private set;}
 
-    [TextArea]
+    [TextArea(minLines: 3, maxLines: 10)]
     public string dialogue;
 
     [SerializeField] private LargeMechanicalDoor door; 
+
+    [SerializeField] private PresidentBoss boss;
 
     [SerializeField] private Transform[] waypoints;
 
@@ -74,8 +76,8 @@ public class Cutscene : MonoBehaviour {
             brain.m_DefaultBlend.m_Time = blendSpeed;
         }
 
-        else if (cmd == "setbrightness") {
-            MenuManager.player.GetCurrentRoom().SetBrightness(float.Parse(args[1]));
+        else if (cmd == "flipboss") {
+            boss.Flip();
         }
 
         else {
