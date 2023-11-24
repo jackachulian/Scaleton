@@ -74,6 +74,10 @@ public class Cutscene : MonoBehaviour {
             brain.m_DefaultBlend.m_Time = blendSpeed;
         }
 
+        else if (cmd == "setbrightness") {
+            MenuManager.player.GetCurrentRoom().SetBrightness(float.Parse(args[1]));
+        }
+
         else {
             Debug.LogError("Unknown cutscene cmd: \""+cmd+"\"");
         }

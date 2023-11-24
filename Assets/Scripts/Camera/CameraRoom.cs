@@ -152,7 +152,7 @@ public class CameraRoom : MonoBehaviour {
 
         if (!ambientParticles.isPlaying) ambientParticles.Play();
 
-        GlobalLight.SetBrightness(brightness, 0.75f);
+        SetBrightness(brightness);
 
         if(canRespawn){
             CameraRoom previousRoom = player.GetCurrentRoom();
@@ -179,6 +179,10 @@ public class CameraRoom : MonoBehaviour {
 
         player.SetCameraRoom(this);
         exitTimer = 0f;
+    }
+
+    public void SetBrightness(float brightness) {
+        GlobalLight.SetBrightness(brightness, 0.75f);
     }
 
     // private void OnTriggerStay2D(Collider2D other) {
