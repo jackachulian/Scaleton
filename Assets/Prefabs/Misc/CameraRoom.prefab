@@ -55,6 +55,8 @@ MonoBehaviour:
   isSubRoom: 0
   blockGrabbables: 1
   respawnObjectsOnDeath: 1
+  respawnDelay: 1.5
+  respawnType: 0
   brightness: 0.5
   ambientParticles: {fileID: 130280680764060364}
   particleDensity: 0.5

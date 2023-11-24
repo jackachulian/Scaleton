@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : DamageableEntity
 {
     [SerializeField]
     private float movementSpeed;
@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D cc;
     public CapsuleCollider2D capsuleCollider {get{return cc;}}
 
+    private List<Collider2D> ignoreCollisionWhileDead;
+
     private Rigidbody2D currentMovingPlatform;
 
     private float initialDrag;
@@ -117,6 +119,7 @@ public class PlayerController : MonoBehaviour
         unstableLayerMask = 1 << LayerMask.NameToLayer("UnstableObject");
         initialDrag = rb.drag;
         followingItems = new List<FollowingItem>();
+        ignoreCollisionWhileDead = new List<Collider2D>();
     }
 
     private void Update()
@@ -430,8 +433,12 @@ public class PlayerController : MonoBehaviour
         if (followingItems.Count > 0) followingItems[0].followOffset = Vector2.right * facingDirection * -1.5f;
     }
 
-    private void Die() {
+    public override void Die() {
         if (playerState == PlayerState.DEAD) return;
+
+        foreach (var other in ignoreCollisionWhileDead) {
+            Physics2D.IgnoreCollision(cc, other, true);
+        }
 
         ForceReleaseGrabbed();
         playerState = PlayerState.DEAD;
@@ -449,7 +456,7 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator RespawnAfterDelay() {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(currentRoom.GetRespawnDelay());
         Respawn();
     }
 
@@ -458,11 +465,15 @@ public class PlayerController : MonoBehaviour
         ForceReleaseGrabbed();
         currentRoom.VirtualCam.Follow = transform;
         rb.velocity.Set(0.0f, 0.0f);
-        MoveToRespawnPoint(currentRoom.currentRespawnPoint);
+        MoveToRespawnPoint(currentRoom.CurrentSpawnPoint());
         currentRoom.RespawnItemsAfterDeath();
 
         rb.drag = initialDrag;
         rb.gravityScale = 1f;
+
+        foreach (var other in ignoreCollisionWhileDead) {
+            Physics2D.IgnoreCollision(cc, other, false);
+        }
 
         animator.SetBool("dead", false);
         playerState = PlayerState.NORMAL;
@@ -493,6 +504,10 @@ public class PlayerController : MonoBehaviour
     public void DisablePhysics() {
         cc.enabled = false;
         rb.bodyType = RigidbodyType2D.Static;
+    }
+
+    public void IgnoreCollisionWhileDead(Collider2D other) {
+        ignoreCollisionWhileDead.Add(other);
     }
 
     public void PickupFollowingItem(FollowingItem item) {
@@ -574,4 +589,9 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
+    public override void OnHit(int dmg, DamageHurtbox hurtbox)
+    {
+        // no hp for player, just die
+        Die();
+    }
 }

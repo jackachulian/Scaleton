@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -9,10 +10,15 @@ public class PresidentBoss : DamageableEntity {
 
     [SerializeField] private Transform[] jumpTargets;
 
-    [SerializeField] private AnimationCurve jumpHeightCurve;
 
     /// <summary> Colliders that are ignored during the jump phase, but not the jumpfall phase </summary>
     [SerializeField] private Collider2D[] ignoreCollidersDuringJump;
+
+    [SerializeField] private Transform feetPositionTransform;
+
+    [SerializeField] private GameObject landHurtboxAndEffect;
+
+    [SerializeField] private CinemachineImpulseSource landImpulseSource;
     
     // frame data
     [SerializeField] private FrameData frameData;
@@ -41,6 +47,14 @@ public class PresidentBoss : DamageableEntity {
     /// <summary> Amount of seconds remaining the boss will wait before choosing an attack phase </summary>
     private float idleTimeRemaining;
 
+    /// <summary>
+    /// True if boss is currently idling.
+    /// Different than being on idle phase.
+    /// If hit during idle, cooldown will not restart.
+    /// If hit during an interuptable attack, switch to idle after hit and cooldown restarts
+    /// </summary>
+    private bool onIdleCooldown;
+
     // other internal variables
     /// <summary> What action the boss is currently taking. </summary>
     private BossPhase phase;
@@ -58,8 +72,8 @@ public class PresidentBoss : DamageableEntity {
     }
 
     private void Start() {
-        player = MenuManager.player;
-
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        player.IgnoreCollisionWhileDead(cc);
         Idle();
     }
 
@@ -82,11 +96,15 @@ public class PresidentBoss : DamageableEntity {
     public void UpdateIdle() {
         FaceTowards(player.transform.position);
 
+        // do not tick idle timer while player is in death cooldown
+        if (player.IsDead()) return;
+
         idleTimeRemaining -= Time.fixedDeltaTime;
         if (idleTimeRemaining < 0) {
+            onIdleCooldown = false;
+            // TODO: select attack
             JumpPrepare();
         }
-
     }
 
     public void UpdateHit() {
@@ -124,12 +142,15 @@ public class PresidentBoss : DamageableEntity {
     public void Idle() {
         Debug.Log("Idle phase entered ===================================");
         phase = BossPhase.Idle;
-        idleTimeRemaining = UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+        if (!onIdleCooldown) {
+            onIdleCooldown = true;
+            idleTimeRemaining = UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+        }
     }
 
     public void Hit() {
         if (phase == BossPhase.Jump || phase == BossPhase.JumpFall) {
-            rb.velocity = new Vector2(rb.velocity.x * 0.3f, rb.velocity.y);
+            rb.velocity = new Vector2(0f, Mathf.Min(rb.velocity.y, 0));
         }
 
         Debug.Log("Hit phase entered ===================================");
@@ -141,22 +162,26 @@ public class PresidentBoss : DamageableEntity {
         Debug.Log("Jump prepare phase entered ===================================");
         phase = BossPhase.JumpPrepare;
         animator.CrossFade("presidentboss_jumpprepare", 0f);
-        
+
         // 75% chance to target closest target to player
+        IOrderedEnumerable<Transform> sortedJumpTargets;
         if (UnityEngine.Random.value < 0.75f) {
-            jumpingTo = jumpTargets.OrderBy(target => Vector2.Distance(target.position, player.transform.position)).FirstOrDefault().position;
+            Debug.Log("Jumping near player");
+            sortedJumpTargets = jumpTargets.OrderBy(target => Vector2.Distance(target.position, player.transform.position));
         } 
         // 25% chance to choose one at random
         else {
-            jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
+            Debug.Log("Jumping at random");
+            sortedJumpTargets = jumpTargets.OrderBy(target => UnityEngine.Random.value);
         }
 
-
-        int iter = 0;
-        Vector2 jumpingFrom = jumpingTo;
-        while (jumpingTo == jumpingFrom && iter < 100) {
-            jumpingTo = jumpTargets[UnityEngine.Random.Range(0, jumpTargets.Length)].position;
-            iter++;
+        // Loop through transforms in order, which are sorted from most preferable to least preferable
+        foreach (Transform jumpTarget in sortedJumpTargets) {
+            // Ensure boss does not jump too close to where it currently already is
+            if (Vector2.Distance(jumpingTo, transform.position) > 2f) {
+                jumpingTo = jumpTarget.position;
+                break;
+            }
         }
         FaceTowards(jumpingTo);
     }
@@ -225,34 +250,27 @@ public class PresidentBoss : DamageableEntity {
         Debug.Log("Jump land phase entered ===================================");
         phase = BossPhase.JumpLand;
         animator.CrossFade("presidentboss_jumpland", 0f);
+
+        Instantiate(landHurtboxAndEffect, feetPositionTransform.position, Quaternion.identity);
+        landImpulseSource.GenerateImpulseAt(feetPositionTransform.position, Vector2.down*0.25f);
     }
 
     // collision - ussed for jump -> jumpLand
     private void OnCollisionEnter2D(Collision2D other) {
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
+        if (player) {
+            if (phase == BossPhase.Jump || phase == BossPhase.JumpFall) {
+                // Don't kill if player is above the boss and player jumped up into them
+                if (other.GetContact(0).normal.y < 0.5f) {
+                    
+                    player.Die();
+                }
+            }
+        }
+
         if (phase == BossPhase.JumpFall) {
             JumpLand();
         }
-
-        CheckDamage(other);
-    }
-
-    public void CheckDamage(Collision2D other) {
-        // Take damage only from boss crates (for now) (TODO other damage types, maybe not in this function)
-        BossCrate crate = other.gameObject.GetComponent<BossCrate>();
-        if (!crate) return;
-
-        // boss crate must be charged
-        if (!crate.charged) return;
-
-        // Relative velocity magnitude must be high enough
-        if (other.relativeVelocity.magnitude < 1.5f) return;
-
-        // Don't take damage if normal points down at all and box's velocity is not positive, meaning box was stepped on
-        if (other.GetContact(0).normal.y < 0f && crate.GetComponent<Rigidbody2D>().velocity.y < 0.25f) return;
-
-        // If all steps pass, this box will deal damage
-        // TODO: implement damage
-        Debug.Log("Damage dealt");
     }
 
     // misc

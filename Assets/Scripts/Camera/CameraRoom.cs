@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
@@ -24,6 +25,14 @@ public class CameraRoom : MonoBehaviour {
     [SerializeField] private bool blockGrabbables = true;
 
     [SerializeField] private bool respawnObjectsOnDeath = true;
+
+    [SerializeField] private float respawnDelay = 1.5f;
+
+    [SerializeField] private RespawnType respawnType;
+    public enum RespawnType {
+        LastTouched,
+        Nearest
+    }
 
     [SerializeField] private float brightness = 0.5f;
 
@@ -217,6 +226,20 @@ public class CameraRoom : MonoBehaviour {
     public RespawnPoint DefaultRespawnPoint() {
         if (respawnPoints.Length == 0) return null;
         return respawnPoints[0];
+    }
+
+    public RespawnPoint CurrentSpawnPoint() {
+        if (respawnType == RespawnType.LastTouched) {
+            return currentRespawnPoint;
+        } else if (respawnType == RespawnType.Nearest) {
+            return respawnPoints.OrderBy(point => Vector2.Distance(MenuManager.player.transform.position, point.transform.position)).FirstOrDefault();
+        } else {
+            return DefaultRespawnPoint();
+        }
+    }
+
+    public float GetRespawnDelay() {
+        return respawnDelay;
     }
 
     private static readonly Color roomBorderGizmoColor = new Color(0f, 0.5f, 1f, 0.5f);
