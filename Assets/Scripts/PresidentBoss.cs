@@ -149,8 +149,19 @@ public class PresidentBoss : DamageableEntity {
     }
 
     public void Hit() {
+        // restart idle cooldown with less time when certain phases are interrupted
+        if (phase == BossPhase.JumpPrepare) {
+            onIdleCooldown = true;
+            idleTimeRemaining = 0.4f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+        }
+
+        // modify velocity if hit during certain jump phases
         if (phase == BossPhase.Jump || phase == BossPhase.JumpFall) {
             rb.velocity = new Vector2(0f, Mathf.Min(rb.velocity.y, 0));
+        }
+
+        foreach (var c in ignoreCollidersDuringJump) {
+            Physics2D.IgnoreCollision(cc, c, false);
         }
 
         Debug.Log("Hit phase entered ===================================");
@@ -167,7 +178,7 @@ public class PresidentBoss : DamageableEntity {
         IOrderedEnumerable<Transform> sortedJumpTargets;
         if (UnityEngine.Random.value < 0.75f) {
             Debug.Log("Jumping near player");
-            sortedJumpTargets = jumpTargets.OrderBy(target => Vector2.Distance(target.position, player.transform.position));
+            sortedJumpTargets = jumpTargets.OrderBy(target => Vector2.Distance(feetPositionTransform.position, player.transform.position));
         } 
         // 25% chance to choose one at random
         else {
@@ -178,7 +189,7 @@ public class PresidentBoss : DamageableEntity {
         // Loop through transforms in order, which are sorted from most preferable to least preferable
         foreach (Transform jumpTarget in sortedJumpTargets) {
             // Ensure boss does not jump too close to where it currently already is
-            if (Vector2.Distance(jumpingTo, transform.position) > 2f) {
+            if (Vector2.Distance(jumpTarget.position, feetPositionTransform.position) > 2f) {
                 jumpingTo = jumpTarget.position;
                 break;
             }

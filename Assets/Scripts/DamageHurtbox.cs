@@ -28,7 +28,7 @@ public class DamageHurtbox : MonoBehaviour {
 
     public void DealDamage() {
         RaycastHit2D[] hits;
-        
+
         if (hurtboxShape == HurtboxShape.Circle) {
             hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero);
         
@@ -38,16 +38,19 @@ public class DamageHurtbox : MonoBehaviour {
 
         foreach (var hit in hits) {
             var entity = hit.transform.GetComponent<DamageableEntity>();
-            if (entity && damagePlayer == entity.IsPlayer()) {
-                entity.OnHit(damage, this);
+            if (entity) {
+                if (damagePlayer == entity.IsPlayer()) entity.OnHit(damage, this);
+                // apply force regardless if should damage or not
                 ApplyForce(entity.GetComponent<Rigidbody2D>());
-            }
+            } 
         }
     }
 
     public void ApplyForce(Rigidbody2D otherRb) {
         if (!otherRb) return;
+        
         Vector2 force = (otherRb.position - (Vector2)transform.position).normalized * forceMagnitude;
+
         otherRb.AddForce(force, ForceMode2D.Impulse);
     }
 

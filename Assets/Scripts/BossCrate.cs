@@ -95,7 +95,7 @@ public class BossCrate : Grabbable {
         base.OnCollisionEnter2D(other);
         if (boosting) {
             Instantiate(boostHitEffect, transform.position, transform.rotation);
-            boostHitImpulseSource.GenerateImpulseAt(transform.position, (other.relativeVelocity + Vector2.up*0.5f).normalized * 0.15f);
+            boostHitImpulseSource.GenerateImpulseAt(transform.position, (other.relativeVelocity + Vector2.up*0.5f).normalized * 0.05f);
             Unboost();
         }
     }
