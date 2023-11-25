@@ -2061,15 +2061,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 277.5
+      value: 182
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -94.25
+      value: -72.75
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -9.964486
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2313,6 +2313,9 @@ MonoBehaviour:
       - {fileID: 8300000, guid: b9442e9a0d434f842be69e7e3881eb0a, type: 3}
       - {fileID: 8300000, guid: 5786f76859521e54ca74ffe5d8daefd1, type: 3}
       - {fileID: 8300000, guid: 02923ab5eecd7a845ba65e7b3fb68440, type: 3}
+    - Key: bossdamageheavy
+      Value:
+      - {fileID: 8300000, guid: c77806a9388070444ae384ed52679f69, type: 3}
 --- !u!1 &6280545383695005357
 GameObject:
   m_ObjectHideFlags: 0

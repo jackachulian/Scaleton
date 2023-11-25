@@ -5003,7 +5003,7 @@ MonoBehaviour:
   inputHint: {fileID: 0}
   spriteRenderer: {fileID: 7328630953806557069}
   isGrabbable: 1
-  rechargeTime: 7
+  rechargeTime: 10
   chargedSprite: {fileID: 608119357, guid: 11f5b5a084c750e4bafc28061cb19a98, type: 3}
   rechargingSprite: {fileID: 395798505, guid: 11f5b5a084c750e4bafc28061cb19a98, type: 3}
   enableWhileRecharging: {fileID: 2748207178872081140}
@@ -5164,7 +5164,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 915852
+  m_InstanceId: 980554
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}

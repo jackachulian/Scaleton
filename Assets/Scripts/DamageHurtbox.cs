@@ -62,4 +62,12 @@ public class DamageHurtbox : MonoBehaviour {
             Gizmos.DrawWireSphere(transform.position, radius);
         }
     }
+
+    public float GetRadius() {
+        if (hurtboxShape == HurtboxShape.Circle) {
+            return radius;
+        } else {
+            return Mathf.Sqrt(boxSize.x*boxSize.x + boxSize.y*boxSize.y);
+        }
+    }
 }

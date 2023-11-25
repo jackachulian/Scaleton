@@ -14,7 +14,7 @@ public class PresidentBoss : DamageableEntity {
     /// <summary> Colliders that are ignored during the jump phase, but not the jumpfall phase </summary>
     [SerializeField] private Collider2D[] ignoreCollidersDuringJump;
 
-    [SerializeField] private Transform feetPositionTransform;
+    [SerializeField] private Transform headPositionTransform, feetPositionTransform;
 
     [SerializeField] private GameObject landHurtboxAndEffect;
 
@@ -311,8 +311,16 @@ public class PresidentBoss : DamageableEntity {
 
     public override void OnHit(int dmg, DamageHurtbox hurtbox)
     {
-        // TODO: extra damage on head hit logic
-        SoundManager.PlaySound(audioSource, "bossdamage");
+        // Take more damage if box is near head
+        float distanceFromHead = Vector2.Distance(headPositionTransform.position, hurtbox.transform.position);
+        if (distanceFromHead < hurtbox.GetRadius() * 2f + 1.25f) {
+            dmg *= 2;
+            SoundManager.PlaySound(audioSource, "bossdamage");
+            SoundManager.PlaySound(audioSource, "bossdamageheavy");
+        } else {
+            SoundManager.PlaySound(audioSource, "bossdamage");
+        }
+
         _hp -= dmg;
         MenuManager.bossUI.HealthBarUpdate();
         if (_hp < 0) {
@@ -320,6 +328,7 @@ public class PresidentBoss : DamageableEntity {
         }
         else {
             Hit();
+            
         }
     }
 

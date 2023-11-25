@@ -95,7 +95,7 @@ public class GrabAndThrow : MonoBehaviour
                     // lower the upward force of charged throws a bit 
                     throwForce += Vector2.up * -0.5f;
                     // upward throws should go further horizontally
-                    if (yInput > 0.7f) throwForce += (Vector2)transform.right * 2.5f;
+                    if (yInput > 0.7f) throwForce += (Vector2)transform.right * 1.5f;
                     bossCrate.Boost();
                 }
 
