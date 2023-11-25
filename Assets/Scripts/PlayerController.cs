@@ -461,8 +461,9 @@ public class PlayerController : DamageableEntity
         Respawn();
     }
 
-    public void Respawn()
+    public override void Respawn()
     {
+        // don't call base.Respawn() (Respawnable), meaning player will be set to initial position which is not desired
         ForceReleaseGrabbed();
         currentRoom.VirtualCam.Follow = transform;
         rb.velocity.Set(0.0f, 0.0f);
@@ -561,7 +562,11 @@ public class PlayerController : DamageableEntity
     }
 
     public void MoveToRespawnPoint(RespawnPoint respawnPoint) {
-        transform.position = respawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
+        rb.position = respawnPoint.transform.position + Vector3.up * cc.size.y / 2f;
+    }
+
+    public void MoveToPoint(Vector2 position) {
+        rb.position = position + Vector2.up * cc.size.y / 2f;
     }
 
     public void EnterMinecart() {

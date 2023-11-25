@@ -124,7 +124,7 @@ public class TitleCamera : MonoBehaviour {
 
     // skips the scrolling thing and places the player at the start - happens when pause is pressed during the intro
     private void SkipIntro() {
-        TransitionManager.Transition(() => SpawnPlayerAtStart());
+        TransitionManager.Transition(() => SpawnPlayerAtStart(), fadeColor: Color.black);
     }
 
     private void SpawnPlayerAtStart() {

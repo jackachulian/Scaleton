@@ -34,6 +34,6 @@ public class CheatMenus : MonoBehaviour {
             room.VirtualCam.MoveToTopOfPrioritySubqueue();
             brain.ManualUpdate();
             brain.ActiveBlend = null;
-        });
+        }, Color.black);
     }
 }

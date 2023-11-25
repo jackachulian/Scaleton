@@ -53,6 +53,12 @@ public class Cutscene : MonoBehaviour {
             door.Open();
         }
 
+        else if (cmd == "teleportplayertowaypoint") {
+            var waypoint = waypoints[int.Parse(args[1])];
+            MenuManager.player.MoveToPoint(waypoint.position);
+            return true;
+        }
+
         else if (cmd == "moveplayertowaypoint") {
             bool waitForPlayer = args.Length <= 2 || args[2] == "waitforplayer"; // default: true
 
@@ -67,7 +73,7 @@ public class Cutscene : MonoBehaviour {
             if (camIndex == -1) {
                 MenuManager.player.GetCurrentRoom().VirtualCam.MoveToTopOfPrioritySubqueue();
             } else {
-                virtualCameras[camIndex].m_Follow = MenuManager.player.transform;
+                if (virtualCameras[camIndex].m_Follow == null) virtualCameras[camIndex].m_Follow = MenuManager.player.transform;
                 virtualCameras[camIndex].MoveToTopOfPrioritySubqueue();
             }
         }
@@ -84,10 +90,6 @@ public class Cutscene : MonoBehaviour {
 
         else if (cmd == "bossdeathanim") {
             boss.DeathAnimation();
-        }
-
-        else if (cmd == "hidebossui") {
-            MenuManager.bossUI.gameObject.SetActive(false);
         }
 
         else if (cmd == "playerfaceboss") {

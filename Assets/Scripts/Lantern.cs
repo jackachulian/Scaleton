@@ -10,7 +10,7 @@ public class Lantern : Respawnable {
 
     AudioSource audioSource;
     
-    private void Awake() {
+    protected override void Awake()  {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }

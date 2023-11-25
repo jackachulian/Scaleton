@@ -6,19 +6,19 @@ public class Respawnable : MonoBehaviour
     private Vector3 rPos;
     private Quaternion rRotation;
     private float rAngle;
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
 
     private RigidbodyType2D rbType;
 
-    void Awake()
+    protected virtual void Awake()
     {
         if (initialStateSaved) return;
         
-        rb = GetComponent<Rigidbody2D>();
-        if (rb) {
-            rPos = rb.position;
-            rAngle = rb.rotation;
-            rbType = rb.bodyType;
+        _rb = GetComponent<Rigidbody2D>();
+        if (_rb) {
+            rPos = _rb.position;
+            rAngle = _rb.rotation;
+            rbType = _rb.bodyType;
         } else {
             rPos = transform.position;
             rRotation = transform.rotation;
@@ -28,14 +28,14 @@ public class Respawnable : MonoBehaviour
     }
 
     public virtual void Respawn(){
-        Debug.Log("Respawning "+name);
+        if (!initialStateSaved) return;
 
-        if (rb) {
-            rb.position = rPos;
-            rb.rotation = rAngle;
-            rb.bodyType = rbType;
-            rb.velocity = Vector2.zero;
-            rb.angularVelocity = 0f;
+        if (_rb) {
+            _rb.position = rPos;
+            _rb.rotation = rAngle;
+            _rb.bodyType = rbType;
+            _rb.velocity = Vector2.zero;
+            _rb.angularVelocity = 0f;
         } else {
             transform.position = rPos;
             transform.rotation = rRotation;

@@ -50,8 +50,6 @@ public class GrabAndThrow : MonoBehaviour
         playerController.gameObject.layer = LayerMask.NameToLayer("PlayerHoldingGrabbable");
 
         SoundManager.PlaySound(playerController.audioSource, "grab");
-
-        Debug.Log("Grab!");
     }
 
     // Attempt to let go of the box.
@@ -59,7 +57,6 @@ public class GrabAndThrow : MonoBehaviour
     public void ReleaseGrabbed(bool throwBox, bool forced = false) {
         Collider2D obstruction = Physics2D.OverlapBox(grabPoint.transform.position + (Vector3)dropCheckOffset*playerController.FacingDirection, dropCheckSize, 0f, obstructionLayerMask);
 
-        Debug.Log(obstruction);
         if (obstruction && !forced) Debug.Log(LayerMask.LayerToName(obstruction.gameObject.layer));
 
         if (obstruction == null || forced) {

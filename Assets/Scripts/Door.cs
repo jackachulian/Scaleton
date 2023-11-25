@@ -13,7 +13,7 @@ public class Door : Respawnable {
     AudioSource audioSource;
     
 
-    private void Awake() {
+    protected override void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
     }

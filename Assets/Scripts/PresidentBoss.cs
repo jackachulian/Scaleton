@@ -334,21 +334,24 @@ public class PresidentBoss : DamageableEntity {
 
     public override void Die()
     {
-        Debug.LogWarning("Boss was killed");
         enabled = false;
         deathCutscene.StartCutscene();
     }
 
     public void DeathAnimation() {
         //todo: make an actual animation here
-        Debug.LogWarning("Boss death animation");
         gameObject.SetActive(false);
     }
 
     public void StartTimeOverCutscene() {
-        Debug.LogWarning("Boss time over cutscene");
         enabled = false;
         timeOverCutscene.StartCutscene();
+    }
+
+    public override void Respawn()
+    {
+        base.Respawn();
+        if (facing == 1) Flip(); // make sure boss faces right on respawn so cutscene looks right
     }
 }
 

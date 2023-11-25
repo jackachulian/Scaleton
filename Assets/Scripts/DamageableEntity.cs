@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class DamageableEntity : MonoBehaviour {
+public abstract class DamageableEntity : Respawnable {
     [SerializeField] protected int _hp = 50;
     public int hp {get{return _hp;}}
 
@@ -12,11 +12,18 @@ public abstract class DamageableEntity : MonoBehaviour {
 
     public abstract void Die();
 
-    protected virtual void Awake() {
+    protected override void Awake() {
+        base.Awake();
         maxHp = _hp;
     }
 
     public bool IsPlayer() {
         return isPlayer;
+    }
+
+    public override void Respawn()
+    {
+        base.Respawn();
+        _hp = maxHp;
     }
 }
