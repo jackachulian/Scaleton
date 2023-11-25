@@ -427,7 +427,7 @@ public class PlayerController : DamageableEntity
         }
     }
 
-    private void Flip()
+    public void Flip()
     {
         facingDirection *= -1;
         spriteObject.transform.Rotate(0.0f, 180.0f, 0.0f);

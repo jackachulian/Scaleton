@@ -86,6 +86,16 @@ public class Cutscene : MonoBehaviour {
             boss.DeathAnimation();
         }
 
+        else if (cmd == "hidebossui") {
+            MenuManager.bossUI.gameObject.SetActive(false);
+        }
+
+        else if (cmd == "playerfaceboss") {
+            if (MenuManager.player.FacingDirection != Mathf.Sign(boss.transform.position.x - MenuManager.player.transform.position.x)) {
+                MenuManager.player.Flip();
+            }
+        }
+
         else {
             Debug.LogError("Unknown cutscene cmd: \""+cmd+"\"");
         }
