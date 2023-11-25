@@ -28,6 +28,8 @@ public class Cutscene : MonoBehaviour {
         current = this;
         string[] lines = dialogue.Split("\n");
 
+        if (MenuManager.player.GrabBox.IsHoldingBox()) MenuManager.player.GrabBox.ReleaseGrabbed(throwBox: false, forced: true);
+
         MenuManager.globalDialogue.StartDialogue(lines);
     }
 
@@ -80,6 +82,10 @@ public class Cutscene : MonoBehaviour {
             boss.Flip();
         }
 
+        else if (cmd == "bossdeathanim") {
+            boss.DeathAnimation();
+        }
+
         else {
             Debug.LogError("Unknown cutscene cmd: \""+cmd+"\"");
         }
@@ -98,6 +104,7 @@ public class Cutscene : MonoBehaviour {
 
     // To be called from dialogue after last line
     public void CutsceneEnded() {
+        current = null;
         invokeAfterCutscene.Invoke();
     }
 }

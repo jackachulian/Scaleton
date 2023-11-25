@@ -19,6 +19,8 @@ public class PresidentBoss : DamageableEntity {
     [SerializeField] private GameObject landHurtboxAndEffect;
 
     [SerializeField] private CinemachineImpulseSource landImpulseSource;
+
+    [SerializeField] private Cutscene deathCutscene;
     
     // frame data
     [SerializeField] private FrameData frameData;
@@ -313,7 +315,7 @@ public class PresidentBoss : DamageableEntity {
     {
         // Take more damage if box is near head
         float distanceFromHead = Vector2.Distance(headPositionTransform.position, hurtbox.transform.position);
-        if (distanceFromHead < hurtbox.GetRadius() * 2f + 1.25f) {
+        if (distanceFromHead < hurtbox.GetRadius() * 2f + 1f) {
             dmg *= 2;
             SoundManager.PlaySound(audioSource, "bossdamage");
             SoundManager.PlaySound(audioSource, "bossdamageheavy");
@@ -323,7 +325,7 @@ public class PresidentBoss : DamageableEntity {
 
         _hp -= dmg;
         MenuManager.bossUI.HealthBarUpdate();
-        if (_hp < 0) {
+        if (hp <= 0) {
             Die();
         }
         else {
@@ -334,8 +336,15 @@ public class PresidentBoss : DamageableEntity {
 
     public override void Die()
     {
-        // TODO: implement death
         Debug.LogWarning("Boss was killed");
+        enabled = false;
+        deathCutscene.StartCutscene();
+    }
+
+    public void DeathAnimation() {
+        //todo: make an actual animation here
+        Debug.LogWarning("Boss death animation");
+        gameObject.SetActive(false);
     }
 }
 

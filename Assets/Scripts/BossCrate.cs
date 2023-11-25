@@ -74,7 +74,6 @@ public class BossCrate : Grabbable {
         chargedParticles.Stop();
         boostParticles.Play();
         boosting = true;
-        SetGrabbable(false);
         StartCoroutine(UnboostAfterDelay());
     }
 
@@ -84,7 +83,6 @@ public class BossCrate : Grabbable {
         boostParticles.Stop();
         boosting = false;
         Physics2D.IgnoreCollision(MenuManager.player.capsuleCollider, GetComponent<Collider2D>(), false);
-        SetGrabbable(true);
         rechargeCoroutine = StartCoroutine(Recharge());
     }
 
