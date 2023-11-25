@@ -9,7 +9,7 @@ public class BossCrate : Grabbable {
 
     [SerializeField] private GameObject enableWhileRecharging, enableWhileCharged;
 
-    [SerializeField] private ParticleSystem boostParticles;
+    [SerializeField] private ParticleSystem chargedParticles, boostParticles;
 
     [SerializeField] private GameObject rechargeRing;
 
@@ -61,14 +61,17 @@ public class BossCrate : Grabbable {
         if (rechargeCoroutine != null) StopCoroutine(rechargeCoroutine);
 
         sr.sprite = chargedSprite;
+        SoundManager.PlaySound(audioSource, "boxcharged");
         enableWhileCharged.SetActive(true);
         enableWhileRecharging.SetActive(false);
+        chargedParticles.Play();
         charged = true;
     }
 
     // Called by BossCrate
     public void Boost() {
         Physics2D.IgnoreCollision(MenuManager.player.capsuleCollider, GetComponent<Collider2D>(), true);
+        chargedParticles.Stop();
         boostParticles.Play();
         boosting = true;
         SetGrabbable(false);

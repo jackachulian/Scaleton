@@ -1598,15 +1598,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 269
+      value: 277.5
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -95.75
+      value: -94.25
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.964486
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8079459315791304068, guid: 3629abdff88aeac42979308d5d9be319, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1834,6 +1834,9 @@ MonoBehaviour:
       - {fileID: 8300000, guid: be1d2a869f948ea42bc7dfd51556833b, type: 3}
       - {fileID: 8300000, guid: 23f32265f542250499e2f0b2d2696d1d, type: 3}
       - {fileID: 8300000, guid: 8e64b18dea3411c4cb7aa5385ee2a233, type: 3}
+    - Key: boxcharged
+      Value:
+      - {fileID: 8300000, guid: 608f474b4326c37499566463fbea1147, type: 3}
     - Key: land
       Value:
       - {fileID: 8300000, guid: b937c42a46fcfb64da0e3cb7cabd269f, type: 3}
@@ -1842,6 +1845,11 @@ MonoBehaviour:
       Value:
       - {fileID: 8300000, guid: 5b95166bb6760c34eb23652542ee6dc3, type: 3}
       - {fileID: 8300000, guid: 7a846f6416f212440b0aea64ae7f56f3, type: 3}
+    - Key: bossdamage
+      Value:
+      - {fileID: 8300000, guid: b9442e9a0d434f842be69e7e3881eb0a, type: 3}
+      - {fileID: 8300000, guid: 5786f76859521e54ca74ffe5d8daefd1, type: 3}
+      - {fileID: 8300000, guid: 02923ab5eecd7a845ba65e7b3fb68440, type: 3}
 --- !u!1 &6280545383695005357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,7 +1860,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8062266843121019298}
   - component: {fileID: 3887660362213103465}
-  - component: {fileID: 8062266843121019299}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1992,18 +1999,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8062266843121019299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6280545383695005357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fccad49b3fc39ad4daeb775c0a0f7982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class Grabbable : Interactable
 {
     private float timeReleased;
 
-    private AudioSource audioSource;
+    public AudioSource audioSource {get; private set;}
 
     // if not held by player, the hand that is grabbing this box
     private RoboticHand roboticHand;

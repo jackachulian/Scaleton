@@ -19,7 +19,9 @@ public class SoundManager : MonoBehaviour {
         if (!source.gameObject.activeInHierarchy) return;
         
         AudioClip clip = GetClip(id);
-        if (clip) source.PlayOneShot(clip);
+        if (clip) {
+            source.PlayOneShot(clip);
+        }
     }
 
     public static void PlaySound(Vector3 position, string id) {
@@ -35,6 +37,8 @@ public class SoundManager : MonoBehaviour {
         if (Instance.soundEffects.TryGetValue(id, out clips)) {
             if (clips.Length == 0) return null;
             return clips[Random.Range(0, clips.Length)];
+        } else {
+            Debug.LogError("No sound with ID "+id+" found");
         }
         return null;
     }

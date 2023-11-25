@@ -37,6 +37,7 @@ public class PresidentBoss : DamageableEntity {
     }
 
     // cached references
+    private AudioSource audioSource;
     private Animator animator;
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
@@ -65,6 +66,7 @@ public class PresidentBoss : DamageableEntity {
 
 
     private void Awake() {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
@@ -152,8 +154,14 @@ public class PresidentBoss : DamageableEntity {
         // restart idle cooldown with less time when certain phases are interrupted
         if (phase == BossPhase.JumpPrepare) {
             onIdleCooldown = true;
-            idleTimeRemaining = 0.4f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+            idleTimeRemaining = 0.5f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
         }
+        else if (phase == BossPhase.Jump) {
+            onIdleCooldown = true;
+            idleTimeRemaining = 0.75f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+        }
+        
+        rb.gravityScale = 1f;
 
         // modify velocity if hit during certain jump phases
         if (phase == BossPhase.Jump || phase == BossPhase.JumpFall) {
@@ -262,6 +270,8 @@ public class PresidentBoss : DamageableEntity {
         phase = BossPhase.JumpLand;
         animator.CrossFade("presidentboss_jumpland", 0f);
 
+        rb.gravityScale = 1f;
+
         Instantiate(landHurtboxAndEffect, feetPositionTransform.position, Quaternion.identity);
         landImpulseSource.GenerateImpulseAt(feetPositionTransform.position, Vector2.down*0.25f);
     }
@@ -299,6 +309,7 @@ public class PresidentBoss : DamageableEntity {
     public override void OnHit(int dmg, DamageHurtbox hurtbox)
     {
         // TODO: extra damage on head hit logic
+        SoundManager.PlaySound(audioSource, "bossdamage");
         hp -= dmg;
         if (hp < 0) {
             Die();
