@@ -16,12 +16,16 @@ public class MenuManager : MonoBehaviour {
 
     [SerializeField] private Dialogue dialogueBox;
 
+    [SerializeField] private BossUI _bossUI;
+    public static BossUI bossUI {get; private set;}
+
 
     public static List<Menu> openMenus {get; private set;}
 
     private void Awake() {
         openMenus = new List<Menu>();
         globalDialogue = dialogueBox;
+        bossUI = _bossUI;
     }
 
     private void Start() {

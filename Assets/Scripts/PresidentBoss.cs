@@ -65,7 +65,8 @@ public class PresidentBoss : DamageableEntity {
     private Vector2 jumpingFrom, jumpingTo;
 
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider2D>();
@@ -76,6 +77,8 @@ public class PresidentBoss : DamageableEntity {
     private void Start() {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         player.IgnoreCollisionWhileDead(cc);
+        MenuManager.bossUI.gameObject.SetActive(true);
+        MenuManager.bossUI.SetBoss(this);
         Idle();
     }
 
@@ -310,8 +313,9 @@ public class PresidentBoss : DamageableEntity {
     {
         // TODO: extra damage on head hit logic
         SoundManager.PlaySound(audioSource, "bossdamage");
-        hp -= dmg;
-        if (hp < 0) {
+        _hp -= dmg;
+        MenuManager.bossUI.HealthBarUpdate();
+        if (_hp < 0) {
             Die();
         }
         else {

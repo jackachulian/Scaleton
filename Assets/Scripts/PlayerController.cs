@@ -111,7 +111,8 @@ public class PlayerController : DamageableEntity
         DEAD
     }
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
