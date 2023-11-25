@@ -20,7 +20,10 @@ public class PresidentBoss : DamageableEntity {
 
     [SerializeField] private CinemachineImpulseSource landImpulseSource;
 
-    [SerializeField] private Cutscene deathCutscene;
+    [SerializeField] private Cutscene deathCutscene, timeOverCutscene;
+
+    // Time (seconds) this boss must me beaten in before timeOverCutscene is played
+    [SerializeField] private int time = 180;
     
     // frame data
     [SerializeField] private FrameData frameData;
@@ -81,6 +84,7 @@ public class PresidentBoss : DamageableEntity {
         player.IgnoreCollisionWhileDead(cc);
         MenuManager.bossUI.gameObject.SetActive(true);
         MenuManager.bossUI.SetBoss(this);
+        MenuManager.bossUI.StartTimer(time);
         Idle();
     }
 
@@ -147,7 +151,6 @@ public class PresidentBoss : DamageableEntity {
     // functions to initate a new phase change
 
     public void Idle() {
-        Debug.Log("Idle phase entered ===================================");
         phase = BossPhase.Idle;
         if (!onIdleCooldown) {
             onIdleCooldown = true;
@@ -177,13 +180,11 @@ public class PresidentBoss : DamageableEntity {
             Physics2D.IgnoreCollision(cc, c, false);
         }
 
-        Debug.Log("Hit phase entered ===================================");
         phase = BossPhase.Hit;
         animator.CrossFade("presidentboss_hit", 0f);
     }
 
     public void JumpPrepare() {
-        Debug.Log("Jump prepare phase entered ===================================");
         phase = BossPhase.JumpPrepare;
         animator.CrossFade("presidentboss_jumpprepare", 0f);
 
@@ -211,7 +212,6 @@ public class PresidentBoss : DamageableEntity {
     }
 
     public void Jump() {
-        Debug.Log("Jump phase entered ===================================");
         phase = BossPhase.Jump;
 
         foreach (var c in ignoreCollidersDuringJump) {
@@ -244,7 +244,6 @@ public class PresidentBoss : DamageableEntity {
     }
 
     public void JumpFall() {
-        Debug.Log("Jump fall phase entered ===================================");
         phase = BossPhase.JumpFall;
         // animator.CrossFade("presidentboss_jumpfall", 0f);
 
@@ -271,7 +270,6 @@ public class PresidentBoss : DamageableEntity {
     }
 
     public void JumpLand() {
-        Debug.Log("Jump land phase entered ===================================");
         phase = BossPhase.JumpLand;
         animator.CrossFade("presidentboss_jumpland", 0f);
 
@@ -345,6 +343,12 @@ public class PresidentBoss : DamageableEntity {
         //todo: make an actual animation here
         Debug.LogWarning("Boss death animation");
         gameObject.SetActive(false);
+    }
+
+    public void StartTimeOverCutscene() {
+        Debug.LogWarning("Boss time over cutscene");
+        enabled = false;
+        timeOverCutscene.StartCutscene();
     }
 }
 

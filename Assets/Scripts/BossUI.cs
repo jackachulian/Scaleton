@@ -1,3 +1,4 @@
+using System.Collections;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class BossUI : MonoBehaviour {
     [SerializeField] private float healthCatchupDelay = 0.6f;
 
     [SerializeField] private float catchupDampedSpeed = 5f;
+
+    [SerializeField] private TMPro.TMP_Text timerLabel;
 
     private int displayedHp; 
     private float catchupHp;
@@ -42,7 +45,22 @@ public class BossUI : MonoBehaviour {
         catchupTimer = healthCatchupDelay;
         float hpPercentage = 1f * boss.hp / boss.maxHp;
         healthFill.sizeDelta = new Vector2(healthBackground.sizeDelta.x * hpPercentage, healthFill.sizeDelta.y);
-        Debug.Log(healthBackground.sizeDelta);
-        Debug.Log(healthFill.sizeDelta);
+    }
+
+    public void StartTimer(int seconds) {
+        StartCoroutine(BossTimer(seconds));
+    }
+
+    private static readonly WaitForSeconds waitOneSecond = new WaitForSeconds(1f);
+    IEnumerator BossTimer(int seconds) {
+        while (seconds > 0) {
+            int min = seconds / 60;
+            int sec = seconds % 60;
+            timerLabel.text = min+":"+sec.ToString("D2");
+            yield return waitOneSecond;
+            seconds--;
+        }
+        timerLabel.text = "0:00";
+        boss.GetComponent<PresidentBoss>().StartTimeOverCutscene();
     }
 }

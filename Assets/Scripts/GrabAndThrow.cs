@@ -121,14 +121,6 @@ public class GrabAndThrow : MonoBehaviour
 
             grabbedBox = null;
             boxRb = null;
-            if(forced){
-                Debug.Log("Box forcefully dropped");
-            }
-            else{
-                Debug.Log("Box dropped");
-            }
-        } else {
-            Debug.Log("Can't drop here!");
         }
     }
 

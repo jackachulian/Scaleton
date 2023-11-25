@@ -36,7 +36,6 @@ public class Interaction : MonoBehaviour {
         Interactable interactable = c.gameObject.GetComponent<Interactable>();
         if(interactable) {
             nearbyInteractables.Add(interactable);
-            Debug.Log(interactable + " entered range");
         } 
     }
 
@@ -45,7 +44,6 @@ public class Interaction : MonoBehaviour {
         Interactable interactable = c.gameObject.GetComponent<Interactable>();
         if (interactable) {
             nearbyInteractables.Remove(interactable);
-            Debug.Log(interactable + " exited range");
         }
     }
 
