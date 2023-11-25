@@ -31,7 +31,8 @@ public class CameraRoom : MonoBehaviour {
     [SerializeField] private RespawnType respawnType;
     public enum RespawnType {
         LastTouched,
-        Nearest
+        Nearest,
+        FarthestFromBoss
     }
 
     [SerializeField] private float brightness = 0.5f;
@@ -40,6 +41,8 @@ public class CameraRoom : MonoBehaviour {
 
     // controls the density of the ambient dust particles, average particles per tile (particles/unit^2)
     [SerializeField] private float particleDensity = 1f; 
+
+    [SerializeField] private DamageableEntity boss;
 
     public Transform objectsTransform {get; private set;}
 
@@ -225,6 +228,10 @@ public class CameraRoom : MonoBehaviour {
 
     public void SetRespawnPoint(RespawnPoint respawnPoint) {
         if (respawnPoints.Contains(respawnPoint)) currentRespawnPoint = respawnPoint;
+    }
+
+    public void SetRespawnType(RespawnType type) {
+        respawnType = type;
     }
 
     public RespawnPoint DefaultRespawnPoint() {

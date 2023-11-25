@@ -53,14 +53,13 @@ public class BossUI : MonoBehaviour {
 
     private static readonly WaitForSeconds waitOneSecond = new WaitForSeconds(1f);
     IEnumerator BossTimer(int seconds) {
-        while (seconds > 0) {
+        while (seconds >= 0) {
             int min = seconds / 60;
             int sec = seconds % 60;
             timerLabel.text = min+":"+sec.ToString("D2");
             yield return waitOneSecond;
             seconds--;
         }
-        timerLabel.text = "0:00";
         boss.GetComponent<PresidentBoss>().StartTimeOverCutscene();
     }
 }
