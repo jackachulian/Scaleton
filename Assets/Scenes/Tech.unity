@@ -45796,7 +45796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b25d477ff8b3241a8509955fa6d87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 1
+  _hp: 30
   isPlayer: 0
   jumpHeightTransform: {fileID: 1223475892}
   jumpTargets:
@@ -45816,7 +45816,7 @@ MonoBehaviour:
   landImpulseSource: {fileID: 1792338468}
   deathCutscene: {fileID: 206198056}
   timeOverCutscene: {fileID: 419477419}
-  time: 5
+  time: 150
   frameData:
     idleTimeMin: 2.5
     idleTimeMax: 2.5
