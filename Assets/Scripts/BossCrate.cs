@@ -71,10 +71,16 @@ public class BossCrate : Grabbable {
     // Called by BossCrate
     public void Boost() {
         Physics2D.IgnoreCollision(MenuManager.player.capsuleCollider, GetComponent<Collider2D>(), true);
+        StartCoroutine(ReenableCollisionAFterShortDelay());
         chargedParticles.Stop();
         boostParticles.Play();
         boosting = true;
         StartCoroutine(UnboostAfterDelay());
+    }
+
+    IEnumerator ReenableCollisionAFterShortDelay() {
+        yield return new WaitForSeconds(0.2f);
+        Physics2D.IgnoreCollision(MenuManager.player.capsuleCollider, GetComponent<Collider2D>(), false);
     }
 
     // Called when colliding with something while boosted. Removes boost particles and begins charge
@@ -82,7 +88,7 @@ public class BossCrate : Grabbable {
         Uncharge();
         boostParticles.Stop();
         boosting = false;
-        Physics2D.IgnoreCollision(MenuManager.player.capsuleCollider, GetComponent<Collider2D>(), false);
+        
         rechargeCoroutine = StartCoroutine(Recharge());
     }
 
