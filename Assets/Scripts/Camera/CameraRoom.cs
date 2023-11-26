@@ -32,7 +32,8 @@ public class CameraRoom : MonoBehaviour {
     public enum RespawnType {
         LastTouched,
         Nearest,
-        FarthestFromBoss
+        FarthestFromBoss,
+        First
     }
 
     [SerializeField] private float brightness = 0.5f;
@@ -244,6 +245,8 @@ public class CameraRoom : MonoBehaviour {
             return currentRespawnPoint;
         } else if (respawnType == RespawnType.Nearest) {
             return respawnPoints.OrderBy(point => Vector2.Distance(MenuManager.player.transform.position, point.transform.position)).FirstOrDefault();
+        } else if (respawnType == RespawnType.FarthestFromBoss) {
+            return respawnPoints.OrderBy(point => Vector2.Distance(boss.transform.position, player.transform.position)).FirstOrDefault();
         } else {
             return DefaultRespawnPoint();
         }

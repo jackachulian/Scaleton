@@ -82,6 +82,7 @@ public class PresidentBoss : DamageableEntity {
     private void Start() {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         player.IgnoreCollisionWhileDead(cc);
+        player.GetCurrentRoom().SetRespawnType(CameraRoom.RespawnType.FarthestFromBoss);
         MenuManager.bossUI.gameObject.SetActive(true);
         MenuManager.bossUI.SetBoss(this);
         MenuManager.bossUI.StartTimer(time);
@@ -162,11 +163,11 @@ public class PresidentBoss : DamageableEntity {
         // restart idle cooldown with less time when certain phases are interrupted
         if (phase == BossPhase.JumpPrepare) {
             onIdleCooldown = true;
-            idleTimeRemaining = 0.5f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+            idleTimeRemaining = 0.6f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
         }
         else if (phase == BossPhase.Jump) {
             onIdleCooldown = true;
-            idleTimeRemaining = 0.75f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
+            idleTimeRemaining = 0.8f * UnityEngine.Random.Range(frameData.idleTimeMin, frameData.idleTimeMax);
         }
         
         rb.gravityScale = 1f;
@@ -203,7 +204,7 @@ public class PresidentBoss : DamageableEntity {
         // Loop through transforms in order, which are sorted from most preferable to least preferable
         foreach (Transform jumpTarget in sortedJumpTargets) {
             // Ensure boss does not jump too close to where it currently already is
-            if (Vector2.Distance(jumpTarget.position, feetPositionTransform.position) > 2f) {
+            if (Vector2.Distance((Vector2)jumpTarget.position, (Vector2)feetPositionTransform.position) > 2f) {
                 jumpingTo = jumpTarget.position;
                 break;
             }
@@ -335,6 +336,7 @@ public class PresidentBoss : DamageableEntity {
     public override void Die()
     {
         enabled = false;
+        player.GetCurrentRoom().SetRespawnType(CameraRoom.RespawnType.First);
         deathCutscene.StartCutscene();
     }
 
@@ -345,6 +347,7 @@ public class PresidentBoss : DamageableEntity {
 
     public void StartTimeOverCutscene() {
         enabled = false;
+        player.GetCurrentRoom().SetRespawnType(CameraRoom.RespawnType.First);
         timeOverCutscene.StartCutscene();
     }
 
