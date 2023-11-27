@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FollowPath : MonoBehaviour {
+public class FollowPath : Respawnable {
     [SerializeField] private Transform[] points;
 
     [SerializeField] private float speed = 1.5f;
@@ -10,7 +10,7 @@ public class FollowPath : MonoBehaviour {
 
     private Transform point, nextPoint;
 
-    private void Awake() {
+    protected override void Awake() {
         if (points.Length == 0) {
             enabled = false;
             return;
@@ -39,8 +39,17 @@ public class FollowPath : MonoBehaviour {
 
     private void MoveTowardsCurrentPoint() {
         point = nextPoint;
-        nextPoint = points[pointIndex+1 % points.Length];
+        nextPoint = points[(pointIndex+1) % points.Length];
         offsetToNextPoint = (Vector2)nextPoint.position - rb.position;
         rb.velocity = offsetToNextPoint.normalized * speed;
+    }
+
+    public override void Respawn()
+    {
+        base.Respawn();
+        if (!enabled) return;
+        pointIndex = 0;
+        rb.position = points[0].position;
+        MoveTowardsCurrentPoint();
     }
 }

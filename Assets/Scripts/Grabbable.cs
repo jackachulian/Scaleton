@@ -25,6 +25,7 @@ public class Grabbable : Interactable
 
     public void AttachToRoboticHand(RoboticHand hand) {
         roboticHand = hand;
+        
     }
 
     public void DetachFromRoboticHand() {

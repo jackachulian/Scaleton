@@ -41,17 +41,13 @@ public class DamageHurtbox : MonoBehaviour {
             if (entity) {
                 if (damagePlayer == entity.IsPlayer()) entity.OnHit(damage, this);
                 // apply force regardless if should damage or not
-                ApplyForce(entity.GetComponent<Rigidbody2D>());
+                if (forceMagnitude <= 0) continue;
+                var otherRb = entity.GetComponent<Rigidbody2D>();
+                if (!otherRb) continue;
+                Vector2 force = (otherRb.position - (Vector2)transform.position).normalized * forceMagnitude;
+                otherRb.AddForce(force, ForceMode2D.Impulse);
             } 
         }
-    }
-
-    public void ApplyForce(Rigidbody2D otherRb) {
-        if (!otherRb) return;
-        
-        Vector2 force = (otherRb.position - (Vector2)transform.position).normalized * forceMagnitude;
-
-        otherRb.AddForce(force, ForceMode2D.Impulse);
     }
 
     private void OnDrawGizmosSelected() {

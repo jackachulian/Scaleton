@@ -16,13 +16,17 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: e52112631e7f1b34fae85958c111820b, type: 2}
+    - target: {fileID: 1387163937187639957, guid: 34b951d7e9919314e9ad2f10c60cb56a, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1520760645396095047, guid: 34b951d7e9919314e9ad2f10c60cb56a, type: 3}
       propertyPath: m_InstanceId
-      value: -339114
+      value: -180668
       objectReference: {fileID: 0}
     - target: {fileID: 2803743939383292349, guid: 34b951d7e9919314e9ad2f10c60cb56a, type: 3}
       propertyPath: m_Name
-      value: MetalBox Variant
+      value: MetalBox
       objectReference: {fileID: 0}
     - target: {fileID: 7004950555846808936, guid: 34b951d7e9919314e9ad2f10c60cb56a, type: 3}
       propertyPath: m_Sprite
