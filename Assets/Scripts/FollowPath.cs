@@ -8,7 +8,13 @@ public class FollowPath : Respawnable {
     int pointIndex;
     private Vector2 offsetToNextPoint;
 
-    private Transform point, nextPoint;
+    private Transform nextPoint;
+
+    [SerializeField] private Transform spriteTransform;
+
+    [SerializeField] bool faceMove;
+
+    int facing = 1;
 
     protected override void Awake() {
         if (points.Length == 0) {
@@ -23,7 +29,6 @@ public class FollowPath : Respawnable {
             return;
         }
 
-        point = points[0];
         nextPoint = points[1];
         rb.position = points[0].position;
         MoveTowardsCurrentPoint();
@@ -38,10 +43,13 @@ public class FollowPath : Respawnable {
     }
 
     private void MoveTowardsCurrentPoint() {
-        point = nextPoint;
         nextPoint = points[(pointIndex+1) % points.Length];
         offsetToNextPoint = (Vector2)nextPoint.position - rb.position;
         rb.velocity = offsetToNextPoint.normalized * speed;
+
+        if (faceMove) {
+            if (facing != Mathf.Sign(offsetToNextPoint.x)) Flip();
+        }
     }
 
     public override void Respawn()
@@ -51,5 +59,10 @@ public class FollowPath : Respawnable {
         pointIndex = 0;
         rb.position = points[0].position;
         MoveTowardsCurrentPoint();
+    }
+
+    public void Flip() {
+        facing = -facing;
+        spriteTransform.Rotate(0.0f, 180.0f, 0.0f);
     }
 }
