@@ -131,4 +131,10 @@ public class Cambot : DamageableEntity
         var bottomHit = Physics2D.Linecast((Vector2)bombShootTransform.position, (Vector2)other.position - (Vector2.up * height * 0.5f), obstructionLayerMask);
         return !topHit || !bottomHit;
     }
+
+    public override void Respawn()
+    {
+        if (dead) return;
+        base.Respawn();
+    }
 }

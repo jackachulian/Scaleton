@@ -219,7 +219,7 @@ public class CameraRoom : MonoBehaviour {
 
     public void RespawnItems(){
         foreach(Respawnable r in respawnables){
-            r.Respawn();
+            if (r.gameObject != null) r.Respawn();
         }
     }
 
