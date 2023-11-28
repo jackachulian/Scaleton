@@ -14,6 +14,8 @@ public class FollowPath : Respawnable {
 
     [SerializeField] bool faceMove;
 
+    [SerializeField] private float maxCorrectionForce = 4f;
+
     int facing = 1;
 
     protected override void Awake() {
@@ -36,13 +38,21 @@ public class FollowPath : Respawnable {
 
     private void FixedUpdate() {
         var offset = (Vector2)nextPoint.position - rb.position;
+
+        if (maxCorrectionForce > 0) {
+            Vector2 targetVelocity = offsetToNextPoint.normalized * speed;
+            Vector2 velocityDelta = targetVelocity - rb.velocity;
+            Vector2 force = velocityDelta.normalized * maxCorrectionForce;
+            rb.AddForce(force);
+        }
+        
         if (Vector2.Dot(offsetToNextPoint, offset) < 0f) {
             pointIndex++;
             MoveTowardsCurrentPoint();
         }
     }
 
-    private void MoveTowardsCurrentPoint() {
+    public void MoveTowardsCurrentPoint() {
         nextPoint = points[(pointIndex+1) % points.Length];
         offsetToNextPoint = (Vector2)nextPoint.position - rb.position;
         rb.velocity = offsetToNextPoint.normalized * speed;

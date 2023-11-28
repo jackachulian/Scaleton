@@ -37,10 +37,12 @@ public class DamageHurtbox : MonoBehaviour {
         }
 
         foreach (var hit in hits) {
+            if (hit.collider.isTrigger) continue;
             var entity = hit.transform.GetComponent<DamageableEntity>();
             if (entity) {
                 if (damagePlayer == entity.IsPlayer()) entity.OnHit(damage, this);
             } 
+
             // apply force regardless if should damage or not
             if (forceMagnitude <= 0) continue;
             var otherRb = hit.transform.GetComponent<Rigidbody2D>();
