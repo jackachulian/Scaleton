@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using Cinemachine;
 using Unity.Mathematics;
@@ -42,6 +43,10 @@ public class PresidentBoss : DamageableEntity {
         public float jumpFallTime = 0.6f;
         /// <summary> Target Y velocity of instant force applied when falling </summary>
         public float jumpFallInstantVel = -1f;
+
+        public float bladeSlashEffectDelay =0.125f;
+
+        public float bladeSlashForwardVelocity = 6f;
     }
 
     // cached references
@@ -308,6 +313,14 @@ public class PresidentBoss : DamageableEntity {
 
     public void BladeSlash() {
         phase = BossPhase.BladeSlash;
+
+        rb.AddForce(Vector2.right * facing * frameData.bladeSlashForwardVelocity * rb.mass, ForceMode2D.Impulse);
+
+        StartCoroutine(BladeEffectAfterDelay());
+    }
+
+    IEnumerator BladeEffectAfterDelay() {
+        yield return new WaitForSeconds(frameData.bladeSlashEffectDelay);
 
         Instantiate(bladeSlashEffect, transform.position, flipTransform.rotation);
     }

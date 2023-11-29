@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DamageHurtbox : MonoBehaviour {
@@ -22,11 +23,29 @@ public class DamageHurtbox : MonoBehaviour {
     // If false, it will deal damage to enemies.
     [SerializeField] private bool damagePlayer;
 
+
+    [SerializeField] private int extraHits = 0;
+
+    [SerializeField] private float extraHitDelay = 0.2f;
+
+    [SerializeField] private ParticleSystem particles;
+
+    [SerializeField] private int emitCount = 30;
+
+    [SerializeField] private float destroyDelay = 2f;
+
     private void Awake() {
         if (damageOnAwake) DealDamage();
+
+        if (destroyDelay > 0) StartCoroutine(DestroyAfterDelay());
     }
 
-    public void DealDamage() {
+    IEnumerator DestroyAfterDelay() {
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(gameObject);
+    }
+
+    public void DealDamage(bool extra = false) {
         RaycastHit2D[] hits;
 
         if (hurtboxShape == HurtboxShape.Circle) {
@@ -50,6 +69,10 @@ public class DamageHurtbox : MonoBehaviour {
             Vector2 force = (otherRb.position - (Vector2)transform.position).normalized * forceMagnitude;
             otherRb.AddForce(force, ForceMode2D.Impulse);
         }
+
+        if (particles) particles.Emit(emitCount);
+
+        if (!extra) StartCoroutine(ExtraHits());
     }
 
     private void OnDrawGizmosSelected() {
@@ -66,6 +89,14 @@ public class DamageHurtbox : MonoBehaviour {
             return radius;
         } else {
             return Mathf.Sqrt(boxSize.x*boxSize.x + boxSize.y*boxSize.y);
+        }
+    }
+
+    IEnumerator ExtraHits() {
+        while (extraHits > 0) {
+            yield return new WaitForSeconds(extraHitDelay);
+            DealDamage(extra: true);
+            extraHits--;
         }
     }
 }
