@@ -27,7 +27,7 @@ public class FadeLight : MonoBehaviour {
     }
 
     private void UpdateColor() {
-        light2D.color = Color.Lerp(previousColor, targetColor, delta);
-        light2D.intensity = Mathf.Lerp(previousIntensity, targetIntensity, delta);
+        light2D.color = Color.Lerp(previousColor, targetColor, delta/transitionTime);
+        light2D.intensity = Mathf.Lerp(previousIntensity, targetIntensity, delta/transitionTime);
     }
 }
