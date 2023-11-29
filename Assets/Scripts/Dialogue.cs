@@ -46,10 +46,16 @@ public class Dialogue : MonoBehaviour
             return;
         }
 
+         // This keeps the dialogue from permenantly erasing names from NPC dialogue objects
+        var tempL = new string[l.Length];
+        for(int i = 0; i < l.Length; i++){
+            tempL[i] = l[i];
+        }
+
         gameObject.SetActive(true);
         if (disableDuringDialogue == null) disableDuringDialogue = GameObject.FindGameObjectsWithTag("DisableDuringDialogue");
         foreach (var obj in disableDuringDialogue) obj.SetActive(false);
-        lines = l;
+        lines = tempL;
         textComponent.text = string.Empty;
         MenuManager.player.DisableControl();
         index = 0;
