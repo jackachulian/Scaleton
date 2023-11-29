@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 22.5, y: 0.75, z: 0}
+        value: {x: -0.4375, y: 0.4375, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -53,7 +53,7 @@ AnimationClip:
     - time: 0.78333336
       value: {fileID: 1414463645, guid: 814f02359b52ddc428d8fc30bdddd6a6, type: 3}
     attribute: m_Sprite
-    path: FlipTransform/Sprite
+    path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -65,7 +65,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 4247128433
+      path: 0
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -118,7 +118,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 22.5
+        value: -0.4375
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -139,7 +139,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.75
+        value: 0.4375
         inSlope: 0
         outSlope: 0
         tangentMode: 136

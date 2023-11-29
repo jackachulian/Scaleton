@@ -46,7 +46,7 @@ public class PresidentBoss : DamageableEntity {
 
     // cached references
     private AudioSource audioSource;
-    private Animator animator;
+    [SerializeField] private Animator animator;
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
     private PlayerController player;
@@ -76,7 +76,6 @@ public class PresidentBoss : DamageableEntity {
     protected override void Awake() {
         base.Awake();
         audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         facing = 1;
@@ -262,6 +261,8 @@ public class PresidentBoss : DamageableEntity {
         float targetXVelocity = xOffset / aerialTime;
         float xVelocityDelta = targetXVelocity - rb.velocity.x;
         rb.AddForce(xVelocityDelta * Vector2.right * rb.mass, ForceMode2D.Impulse);
+
+        Debug.LogWarning(rb.velocity);
     }
 
     public void JumpFall() {
