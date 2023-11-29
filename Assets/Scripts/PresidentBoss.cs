@@ -21,6 +21,8 @@ public class PresidentBoss : DamageableEntity {
 
     [SerializeField] private CinemachineImpulseSource landImpulseSource;
 
+    [SerializeField] private GameObject bladeSlashEffect;
+
     [SerializeField] private Cutscene deathCutscene, timeOverCutscene;
 
     // Time (seconds) this boss must me beaten in before timeOverCutscene is played
@@ -98,8 +100,8 @@ public class PresidentBoss : DamageableEntity {
             case BossPhase.Jump: UpdateJump(); break;
             case BossPhase.JumpFall: UpdateJumpFall(); break;
             case BossPhase.JumpLand: UpdateJumpLand(); break;
-            case BossPhase.BladeSlashPrepare: break;
-            case BossPhase.BladeSlash: break;
+            case BossPhase.BladeSlashPrepare: UpdateBladeSlashPrepare(); break;
+            case BossPhase.BladeSlash: UpdateBladeSlash(); break;
             case BossPhase.MissileLaunchPrepare: break;
             case BossPhase.MissileLaunch: break;
         }
@@ -115,8 +117,13 @@ public class PresidentBoss : DamageableEntity {
         idleTimeRemaining -= Time.fixedDeltaTime;
         if (idleTimeRemaining < 0) {
             onIdleCooldown = false;
-            // TODO: select attack
-            JumpPrepare();
+
+            // TODO: cycle between idle, blade, idle, missile, repeat
+            if (UnityEngine.Random.value < 0.5f) {
+                JumpPrepare();
+            } else {
+                BladeSlashPrepare();
+            }
         }
     }
 
@@ -145,6 +152,18 @@ public class PresidentBoss : DamageableEntity {
     }
 
     public void UpdateJumpLand() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
+            Idle();
+        }
+    }
+
+    public void UpdateBladeSlashPrepare() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_bladeslash")) {
+            BladeSlash();
+        }
+    }
+
+    public void UpdateBladeSlash() {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
             Idle();
         }
@@ -279,6 +298,17 @@ public class PresidentBoss : DamageableEntity {
 
         Instantiate(landHurtboxAndEffect, feetPositionTransform.position, Quaternion.identity);
         landImpulseSource.GenerateImpulseAt(feetPositionTransform.position, Vector2.down*0.25f);
+    }
+
+    public void BladeSlashPrepare() {
+        phase = BossPhase.BladeSlashPrepare;
+        animator.CrossFade("presidentboss_bladeprepare", 0f);
+    }
+
+    public void BladeSlash() {
+        phase = BossPhase.BladeSlash;
+
+        Instantiate(bladeSlashEffect, transform.position, flipTransform.rotation);
     }
 
     // collision - ussed for jump -> jumpLand
