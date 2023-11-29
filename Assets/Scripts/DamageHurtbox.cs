@@ -99,4 +99,8 @@ public class DamageHurtbox : MonoBehaviour {
             extraHits--;
         }
     }
+
+    public void SetDamagePlayer(bool damagePlayer) {
+        this.damagePlayer = damagePlayer;
+    }
 }

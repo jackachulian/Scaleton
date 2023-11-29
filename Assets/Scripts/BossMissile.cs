@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class BossMissile : DamageableEntity {
     [SerializeField] private GameObject hitEffect;
@@ -8,6 +9,8 @@ public class BossMissile : DamageableEntity {
     [SerializeField] private float rotationSpeed = 50f;
 
     [SerializeField] private float speed = 8f;
+
+    [SerializeField] private float rotateDelay = 0.75f;
 
     private PlayerController target;
     private PresidentBoss sender;
@@ -21,27 +24,38 @@ public class BossMissile : DamageableEntity {
     }
 
     private void FixedUpdate() {
-        Vector2 targetPosition = (Vector2)(reflected ? sender.transform.position : target.transform.position);
-        Vector2 targetDirection = targetPosition - (Vector2)transform.position;
-        rb.velocity = Vector3.RotateTowards(rb.velocity, targetDirection.normalized * speed, rotationSpeed * Mathf.Deg2Rad * Time.fixedDeltaTime, 0f);
-        transform.right = rb.velocity.normalized;
+        if (target == null) return;
 
+        if (rotateDelay < 0) {
+            float targetHeight = reflected ? 3.5f : 1.5f;
+            Vector2 targetPosition = (Vector2)(reflected ? sender.transform.position : target.transform.position) + (Vector2.up * targetHeight * 0.5f);
+            Vector2 targetDirection = targetPosition - (Vector2)transform.position;
+            rb.velocity = Vector3.RotateTowards(rb.velocity, targetDirection.normalized * speed, rotationSpeed * Mathf.Deg2Rad * Time.fixedDeltaTime, 0f);
+        } else {
+            rotateDelay -= Time.fixedDeltaTime;
+        }
+        transform.right = rb.velocity.normalized;
     }
 
-    // only don't self destruct if object collided with was not a boss crate
+    // only self destruct if object collided with was not a boss crate
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.GetComponent<BossCrate>()) return;
-        if (hitEffect) Instantiate(hitEffect, transform.position, transform.rotation);
+        if (hitEffect) {
+            var effect = Instantiate(hitEffect, transform.position, transform.rotation);
+            var hurtbox = effect.GetComponent<DamageHurtbox>();
+            hurtbox.SetDamagePlayer(!reflected);
+            hurtbox.DealDamage();
+        }
         Destroy(gameObject);
     }
 
-    public void Initialize(PlayerController target, PresidentBoss sender) {
+    public void Initialize(PlayerController target, PresidentBoss sender, Vector2 initialDirection) {
         this.target = target;
         this.sender = sender;
 
-        Vector2 targetPosition = (Vector2)(reflected ? sender.transform.position : target.transform.position);
-        Vector2 targetDirection = targetPosition - (Vector2)transform.position;
-        rb.velocity = targetDirection.normalized * speed;
+        // Vector2 targetPosition = (Vector2)(reflected ? sender.transform.position : target.transform.position);
+        // Vector2 targetDirection = targetPosition - (Vector2)transform.position;
+        rb.velocity = initialDirection.normalized * speed;
     }
 
     public override void OnHit(int dmg, DamageHurtbox hurtbox)

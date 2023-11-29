@@ -50,6 +50,8 @@ public class PresidentBoss : DamageableEntity {
 
         public float bladeSlashForwardVelocity = 6f;
 
+        public float missileSpawnDelay = 0.25f;
+
         public float missileLaunchSpeed = 5f;
     }
 
@@ -100,98 +102,6 @@ public class PresidentBoss : DamageableEntity {
         Idle();
     }
 
-    private void FixedUpdate() {
-        switch (phase) {
-            case BossPhase.Idle: UpdateIdle(); break;
-            case BossPhase.Hit: UpdateHit(); break;
-            case BossPhase.JumpPrepare: UpdateJumpPrepare(); break;
-            case BossPhase.Jump: UpdateJump(); break;
-            case BossPhase.JumpFall: UpdateJumpFall(); break;
-            case BossPhase.JumpLand: UpdateJumpLand(); break;
-            case BossPhase.BladeSlashPrepare: UpdateBladeSlashPrepare(); break;
-            case BossPhase.BladeSlash: UpdateBladeSlash(); break;
-            case BossPhase.MissileLaunchPrepare: UpdateMissilePrepare(); break;
-            case BossPhase.MissileLaunch: UpdateMissileLaunch(); break;
-        }
-    }
-
-    // per update handlers for each phase
-    public void UpdateIdle() {
-        FaceTowards(player.transform.position);
-
-        // do not tick idle timer while player is in death cooldown
-        if (player.IsDead()) return;
-
-        idleTimeRemaining -= Time.fixedDeltaTime;
-        if (idleTimeRemaining < 0) {
-            onIdleCooldown = false;
-
-            // TODO: cycle between idle, blade, idle, missile, repeat
-            var rng = UnityEngine.Random.value;
-            if (rng < 0.33f) {
-                MissilePrepare();
-            } else if (rng < 0.67f) {
-                BladeSlashPrepare();
-            } else {
-                JumpPrepare();
-            }
-        }
-    }
-
-    public void UpdateHit() {
-        idleTimeRemaining -= Time.fixedDeltaTime;
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
-            Idle();
-        }
-    }
-
-    public void UpdateJumpPrepare() {
-        // once animator has left jumpPrepare anim reached jump anim, initiate jump
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_jump")) {
-            Jump();
-        }
-    }
-
-    public void UpdateJump() {
-        if ((rb.position.x - jumpingFrom.x)/(jumpingTo.x - jumpingFrom.x) >= 1f || rb.velocity.y < 0f) {
-            JumpFall();
-        }
-    }
-
-    public void UpdateJumpFall() {
-        // no behaviour here - JumpLand will occurr in OnCollisionEnter2D when colliding with something
-    }
-
-    public void UpdateJumpLand() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
-            Idle();
-        }
-    }
-
-    public void UpdateBladeSlashPrepare() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_bladeslash")) {
-            BladeSlash();
-        }
-    }
-
-    public void UpdateBladeSlash() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
-            Idle();
-        }
-    }
-
-    public void UpdateMissilePrepare() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_missileshoot")) {
-            MissileLaunch();
-        }
-    }
-
-    public void UpdateMissileLaunch() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
-            Idle();
-        }
-    }
-
     // functions to initate a new phase change
 
     public void Idle() {
@@ -224,8 +134,12 @@ public class PresidentBoss : DamageableEntity {
             Physics2D.IgnoreCollision(cc, c, false);
         }
 
+        if (missile && phase == BossPhase.MissileLaunchPrepare) Destroy(missile.gameObject);
+
         phase = BossPhase.Hit;
         animator.CrossFade("presidentboss_hit", 0f);
+
+        
     }
 
     public void JumpPrepare() {
@@ -336,25 +250,136 @@ public class PresidentBoss : DamageableEntity {
         StartCoroutine(BladeEffectAfterDelay());
     }
 
-    public void MissilePrepare() {
-        phase = BossPhase.MissileLaunchPrepare;
-        animator.CrossFade("presidentboss_missileprepare", 0f);
-    }
-
-    public void MissileLaunch() {
-        phase = BossPhase.MissileLaunch;
-
-        Vector2 playerOffset = player.transform.position - missileShootTransform.position;
-        var missile = Instantiate(missileObject, missileShootTransform.position, Quaternion.identity);
-        missile.transform.right = playerOffset.normalized;
-        // missile.GetComponent<Rigidbody2D>().velocity = playerOffset.normalized * frameData.missileLaunchSpeed;
-        missile.GetComponent<BossMissile>().Initialize(player, this);
-    }
-
     IEnumerator BladeEffectAfterDelay() {
         yield return new WaitForSeconds(frameData.bladeSlashEffectDelay);
 
         Instantiate(bladeSlashEffect, transform.position, flipTransform.rotation);
+    }
+
+    private GameObject missile;
+
+    public void MissilePrepare() {
+        phase = BossPhase.MissileLaunchPrepare;
+        animator.CrossFade("presidentboss_missileprepare", 0f);
+
+        StartCoroutine(SpawnMissileAfterDelay());
+    }
+
+    IEnumerator SpawnMissileAfterDelay() {
+        yield return new WaitForSeconds(frameData.missileSpawnDelay);
+
+        if (phase != BossPhase.MissileLaunchPrepare && phase != BossPhase.MissileLaunch) yield break;
+
+        SpawnMissile();
+    }
+
+    private void SpawnMissile() {
+        Vector2 playerOffset = player.transform.position - missileShootTransform.position;
+        missile = Instantiate(missileObject, missileShootTransform.position, Quaternion.identity);
+        missile.transform.right = playerOffset.normalized;
+
+        var missileCollider = missile.GetComponent<Collider2D>();
+        foreach (var c in ignoreCollidersDuringJump) {
+            Physics2D.IgnoreCollision(missileCollider, c);
+        }
+    }
+
+    public void MissileLaunch() {
+        phase = BossPhase.MissileLaunch;
+        if (!missile) SpawnMissile();
+        missile.GetComponent<BossMissile>().Initialize(player, this, Vector2.right * facing);
+    }
+
+    private void FixedUpdate() {
+        switch (phase) {
+            case BossPhase.Idle: UpdateIdle(); break;
+            case BossPhase.Hit: UpdateHit(); break;
+            case BossPhase.JumpPrepare: UpdateJumpPrepare(); break;
+            case BossPhase.Jump: UpdateJump(); break;
+            case BossPhase.JumpFall: UpdateJumpFall(); break;
+            case BossPhase.JumpLand: UpdateJumpLand(); break;
+            case BossPhase.BladeSlashPrepare: UpdateBladeSlashPrepare(); break;
+            case BossPhase.BladeSlash: UpdateBladeSlash(); break;
+            case BossPhase.MissileLaunchPrepare: UpdateMissilePrepare(); break;
+            case BossPhase.MissileLaunch: UpdateMissileLaunch(); break;
+        }
+    }
+
+    // per update handlers for each phase
+    public void UpdateIdle() {
+        FaceTowards(player.transform.position);
+
+        // do not tick idle timer while player is in death cooldown
+        if (player.IsDead()) return;
+
+        idleTimeRemaining -= Time.fixedDeltaTime;
+        if (idleTimeRemaining < 0) {
+            onIdleCooldown = false;
+
+            // TODO: cycle between idle, blade, idle, missile, repeat
+            var rng = UnityEngine.Random.value;
+            if (rng < 0.33f) {
+                MissilePrepare();
+            } else if (rng < 0.66f) {
+                BladeSlashPrepare();
+            } else {
+                JumpPrepare();
+            }
+        }
+    }
+
+    public void UpdateHit() {
+        idleTimeRemaining -= Time.fixedDeltaTime;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
+            Idle();
+        }
+    }
+
+    public void UpdateJumpPrepare() {
+        // once animator has left jumpPrepare anim reached jump anim, initiate jump
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_jump")) {
+            Jump();
+        }
+    }
+
+    public void UpdateJump() {
+        if ((rb.position.x - jumpingFrom.x)/(jumpingTo.x - jumpingFrom.x) >= 1f || rb.velocity.y < 0f) {
+            JumpFall();
+        }
+    }
+
+    public void UpdateJumpFall() {
+        // no behaviour here - JumpLand will occurr in OnCollisionEnter2D when colliding with something
+    }
+
+    public void UpdateJumpLand() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
+            Idle();
+        }
+    }
+
+    public void UpdateBladeSlashPrepare() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_bladeslash")) {
+            BladeSlash();
+        }
+    }
+
+    public void UpdateBladeSlash() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
+            Idle();
+        }
+    }
+
+    public void UpdateMissilePrepare() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_missileshoot")) {
+            MissileLaunch();
+        }
+    }
+
+    public void UpdateMissileLaunch() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
+            Idle();
+        }
     }
 
     // collision - ussed for jump -> jumpLand
