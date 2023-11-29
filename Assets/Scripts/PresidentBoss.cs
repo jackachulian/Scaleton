@@ -10,6 +10,7 @@ public class PresidentBoss : DamageableEntity {
 
     [SerializeField] private Transform[] jumpTargets;
 
+    [SerializeField] private Transform flipTransform;
 
     /// <summary> Colliders that are ignored during the jump phase, but not the jumpfall phase </summary>
     [SerializeField] private Collider2D[] ignoreCollidersDuringJump;
@@ -76,7 +77,7 @@ public class PresidentBoss : DamageableEntity {
         animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-        facing = -1;
+        facing = 1;
     }
 
     private void Start() {
@@ -297,11 +298,7 @@ public class PresidentBoss : DamageableEntity {
     // misc
     public void Flip() {
         facing *= -1;
-        spriteRenderer.transform.Rotate(0.0f, 180.0f, 0.0f);
-        spriteRenderer.transform.localPosition =  new Vector3(
-            -spriteRenderer.transform.localPosition.x, 
-            spriteRenderer.transform.localPosition.y,
-            spriteRenderer.transform.localPosition.z);
+        flipTransform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
     public void FaceTowards(Vector2 point) {
@@ -354,7 +351,6 @@ public class PresidentBoss : DamageableEntity {
     public override void Respawn()
     {
         base.Respawn();
-        if (facing == 1) Flip(); // make sure boss faces right on respawn so cutscene looks right
     }
 }
 

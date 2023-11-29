@@ -23,7 +23,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.23921567
+        value: 0.5424528
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: Sprite
+    path: FlipTransform/Sprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: Sprite
+    path: FlipTransform/Sprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -65,7 +65,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7115654
+        value: 0.9707529
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -76,7 +76,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: Sprite
+    path: FlipTransform/Sprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -84,9 +84,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: cbe0fac8624f8c849957d7d2420b3cf2, type: 3}
+      value: {fileID: 2024099407, guid: 7ef06fbc5f4435b47b277611e944fd39, type: 3}
     attribute: m_Sprite
-    path: Sprite
+    path: FlipTransform/Sprite
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -98,7 +98,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 850496168
+      path: 4247128433
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -107,7 +107,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 850496168
+      path: 4247128433
       attribute: 2526845255
       script: {fileID: 0}
       typeID: 212
@@ -116,7 +116,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 850496168
+      path: 4247128433
       attribute: 4215373228
       script: {fileID: 0}
       typeID: 212
@@ -125,7 +125,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 850496168
+      path: 4247128433
       attribute: 2334886179
       script: {fileID: 0}
       typeID: 212
@@ -134,7 +134,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: cbe0fac8624f8c849957d7d2420b3cf2, type: 3}
+    - {fileID: 2024099407, guid: 7ef06fbc5f4435b47b277611e944fd39, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -162,7 +162,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.23921567
+        value: 0.5424528
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -173,7 +173,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: Sprite
+    path: FlipTransform/Sprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -194,7 +194,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: Sprite
+    path: FlipTransform/Sprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -204,7 +204,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7115654
+        value: 0.9707529
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -215,7 +215,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: Sprite
+    path: FlipTransform/Sprite
     classID: 212
     script: {fileID: 0}
     flags: 0
