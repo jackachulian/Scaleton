@@ -16,13 +16,15 @@ public class PresidentBoss : DamageableEntity {
     /// <summary> Colliders that are ignored during the jump phase, but not the jumpfall phase </summary>
     [SerializeField] private Collider2D[] ignoreCollidersDuringJump;
 
-    [SerializeField] private Transform headPositionTransform, feetPositionTransform;
+    [SerializeField] private Transform headPositionTransform, feetPositionTransform, missileShootTransform;
 
     [SerializeField] private GameObject landHurtboxAndEffect;
 
     [SerializeField] private CinemachineImpulseSource landImpulseSource;
 
     [SerializeField] private GameObject bladeSlashEffect;
+
+    [SerializeField] private GameObject missileObject;
 
     [SerializeField] private Cutscene deathCutscene, timeOverCutscene;
 
@@ -47,6 +49,8 @@ public class PresidentBoss : DamageableEntity {
         public float bladeSlashEffectDelay =0.125f;
 
         public float bladeSlashForwardVelocity = 6f;
+
+        public float missileLaunchSpeed = 5f;
     }
 
     // cached references
@@ -106,8 +110,8 @@ public class PresidentBoss : DamageableEntity {
             case BossPhase.JumpLand: UpdateJumpLand(); break;
             case BossPhase.BladeSlashPrepare: UpdateBladeSlashPrepare(); break;
             case BossPhase.BladeSlash: UpdateBladeSlash(); break;
-            case BossPhase.MissileLaunchPrepare: break;
-            case BossPhase.MissileLaunch: break;
+            case BossPhase.MissileLaunchPrepare: UpdateMissilePrepare(); break;
+            case BossPhase.MissileLaunch: UpdateMissileLaunch(); break;
         }
     }
 
@@ -123,10 +127,13 @@ public class PresidentBoss : DamageableEntity {
             onIdleCooldown = false;
 
             // TODO: cycle between idle, blade, idle, missile, repeat
-            if (UnityEngine.Random.value < 0.5f) {
-                JumpPrepare();
-            } else {
+            var rng = UnityEngine.Random.value;
+            if (rng < 0.33f) {
+                MissilePrepare();
+            } else if (rng < 0.67f) {
                 BladeSlashPrepare();
+            } else {
+                JumpPrepare();
             }
         }
     }
@@ -168,6 +175,18 @@ public class PresidentBoss : DamageableEntity {
     }
 
     public void UpdateBladeSlash() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
+            Idle();
+        }
+    }
+
+    public void UpdateMissilePrepare() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_missileshoot")) {
+            MissileLaunch();
+        }
+    }
+
+    public void UpdateMissileLaunch() {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("presidentboss_idle")) {
             Idle();
         }
@@ -266,8 +285,6 @@ public class PresidentBoss : DamageableEntity {
         float targetXVelocity = xOffset / aerialTime;
         float xVelocityDelta = targetXVelocity - rb.velocity.x;
         rb.AddForce(xVelocityDelta * Vector2.right * rb.mass, ForceMode2D.Impulse);
-
-        Debug.LogWarning(rb.velocity);
     }
 
     public void JumpFall() {
@@ -317,6 +334,21 @@ public class PresidentBoss : DamageableEntity {
         rb.AddForce(Vector2.right * facing * frameData.bladeSlashForwardVelocity * rb.mass, ForceMode2D.Impulse);
 
         StartCoroutine(BladeEffectAfterDelay());
+    }
+
+    public void MissilePrepare() {
+        phase = BossPhase.MissileLaunchPrepare;
+        animator.CrossFade("presidentboss_missileprepare", 0f);
+    }
+
+    public void MissileLaunch() {
+        phase = BossPhase.MissileLaunch;
+
+        Vector2 playerOffset = player.transform.position - missileShootTransform.position;
+        var missile = Instantiate(missileObject, missileShootTransform.position, Quaternion.identity);
+        missile.transform.right = playerOffset.normalized;
+        // missile.GetComponent<Rigidbody2D>().velocity = playerOffset.normalized * frameData.missileLaunchSpeed;
+        missile.GetComponent<BossMissile>().Initialize(player, this);
     }
 
     IEnumerator BladeEffectAfterDelay() {
