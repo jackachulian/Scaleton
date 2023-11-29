@@ -40,10 +40,10 @@ public class FollowPath : Respawnable {
         var offset = (Vector2)nextPoint.position - rb.position;
 
         if (maxCorrectionForce > 0) {
-            Vector2 targetVelocity = offsetToNextPoint.normalized * speed;
+            Vector2 targetVelocity = offset.normalized * speed;
             Vector2 velocityDelta = targetVelocity - rb.velocity;
             Vector2 force = velocityDelta.normalized * maxCorrectionForce;
-            rb.AddForce(force);
+            rb.AddForce(force * rb.mass);
         }
         
         if (Vector2.Dot(offsetToNextPoint, offset) < 0f) {

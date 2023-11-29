@@ -38,6 +38,7 @@ public class Cambot : DamageableEntity
     }
 
     private void FixedUpdate() {
+        // only control player tracking movement in this fixed update, followpath while not tracking
         if (!trackedPlayer) return;
 
         if (trackedPlayer.IsDead()) {
@@ -115,6 +116,7 @@ public class Cambot : DamageableEntity
 
     public void Detect(PlayerController player) {
         if (dead) return;
+        if (!CanSee(player.transform)) return;
         trackedPlayer = player;
         bombShootTimer = bombShootDelay;
         followPath.enabled = false;
