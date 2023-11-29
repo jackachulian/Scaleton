@@ -31,6 +31,7 @@ public class CheatMenus : MonoBehaviour {
         TransitionManager.Transition(() => {
             MenuManager.player.MoveToRespawnPoint(room.currentRespawnPoint);
             var brain = Camera.main.GetComponent<CinemachineBrain>();
+            brain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
             room.VirtualCam.MoveToTopOfPrioritySubqueue();
             brain.ManualUpdate();
             brain.ActiveBlend = null;

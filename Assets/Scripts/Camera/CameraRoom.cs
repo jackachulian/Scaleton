@@ -105,6 +105,7 @@ public class CameraRoom : MonoBehaviour {
         if (virtualCam.Follow == null) {
             virtualCam.Follow = player.transform;
         }
+        virtualCam.enabled = false;
 
         RepositionAmbientParticles();
         ambientParticles.Stop();
@@ -143,6 +144,7 @@ public class CameraRoom : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (other.name != "Player") return;
        if (!playerWithin) EnterRoom();
     }
 
@@ -214,7 +216,6 @@ public class CameraRoom : MonoBehaviour {
         playerWithin = false;
 
         virtualCam.enabled = false;
-
     }
 
     public void RespawnItems(){

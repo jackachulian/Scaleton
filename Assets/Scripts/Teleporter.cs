@@ -29,7 +29,7 @@ public class Teleporter : MonoBehaviour {
 
     IEnumerator ResetBlendAfterShortDelay(CinemachineBrain brain, float resetTime) {
         
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.5f);
         brain.m_DefaultBlend.m_Time = resetTime;
     }
 }

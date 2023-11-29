@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -70,10 +71,15 @@ public class Cutscene : MonoBehaviour {
         // index -1 will be the current room's default camera
         else if (cmd == "changevirtualcamera") {
             int camIndex = int.Parse(args[1]);
+
+            Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
+
             if (camIndex == -1) {
+                MenuManager.player.GetCurrentRoom().VirtualCam.enabled = true;
                 MenuManager.player.GetCurrentRoom().VirtualCam.MoveToTopOfPrioritySubqueue();
             } else {
                 if (virtualCameras[camIndex].m_Follow == null) virtualCameras[camIndex].m_Follow = MenuManager.player.transform;
+                virtualCameras[camIndex].enabled = true;
                 virtualCameras[camIndex].MoveToTopOfPrioritySubqueue();
             }
         }
