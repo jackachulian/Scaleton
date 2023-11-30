@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SharedObjects.unity
+    guid: 6fe24f73d8e6939489179fd9ccb6178e
+  - enabled: 1
     path: Assets/Scenes/Dungeon.unity
     guid: f42f9789099dc7b4c8119e22d6d5188c
+  - enabled: 1
+    path: Assets/Scenes/BonusShop.unity
+    guid: f34dc4612c4d1244aba61c4af5a3d8ca
+  - enabled: 1
+    path: Assets/Scenes/Tech.unity
+    guid: 84b66af32701c464b9c7716de8480815
   m_configObjects: {}

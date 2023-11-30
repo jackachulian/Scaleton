@@ -29,12 +29,12 @@ public class TitleCamera : MonoBehaviour {
     private CinemachineBrain cinemachineBrain;
 
     private void Awake() {
-        // load Dungeon scene if not loaded, which it won't be in the build
-        bool dungeonLoaded = false;
-        for (int i = 0; i < SceneManager.loadedSceneCount; i++) {
-            if (SceneManager.GetSceneAt(i).name == "Dungeon") dungeonLoaded = true;
+        // Load required scenes if this is the build version
+        if (!Application.isEditor) {
+            SceneManager.LoadScene("Dungeon", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Tech", LoadSceneMode.Additive);
+            SceneManager.LoadScene("BonusShop", LoadSceneMode.Additive);
         }
-        if (!dungeonLoaded) SceneManager.LoadScene("Dungeon", LoadSceneMode.Additive);
 
         startPressed = false;
         player.DisableControl();
