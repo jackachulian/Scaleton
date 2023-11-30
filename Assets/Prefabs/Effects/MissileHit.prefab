@@ -9826,7 +9826,7 @@ MonoBehaviour:
   hurtboxShape: 1
   radius: 0.75
   boxSize: {x: 3, y: 1.75}
-  damage: 1
+  damage: 4
   forceMagnitude: 5
   damagePlayer: 0
   extraHits: 0
@@ -9834,3 +9834,4 @@ MonoBehaviour:
   particles: {fileID: 787467807151305283}
   emitCount: 0
   destroyDelay: 2
+  canCriticalHit: 0

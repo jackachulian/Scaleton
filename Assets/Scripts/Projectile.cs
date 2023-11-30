@@ -8,7 +8,6 @@ public class Projectile : MonoBehaviour {
     protected float destroyTimer;
 
     private void Start() {
-        Debug.LogWarning("proj start");
         destroyTimer = maxTime;
     }
 

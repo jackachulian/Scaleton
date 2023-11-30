@@ -410,14 +410,14 @@ public class PresidentBoss : DamageableEntity {
 
     public override void OnHit(int dmg, DamageHurtbox hurtbox)
     {
+        SoundManager.PlaySound(audioSource, "bossdamage");
         // Take more damage if box is near head
         float distanceFromHead = Vector2.Distance(headPositionTransform.position, hurtbox.transform.position);
-        if (distanceFromHead < hurtbox.GetRadius() * 2f + 1f) {
+        if (hurtbox.CanCriticalHit() && distanceFromHead < hurtbox.GetRadius() * 2f + 1f) {
             dmg *= 2;
-            SoundManager.PlaySound(audioSource, "bossdamage");
+        }
+        if (dmg >= 2) {
             SoundManager.PlaySound(audioSource, "bossdamageheavy");
-        } else {
-            SoundManager.PlaySound(audioSource, "bossdamage");
         }
 
         _hp -= dmg;
