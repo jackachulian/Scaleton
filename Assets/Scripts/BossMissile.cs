@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -70,6 +71,10 @@ public class BossMissile : Projectile {
         reflected = true;
         speed = reflectSpeed;
         destroyTimer = maxTime*2f;
+
+        foreach (var crate in sender.GetBossCrates()) {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), crate.GetComponent<Collider2D>(), true);
+        }
     }
 
     protected override void ProjHit()
