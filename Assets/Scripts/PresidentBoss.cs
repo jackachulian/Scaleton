@@ -434,8 +434,8 @@ public class PresidentBoss : DamageableEntity {
     {
         enabled = false;
         player.GetCurrentRoom().SetRespawnType(CameraRoom.RespawnType.First);
+        animator.CrossFade("presidentboss_death", 0f);
         deathCutscene.StartCutscene();
-        animator.SetBool("dead", true);
     }
 
     public void DeathAnimation() {

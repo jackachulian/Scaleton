@@ -65,6 +65,7 @@ public class BossMissile : Projectile {
 
     private void Reflect() {
         if (reflected) return;
+        if (!sender) return;
 
         rb.velocity = -rb.velocity;
 

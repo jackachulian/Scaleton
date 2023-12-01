@@ -15,7 +15,8 @@ public class CheatMenus : MonoBehaviour {
     private void Update() {
         if (!dialog.CanOpenDialog()) return;
 
-        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.F1)) OpenFastTravelMenu();
+        // if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.F1)) OpenFastTravelMenu();
+        if (Input.GetKeyDown(KeyCode.F1)) OpenFastTravelMenu();
     }
 
     private void OpenFastTravelMenu() {
