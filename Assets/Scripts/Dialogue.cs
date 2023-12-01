@@ -142,12 +142,22 @@ public class Dialogue : MonoBehaviour
             lines[index] = line.Substring(closeBracketIndex+2);
             nameBox.SetActive(true);
             nameLabel.text = name;
+            if (lines[index].Contains('{')) {
+                lines[index] = lines[index].Replace("{scrollsCollected}", ""+SaveData.scrollsCollected);
+                lines[index] = lines[index].Replace("{fragmentsCollected}", ""+SaveData.scrollsCollected);
+                lines[index] = lines[index].Replace("{totalTime}", SaveData.TotalTimeString());
+            }
             StartCoroutine(TypeLine());
         }
 
         // otherwise, this is a normal line, type it out
         else {
             nameBox.SetActive(false);
+            if (lines[index].Contains('{')) {
+                lines[index] = lines[index].Replace("{scrollsCollected}", ""+SaveData.scrollsCollected);
+                lines[index] = lines[index].Replace("{fragmentsCollected}", ""+SaveData.scrollsCollected);
+                lines[index] = lines[index].Replace("{totalTime}", SaveData.TotalTimeString());
+            }
             StartCoroutine(TypeLine());
         }
 

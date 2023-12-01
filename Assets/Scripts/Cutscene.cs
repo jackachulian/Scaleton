@@ -18,6 +18,8 @@ public class Cutscene : MonoBehaviour {
 
     [SerializeField] private CinemachineVirtualCamera[] virtualCameras;
 
+    [SerializeField] private AudioClip[] musicClips;
+
     [SerializeField] private UnityEvent invokeBeforeCutscene;
 
     [SerializeField] private UnityEvent invokeAfterCutscene;
@@ -85,6 +87,15 @@ public class Cutscene : MonoBehaviour {
                 virtualCameras[camIndex].enabled = true;
                 virtualCameras[camIndex].MoveToTopOfPrioritySubqueue();
             }
+        }
+
+        else if (cmd == "playmusic") {
+            int index = int.Parse(args[1]);
+            SoundManager.Instance.PlayMusic(musicClips[index]);
+        }
+
+        else if (cmd == "stopmusic") {
+            SoundManager.Instance.StopMusic();
         }
 
         else if (cmd == "camerablendtime") {

@@ -123,6 +123,8 @@ public class TitleCamera : MonoBehaviour {
         player.EnableControl();
         cinemachineBrain.enabled = true;
         enabled = false;
+
+        SaveData.startTime = Time.time;
     }
 
 

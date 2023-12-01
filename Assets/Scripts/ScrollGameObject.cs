@@ -7,6 +7,7 @@ public class ScrollGameObject : MonoBehaviour
     void OnTriggerEnter2D(Collider2D c){
         if(c.gameObject.GetComponent<PlayerController>() != null){
             SaveData.inventory.Add(scroll);
+            SaveData.scrollsCollected++;
             Debug.Log("Player picked up " + scroll.title + "!");
             Destroy(gameObject);
         }
