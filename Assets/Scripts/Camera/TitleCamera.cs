@@ -25,6 +25,8 @@ public class TitleCamera : MonoBehaviour {
 
     [SerializeField] private PlayerController player;
 
+    [SerializeField] private AudioClip titleMusic;
+
     [SerializeField] private Transform cameraTransform;
     private CinemachineBrain cinemachineBrain;
 
@@ -40,6 +42,8 @@ public class TitleCamera : MonoBehaviour {
         player.DisableControl();
         player.DisablePhysics();
         player.EnterMinecart();
+
+        SoundManager.Instance.PlayMusic(titleMusic, fade: false);
     }
 
     private void Start() {

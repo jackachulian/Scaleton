@@ -61,6 +61,7 @@ MonoBehaviour:
   ambientParticles: {fileID: 130280680764060364}
   particleDensity: 0.5
   boss: {fileID: 0}
+  changeMusicTo: {fileID: 0}
 --- !u!60 &6430863613549729845
 PolygonCollider2D:
   m_ObjectHideFlags: 0

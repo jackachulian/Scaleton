@@ -49,6 +49,8 @@ public class CameraRoom : MonoBehaviour {
 
     private PolygonCollider2D polygonCollider;
 
+    [SerializeField] private AudioClip changeMusicTo;
+
     private bool usesConfiner;
     private Respawnable[] respawnables;
 
@@ -159,6 +161,8 @@ public class CameraRoom : MonoBehaviour {
         if (!ambientParticles.isPlaying) ambientParticles.Play();
 
         SetBrightness(brightness);
+
+        if (changeMusicTo) SoundManager.Instance.PlayMusic(changeMusicTo);
 
         if(canRespawn){
             CameraRoom previousRoom = player.GetCurrentRoom();

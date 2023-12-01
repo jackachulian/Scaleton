@@ -21,14 +21,24 @@ public class SoundManager : MonoBehaviour {
     float musicFadeValue;
     bool fading;
 
-    private void PlayMusic(string id) {
-        var temp = fadingFromSource;
-        fadingToSource = fadingFromSource;
-        fadingFromSource = temp;
+    public void PlayMusic(AudioClip clip, bool fade = true) {
+        if (fadingToSource.clip == clip) return;
 
-        musicFadeValue = 0;
-        fading = true;
-        fadingToSource.clip = GetClip(id);
+        AudioSource temp = fadingFromSource;
+        fadingFromSource = fadingToSource;
+        fadingToSource = temp;
+
+        fadingToSource.clip = clip;
+
+        if (fade) {
+            musicFadeValue = 0;
+            fadingToSource.volume = 0;
+            fading = true;
+        } else {
+            fadingFromSource.Stop();
+        }
+
+        fadingToSource.Play();
     }
 
     private void Update() {
