@@ -77,6 +77,7 @@ public class MenuManager : MonoBehaviour {
 
     public static void ShowHiddenMenus() {
         for (int i = 0; i < openMenus.Count; i++) {
+            Debug.Log("showing "+openMenus[i]);
             openMenus[i].Show();
         }
     }

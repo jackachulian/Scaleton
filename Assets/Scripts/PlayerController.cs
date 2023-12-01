@@ -95,6 +95,7 @@ public class PlayerController : DamageableEntity
     // While controlmode is not Normal, can be used to control the player during cutscenes, etc.
     public float autoXInput {get; private set;} = 0f;
 
+    private float timeSinceMoved = 0;
     private float timeSinceLastGrounded;
 
     // Amount of time after walkng off a ledge that the player can jump.
@@ -105,6 +106,8 @@ public class PlayerController : DamageableEntity
 
     // Set to false the moment the user regains control. Prevents double inputs. Also will prevent opening the menu.
     private bool canInteractThisFrame = true;
+
+    private GameObject pauseHint;
 
     private enum PlayerState {
         NORMAL,
@@ -122,6 +125,7 @@ public class PlayerController : DamageableEntity
         initialDrag = rb.drag;
         followingItems = new List<FollowingItem>();
         ignoreCollisionWhileDead = new List<Collider2D>();
+        pauseHint = GameObject.Find("PauseHint");
     }
 
     private void Update()
@@ -147,6 +151,13 @@ public class PlayerController : DamageableEntity
     {
         if(playerState == PlayerState.NORMAL){
             xInput = Input.GetAxisRaw("Horizontal");
+
+            if (xInput != 0) {
+                timeSinceMoved = 0;
+            } else {
+                timeSinceMoved += Time.deltaTime;
+            }
+            pauseHint.SetActive(timeSinceMoved > 5f);
 
             if (xInput == 1 && facingDirection == -1)
             {
@@ -184,6 +195,7 @@ public class PlayerController : DamageableEntity
         }
         else{
             xInput = autoXInput;
+            pauseHint.SetActive(false);
         }
 
         canInteractThisFrame = true;

@@ -217,8 +217,10 @@ public class Dialogue : MonoBehaviour
         if (Cutscene.current != null) Cutscene.current.CutsceneEnded();
         if (MenuManager.openMenus.Count > 0)
         {
+            Debug.Log("showing hidden menus");
             MenuManager.ShowHiddenMenus();
         } else {
+            Debug.Log("returning control");
             MenuManager.player.EnableControl();
         }
     }

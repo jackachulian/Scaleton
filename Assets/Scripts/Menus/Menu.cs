@@ -20,8 +20,6 @@ public class Menu : MonoBehaviour {
     // If this menu closes when cancel (C) is pressed.
     [SerializeField] private bool cancellable = true;
 
-    [SerializeField] private bool blockPlayerControl = true;
-
     // True if this should return control to the player when closed and there is no parent menu to return to
     [SerializeField] private bool returnPlayerControl = true;
 

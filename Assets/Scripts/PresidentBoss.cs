@@ -152,13 +152,13 @@ public class PresidentBoss : DamageableEntity {
         phase = BossPhase.JumpPrepare;
         animator.CrossFade("presidentboss_jumpprepare", 0f);
 
-        // 75% chance to target closest target to player
+        // chance to target closest target to player
         IOrderedEnumerable<Transform> sortedJumpTargets;
-        if (UnityEngine.Random.value < 0.75f) {
+        if (UnityEngine.Random.value < 0.3f) {
             Debug.Log("Jumping near player");
             sortedJumpTargets = jumpTargets.OrderBy(target => Vector2.Distance(feetPositionTransform.position, player.transform.position));
         } 
-        // 25% chance to choose one at random
+        // otherwise, choose one at random
         else {
             Debug.Log("Jumping at random");
             sortedJumpTargets = jumpTargets.OrderBy(target => UnityEngine.Random.value);
