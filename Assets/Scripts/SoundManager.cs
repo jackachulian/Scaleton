@@ -14,6 +14,35 @@ public class SoundManager : MonoBehaviour {
     [SerializedDictionary("ID", "Audio Clips")]
     [SerializeField] private SerializedDictionary<string, AudioClip[]> soundEffects;
 
+    [SerializeField] private float musicFadeTime = 10f;
+
+    [SerializeField] private AudioSource fadingToSource, fadingFromSource;
+    // 0 - fully source 1 playing, 1 - fully source 2 playing
+    float musicFadeValue;
+    bool fading;
+
+    private void PlayMusic(string id) {
+        var temp = fadingFromSource;
+        fadingToSource = fadingFromSource;
+        fadingFromSource = temp;
+
+        musicFadeValue = 0;
+        fading = true;
+        fadingToSource.clip = GetClip(id);
+    }
+
+    private void Update() {
+        if (fading) {
+            musicFadeValue += Time.deltaTime / musicFadeTime;
+            if (musicFadeValue >= 1) {
+                musicFadeValue = 1;
+                fading = false;
+            }
+            fadingToSource.volume = musicFadeValue;
+            fadingFromSource.volume = 1 - musicFadeValue;
+        }
+    }
+
     public static void PlaySound(AudioSource source, string id) {
         if (!source.enabled) return;
         if (!source.gameObject.activeInHierarchy) return;
