@@ -41,6 +41,11 @@ public class SoundManager : MonoBehaviour {
         fadingToSource.Play();
     }
 
+    public void StopMusic() {
+        fadingToSource.Stop();
+        fadingFromSource.Stop();
+    }
+
     private void Update() {
         if (fading) {
             musicFadeValue += Time.deltaTime / musicFadeTime;

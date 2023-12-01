@@ -128,4 +128,8 @@ public class Cutscene : MonoBehaviour {
         current = null;
         invokeAfterCutscene.Invoke();
     }
+
+    public void PlayMusic(AudioClip clip) {
+        SoundManager.Instance.PlayMusic(clip);
+    }
 }

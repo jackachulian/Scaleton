@@ -30,6 +30,8 @@ public class PresidentBoss : DamageableEntity {
 
     [SerializeField] private Cutscene deathCutscene, timeOverCutscene;
 
+    [SerializeField] private AudioClip bossMusic;
+
     // Time (seconds) this boss must me beaten in before timeOverCutscene is played
     [SerializeField] private int time = 180;
     
@@ -102,6 +104,8 @@ public class PresidentBoss : DamageableEntity {
         MenuManager.bossUI.SetBoss(this);
         MenuManager.bossUI.StartTimer(time);
         Idle();
+
+        SoundManager.Instance.PlayMusic(bossMusic, fade: false);
     }
 
     // functions to initate a new phase change
@@ -435,6 +439,7 @@ public class PresidentBoss : DamageableEntity {
         enabled = false;
         player.GetCurrentRoom().SetRespawnType(CameraRoom.RespawnType.First);
         animator.CrossFade("presidentboss_death", 0f);
+        SoundManager.Instance.StopMusic();
         deathCutscene.StartCutscene();
     }
 
@@ -445,6 +450,7 @@ public class PresidentBoss : DamageableEntity {
 
     public void StartTimeOverCutscene() {
         enabled = false;
+        SoundManager.Instance.StopMusic();
         player.GetCurrentRoom().SetRespawnType(CameraRoom.RespawnType.First);
         timeOverCutscene.StartCutscene();
     }
