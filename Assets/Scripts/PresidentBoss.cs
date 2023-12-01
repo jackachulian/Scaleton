@@ -16,6 +16,8 @@ public class PresidentBoss : DamageableEntity {
     /// <summary> Colliders that are ignored during the jump phase, but not the jumpfall phase </summary>
     [SerializeField] private Collider2D[] ignoreCollidersDuringJump;
 
+    [SerializeField] private BossCrate[] bossCrates;
+
     [SerializeField] private Transform headPositionTransform, feetPositionTransform, missileShootTransform;
 
     [SerializeField] private GameObject landHurtboxAndEffect;
@@ -410,24 +412,21 @@ public class PresidentBoss : DamageableEntity {
 
     public override void OnHit(int dmg, DamageHurtbox hurtbox)
     {
+        SoundManager.PlaySound(audioSource, "bossdamage");
         // Take more damage if box is near head
         float distanceFromHead = Vector2.Distance(headPositionTransform.position, hurtbox.transform.position);
-        if (distanceFromHead < hurtbox.GetRadius() * 2f + 1f) {
+        if (hurtbox.CanCriticalHit() && distanceFromHead < hurtbox.GetRadius() * 2f + 1f) {
             dmg *= 2;
-            SoundManager.PlaySound(audioSource, "bossdamage");
+        }
+        if (dmg >= 2) {
             SoundManager.PlaySound(audioSource, "bossdamageheavy");
-        } else {
-            SoundManager.PlaySound(audioSource, "bossdamage");
         }
 
         _hp -= dmg;
         MenuManager.bossUI.HealthBarUpdate();
+        Hit();
         if (hp <= 0) {
             Die();
-        }
-        else {
-            Hit();
-            
         }
     }
 
@@ -435,6 +434,7 @@ public class PresidentBoss : DamageableEntity {
     {
         enabled = false;
         player.GetCurrentRoom().SetRespawnType(CameraRoom.RespawnType.First);
+        animator.CrossFade("presidentboss_death", 0f);
         deathCutscene.StartCutscene();
     }
 
@@ -452,6 +452,10 @@ public class PresidentBoss : DamageableEntity {
     public override void Respawn()
     {
         base.Respawn();
+    }
+
+    public BossCrate[] GetBossCrates() {
+        return bossCrates;
     }
 }
 

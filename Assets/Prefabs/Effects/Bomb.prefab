@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 915031398696404937, guid: 4e69fa8155d8c3c468a02a4d8c3e3b32, type: 3}
+  maxTime: 5
 --- !u!212 &6951369363244349038
 SpriteRenderer:
   m_ObjectHideFlags: 0

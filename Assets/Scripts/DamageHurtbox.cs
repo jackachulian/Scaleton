@@ -34,6 +34,8 @@ public class DamageHurtbox : MonoBehaviour {
 
     [SerializeField] private float destroyDelay = 2f;
 
+    [SerializeField] private bool canCriticalHit = true;
+
     private void Awake() {
         if (damageOnAwake) DealDamage();
 
@@ -102,5 +104,9 @@ public class DamageHurtbox : MonoBehaviour {
 
     public void SetDamagePlayer(bool damagePlayer) {
         this.damagePlayer = damagePlayer;
+    }
+
+    public bool CanCriticalHit() {
+        return canCriticalHit;
     }
 }

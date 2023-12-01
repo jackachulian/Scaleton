@@ -14,6 +14,9 @@ public class Dialogue : MonoBehaviour
     public float speed;
     private int index;
 
+
+    public bool dialoguePlaying {get; private set;}
+
     bool typing;
     bool waitingForInput;
     // If the player can currently advance the cutscene by inputting. may be set to false during cutscenes with auto-dialogue.
@@ -45,6 +48,8 @@ public class Dialogue : MonoBehaviour
             Debug.LogWarning("Empty dialogue was played");
             return;
         }
+
+        dialoguePlaying = true;
 
          // This keeps the dialogue from permenantly erasing names from NPC dialogue objects
         var tempL = new string[l.Length];
@@ -196,6 +201,7 @@ public class Dialogue : MonoBehaviour
 
     void EndDialogue()
     {
+        dialoguePlaying = false;
         gameObject.SetActive(false);
         foreach (var obj in disableDuringDialogue) obj.SetActive(true);
         if (Cutscene.current != null) Cutscene.current.CutsceneEnded();

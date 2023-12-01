@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using Cinemachine;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +18,8 @@ public class Cutscene : MonoBehaviour {
 
     [SerializeField] private CinemachineVirtualCamera[] virtualCameras;
 
+    [SerializeField] private UnityEvent invokeBeforeCutscene;
+
     [SerializeField] private UnityEvent invokeAfterCutscene;
 
     public void StartCutscene() {
@@ -30,6 +31,8 @@ public class Cutscene : MonoBehaviour {
         string[] lines = dialogue.Split("\n");
 
         if (MenuManager.player.GrabBox.IsHoldingBox()) MenuManager.player.GrabBox.ReleaseGrabbed(throwBox: false, forced: true);
+
+        invokeBeforeCutscene.Invoke();
 
         MenuManager.globalDialogue.StartDialogue(lines);
     }

@@ -247,7 +247,7 @@ public class CameraRoom : MonoBehaviour {
         } else if (respawnType == RespawnType.Nearest) {
             return respawnPoints.OrderBy(point => Vector2.Distance(MenuManager.player.transform.position, point.transform.position)).FirstOrDefault();
         } else if (respawnType == RespawnType.FarthestFromBoss) {
-            return respawnPoints.OrderBy(point => Vector2.Distance(boss.transform.position, player.transform.position)).FirstOrDefault();
+            return respawnPoints.OrderBy(point => Vector2.Distance(boss.transform.position, player.transform.position)).LastOrDefault();
         } else {
             return DefaultRespawnPoint();
         }

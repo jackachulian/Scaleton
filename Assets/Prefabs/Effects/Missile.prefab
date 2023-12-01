@@ -4964,11 +4964,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344d5670a20afc44b8d7051242a1a8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 50
-  isPlayer: 0
   hitEffect: {fileID: 5104661781179126308, guid: fb26fe8225467324cb407360f82c420c, type: 3}
-  rotationSpeed: 60
-  speed: 7.5
+  maxTime: 5
+  rotationSpeed: 75
+  speed: 9
+  reflectSpeed: 12
   rotateDelay: 0.2
 --- !u!212 &4105619305795181012
 SpriteRenderer:
@@ -5149,8 +5149,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0027000308, y: 0.00024998188, z: 0}
-    m_Extent: {x: 1.8396001, y: 1.37875, z: 0}
+    m_Center: {x: 0.0016500354, y: 0.00040000677, z: 0}
+    m_Extent: {x: 1.8441501, y: 1.3734, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
