@@ -24,9 +24,9 @@ public class SaveData {
 
     public static string TotalTimeString() {
         int totalSeconds = Mathf.FloorToInt(Time.time - SaveData.startTime);
-        float seconds = totalSeconds % 60;
-        float minutes = totalSeconds/60 % 60;
-        float hours = totalSeconds / 3600;
+        int seconds = totalSeconds % 60;
+        int minutes = totalSeconds/60 % 60;
+        int hours = totalSeconds / 3600;
         if (hours > 0) {
             return hours+":"+minutes.ToString("D2")+":"+seconds.ToString("D2");
         } else {
