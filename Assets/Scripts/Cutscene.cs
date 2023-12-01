@@ -132,4 +132,8 @@ public class Cutscene : MonoBehaviour {
     public void PlayMusic(AudioClip clip) {
         SoundManager.Instance.PlayMusic(clip);
     }
+
+    public void StopMusic() {
+        SoundManager.Instance.StopMusic();
+    }
 }

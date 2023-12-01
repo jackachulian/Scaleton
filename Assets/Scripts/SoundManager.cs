@@ -35,6 +35,7 @@ public class SoundManager : MonoBehaviour {
             fadingToSource.volume = 0;
             fading = true;
         } else {
+            fadingToSource.volume = 1f;
             fadingFromSource.Stop();
         }
 
